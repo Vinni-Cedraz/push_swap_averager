@@ -45,24 +45,27 @@ This is why the `push_swap-averager` was born
 
 To test thousands of permutations in a semi-random pattern that would be as
 representative as possible, I have divided the total number of permutations
-of an N-sized array into N groups. Then, I pick up (8 * N) random permutations
+of an N-sized array into N groups. Then, I pick up 160 random permutations
 from each of these N groups to create the sample set of permutations that will
 be tested as input for your `push_swap`.
 
-This means that for the 100 size case, I will be executing your push_swap 80,000
-times. The result is a surprisingly reliable measurement of your average case!
-To "test the tester," you can take it several times in a row and you'll see what I'm
+This means that for the 100 size case, the `push_swap-averager` will be
+executing your push_swap 16,000 times. It is still a small number compared to
+the total. But because of the way the combinations are selected, the result is
+a very consistent measurement of your average case.
+
+If you run the `push_swap-averager` 10 times in a row, you'll see what I'm
 talking about: each time the test is taken, the count of the average case will
-be slightly different but only by a very small deviation. For example, out of 10
-tests, my `push_swap` program ranked averages that oscillated between 583 and 586!
+be slightly different (because the sample selected will be unavoidably
+different) but only by a very small deviation. For example, out of 10 tests, my
+`push_swap` program ranked averages between 583 and 586. Seems good enough for me.
 
 I know I could have done it with a `Bash` script, and it would make for a shorter
-code and a simpler program. In fact, I had...
-
-The issue was that it was taking three and a half hours to test 60,000 combinations!
-This is why I decided to build this tester in `C` instead and then speed it up
-further with a multithreaded approach. Now it should take 5 minutes to test
-80,000 combinations of size 100 and analyze them for you.
+code and a simpler program. In fact, I had done it before... But it was taking
+three and a half hours to test 50,000 combinations of size 500. This is why I
+this tester was written in `C` instead of `Bash`. And I also sped it up further
+with a multithreaded approach. Now it should take 5 minutes to do the same
+thing the `Bash` script was doing in 3 hours.
 
 So this is why I bothered to make this test.
 

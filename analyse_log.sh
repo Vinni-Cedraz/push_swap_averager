@@ -24,12 +24,12 @@ highest=${sorted[-1]}
 
 # print the lines with the lowest, highest, and average number of operations
 printf "best case arrays: \n"
-grep "number of operations: $lowest" $log_file
+grep "number of operations: $lowest$" $log_file
 
 printf "worst case arrays: \n"
-grep "number of operations: $highest" $log_file
+grep "number of operations: $highest$" $log_file
 
 # print the lowest, highest, and average number of operations
 printf "best case: $lowest\n"
 printf "worst case: $highest\n"
-printf "\n\n<MOST IMPORTANT FOR THE EVALUATION> average case: $average\n\n"
+printf "\n\n<MOST IMPORTANT FOR THE EVALUATION> average case: $average\n"

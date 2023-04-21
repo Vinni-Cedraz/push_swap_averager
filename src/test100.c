@@ -33,11 +33,11 @@ int **init_permutation_table(void) {
     int count = 0;
     int j = 1;
     int *tmp_arr = calloc(sizeof(int), 99);
-    int **table = calloc(sizeof(int *), 80000);
+    int **table = calloc(sizeof(int *), 16000);
 
     for (int i = 1; i <= 100; i++) {
         tmp_arr = seq_except(i);
-        for (int k = 1; k <= 800; k++) {
+        for (int k = 1; k <= 160; k++) {
             table[count] = malloc(sizeof(int) * 100);
             table[count][0] = i;
             ft_randomize_array(tmp_arr, 99);
@@ -529,10 +529,10 @@ int main(void) {
     printf(
         "Get ready to witness the ultimate push_swap breaker.\nWe'll have 8 "
         "threads pushing your push_swap to the limits at the same time.\n"
-        "It will be a total of 80000 different args tested.\n"
+        "It will be a total of 16000 different arrays tested.\n"
         "Don't worry, these permutations are very well distributed...\n"
         "Unlike your life choices.\n\n");
-    printf("This shouldn't take much more than 5 minutes.\n\n");
+    printf("This shouldn't take much more than 30 seconds...\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
