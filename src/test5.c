@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 #include "ft_free_arr.c"
 
 typedef struct s_args {
@@ -65,18 +66,24 @@ void *execute_push_swap_t1(void *args_void) {
     char command[100];
     char buffer[10];
     FILE *output;
+    FILE *fp;
     int i = 0;
 
+    fp = fopen("tmp1", "a");
     while (table[i][0] != 1) i++;
     while (table[i][0] == 1) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
+
         output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("%s", buffer);
+        char *out_str = fgets(buffer, 10, output);
+        fprintf(fp, "arr[%d]: { ", i);
+        for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
+        fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
         i++;
     }
+
     pthread_exit(NULL);
     return NULL;
 }
@@ -87,18 +94,24 @@ void *execute_push_swap_t2(void *args_void) {
     char command[100];
     char buffer[10];
     FILE *output;
+    FILE *fp;
     int i = 0;
 
+    fp = fopen("tmp2", "a");
     while (table[i][0] != 2) i++;
     while (table[i][0] == 2) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
+
         output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("%s", buffer);
+        char *out_str = fgets(buffer, 10, output);
+        fprintf(fp, "arr[%d]: { ", i);
+        for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
+        fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
         i++;
     }
+
     pthread_exit(NULL);
     return NULL;
 }
@@ -109,18 +122,24 @@ void *execute_push_swap_t3(void *args_void) {
     char command[100];
     char buffer[10];
     FILE *output;
+    FILE *fp;
     int i = 0;
 
+    fp = fopen("tmp3", "a");
     while (table[i][0] != 3) i++;
     while (table[i][0] == 3) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
+
         output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("%s", buffer);
+        char *out_str = fgets(buffer, 10, output);
+        fprintf(fp, "arr[%d]: { ", i);
+        for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
+        fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
         i++;
     }
+
     pthread_exit(NULL);
     return NULL;
 }
@@ -132,17 +151,23 @@ void *execute_push_swap_t4(void *args_void) {
     char buffer[10];
     FILE *output;
     int i = 0;
+    FILE *fp;
 
+    fp = fopen("tmp4", "a");
     while (table[i][0] != 4) i++;
     while (table[i][0] == 4) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
+
         output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("%s", buffer);
+        char *out_str = fgets(buffer, 10, output);
+        fprintf(fp, "arr[%d]: { ", i);
+        for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
+        fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
         i++;
     }
+
     pthread_exit(NULL);
     return NULL;
 }
@@ -150,20 +175,27 @@ void *execute_push_swap_t4(void *args_void) {
 void *execute_push_swap_t5(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
+    int i = 0;
     char command[100];
     char buffer[10];
     FILE *output;
+    FILE *fp;
 
-    while (**table != 5) table++;
-    while (*table != NULL) {
-        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[0][0],
-                table[0][1], table[0][2], table[0][3], table[0][4]);
+    fp = fopen("tmp5", "a");
+    while (table[i][0] != 5) i++;
+    while (table[i] != NULL) {
+        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
+                table[i][1], table[i][2], table[i][3], table[i][4]);
+
         output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("%s", buffer);
+        char *out_str = fgets(buffer, 10, output);
+        fprintf(fp, "arr[%d]: { ", i);
+        for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
+        fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
-        table++;
+        i++;
     }
+
     pthread_exit(NULL);
     return NULL;
 }
@@ -177,12 +209,8 @@ int main(void) {
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
     pthread_create(&pthread[3], NULL, execute_push_swap_t4, (void *)args);
     pthread_create(&pthread[4], NULL, execute_push_swap_t5, (void *)args);
-    int count = 0;
-    while (count < 5) {
-        pthread_join(pthread[count], NULL);
-        count++;
-    }
-    printf("numbers of threads joined: %d\n", count);
+    int count = -1;
+    while (++count < 5) pthread_join(pthread[count], NULL);
     ft_free_arr((char **)args->table, (void **)args->table);
     free(args);
 }

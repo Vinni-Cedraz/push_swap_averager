@@ -16,22 +16,22 @@ all: $(PUSH_SWAP)
 	fi
 
 test5: all
-	@mkdir -p log_files_test5
-	@if [ ! -f log_files_test5/log_t1.txt ]; then \
+	@mkdir -p log_files
+	@if [ ! -f tmp1 ]; then \
 		./test5; \
 	fi;
-	@if [ ! -f test100_log/log_t1.txt ]; then \
-		mv -f log*.txt log_files_test5; \
-	fi
+	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
+	@./analyse_log.sh test5.log
+	@mv test5.log ./log_files
 
 test100: all
-	@mkdir -p test100_log
+	@mkdir -p log_files
 	@if [ ! -f tmp1 ]; then \
 		./test100; \
-	fi
+	fi;
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test100.log && rm tmp*
 	@./analyse_log.sh test100.log
-	@mv test100.log log_files
+	@mv test100.log ./log_files
 
 clean:
 	rm -f test5 test100 push_swap checker
