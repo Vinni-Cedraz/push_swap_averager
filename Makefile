@@ -2,7 +2,7 @@ SHELL := /bin/bash
 PUSH_SWAP = ../push_swap
 PUSH_SWAP_BONUS = ../checker
 
-CFLAGS = $(CC) -w -O3
+CFLAGS = $(CC) -w -O3 -pthread
 
 all: $(PUSH_SWAP)
 	@cp -f $(PUSH_SWAP) .
