@@ -14,6 +14,11 @@ all: $(PUSH_SWAP)
 		$(CFLAGS) src/test100.c -o test100; \
 		printf "test100 created\n"; \
 	fi
+	@if [ ! -f test500 ]; then \
+		$(CFLAGS) src/test500.c -o test500; \
+		printf "test500 created\n"; \
+	fi
+
 
 test5: all
 	@mkdir -p log_files
@@ -33,8 +38,18 @@ test100: all
 	@./analyse_log.sh test100.log
 	@mv test100.log ./log_files
 
+test500: all
+	@mkdir -p log_files
+	@if [ ! -f tmp1 ]; then \
+		./test500; \
+	fi;
+	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test500.log && rm tmp*
+	@./analyse_log.sh test500.log
+	@mv test500.log ./log_files
+
+
 clean:
-	rm -f test5 test100 push_swap checker
+	rm -f test5 test100 test500 push_swap checker
 	@rm -f tmp*
 
 fclean: clean
