@@ -19,6 +19,8 @@ all: $(PUSH_SWAP)
 		printf "test500 created\n"; \
 	fi
 
+$(PUSH_SWAP):
+	@make --no-print-directory -C ..
 
 test5: all
 	@mkdir -p log_files
