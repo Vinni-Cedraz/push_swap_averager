@@ -2,6 +2,16 @@ SHELL := /bin/bash
 PUSH_SWAP = ../push_swap
 PUSH_SWAP_BONUS = ../checker
 
+# Colors
+RED    	  	=  \033[0;91m
+GRAY      	=  \033[0;37m
+CYAN      	=  \033[0;96m
+WHITE     	=  \033[0;97m
+GREEN     	=  \033[0;92m
+YELLOW          =  \033[0;93m
+MAGENTA         =  \033[0;95m
+DEF_COLOR       =  \033[0;39m
+
 CFLAGS = $(CC) -w -O3 -pthread
 
 all: $(PUSH_SWAP)
@@ -18,6 +28,7 @@ all: $(PUSH_SWAP)
 		$(CFLAGS) srcs/test500.c -o test500; \
 		printf "test500 created\n"; \
 	fi
+	@printf "$(CYAN)Now run make with the chosen test as argument, example: $(GRAY)make -C pushswap-averager test5$(DEF_COLOR)\n"
 
 $(PUSH_SWAP):
 	@make --no-print-directory -C ..
@@ -54,7 +65,6 @@ test500: all
 	@mv test500.log ./log_files
 	@mkdir -p executables
 	@mv test500 ./executables
-
 
 clean:
 	rm -f test5 test100 test500 push_swap checker
