@@ -7,15 +7,15 @@ CFLAGS = $(CC) -w -O3 -pthread
 all: $(PUSH_SWAP)
 	@cp -f $(PUSH_SWAP) .
 	@if [ ! -f test5 ]; then \
-		$(CFLAGS) src/test5.c -o test5; \
+		$(CFLAGS) srcs/test5.c -o test5; \
 		printf "test5 created\n"; \
 	fi
 	@if [ ! -f test100 ]; then \
-		$(CFLAGS) src/test100.c -o test100; \
+		$(CFLAGS) srcs/test100.c -o test100; \
 		printf "test100 created\n"; \
 	fi
 	@if [ ! -f test500 ]; then \
-		$(CFLAGS) src/test500.c -o test500; \
+		$(CFLAGS) srcs/test500.c -o test500; \
 		printf "test500 created\n"; \
 	fi
 
