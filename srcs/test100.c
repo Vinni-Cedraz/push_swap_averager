@@ -6,7 +6,6 @@
 #include <unistd.h>
 
 #include "ft_free_arr.c"
-#include "ft_randomize_array.c"
 #include "mersenne_twister_algorithm.c"
 
 typedef struct s_args {
