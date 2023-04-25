@@ -66,6 +66,17 @@ test500: all
 	@mkdir -p executables
 	@mv test500 ./executables
 
+bonus: $(PUSH_SWAP_BONUS)
+	@if [ ! -f test5_bonus ]; then \
+		$(CFLAGS) srcs/test5_bonus.c -o test5_bonus; \
+		printf "test5_bonus created\n"; \
+	fi
+
+
+test5_bonus: bonus
+	@mkdir -p log_files
+	@cp -f $(PUSH_SWAP_BONUS) .
+
 clean:
 	rm -f test5 test100 test500 push_swap checker
 	@rm -rf ./executables

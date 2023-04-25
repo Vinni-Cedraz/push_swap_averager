@@ -46,7 +46,7 @@ int **init_permutation_table(void) {
     int *arr = malloc(sizeof(int) * 5);
     int **table = calloc(sizeof(int *), 121);
     int *is_still_going_on;
-    arr[0] = 1, arr[1] = 2, arr[2] = 3, arr[3] = 4, arr[4] = 5;
+    arr[0] = -1, arr[1] = 0, arr[2] = 1, arr[3] = 2, arr[4] = 3;
 
     do {
         if ((is_still_going_on = next_permutation(arr, 4))) {
@@ -70,8 +70,8 @@ void *execute_push_swap_t1(void *args_void) {
     int i = 0;
 
     fp = fopen("tmp1", "a");
-    while (table[i][0] != 1) i++;
-    while (table[i][0] == 1) {
+    while (table[i][0] != -1 ) i++;
+    while (table[i][0] == -1) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
 
@@ -99,8 +99,8 @@ void *execute_push_swap_t2(void *args_void) {
     int i = 0;
 
     fp = fopen("tmp2", "a");
-    while (table[i][0] != 2) i++;
-    while (table[i][0] == 2) {
+    while (table[i][0] != 0) i++;
+    while (table[i][0] == 0) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
 
@@ -128,8 +128,8 @@ void *execute_push_swap_t3(void *args_void) {
     int i = 0;
 
     fp = fopen("tmp3", "a");
-    while (table[i][0] != 3) i++;
-    while (table[i][0] == 3) {
+    while (table[i][0] != 1) i++;
+    while (table[i][0] == 1) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
 
@@ -157,8 +157,8 @@ void *execute_push_swap_t4(void *args_void) {
     FILE *fp;
 
     fp = fopen("tmp4", "a");
-    while (table[i][0] != 4) i++;
-    while (table[i][0] == 4) {
+    while (table[i][0] != 2) i++;
+    while (table[i][0] == 2) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
 
@@ -186,7 +186,7 @@ void *execute_push_swap_t5(void *args_void) {
     FILE *fp;
 
     fp = fopen("tmp5", "a");
-    while (table[i][0] != 5) i++;
+    while (table[i][0] != 3) i++;
     while (table[i] != NULL) {
         sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
                 table[i][1], table[i][2], table[i][3], table[i][4]);
