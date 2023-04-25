@@ -84,6 +84,7 @@ void *execute_push_swap_t1(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -112,6 +113,7 @@ void *execute_push_swap_t2(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -140,6 +142,7 @@ void *execute_push_swap_t3(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -168,6 +171,7 @@ void *execute_push_swap_t4(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -196,6 +200,7 @@ void *execute_push_swap_t5(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }

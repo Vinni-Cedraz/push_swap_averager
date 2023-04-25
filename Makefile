@@ -30,6 +30,8 @@ test5: all
 	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
 	@./analyse_log.sh test5.log
 	@mv test5.log ./log_files
+	@mkdir -p executables
+	@mv test5 ./executables
 
 test100: all
 	@mkdir -p log_files
@@ -39,6 +41,8 @@ test100: all
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test100.log && rm tmp*
 	@./analyse_log.sh test100.log
 	@mv test100.log ./log_files
+	@mkdir -p executables
+	@mv test100 ./executables
 
 test500: all
 	@mkdir -p log_files
@@ -48,13 +52,16 @@ test500: all
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test500.log && rm tmp*
 	@./analyse_log.sh test500.log
 	@mv test500.log ./log_files
+	@mkdir -p executables
+	@mv test500 ./executables
 
 
 clean:
 	rm -f test5 test100 test500 push_swap checker
+	@rm -rf ./executables
 	@rm -f tmp*
 
 fclean: clean
-	rm -rf ./log_files
+	@rm -rf ./log_files
 
 re: fclean all

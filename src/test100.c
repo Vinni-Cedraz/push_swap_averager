@@ -7,40 +7,50 @@
 
 #include "ft_free_arr.c"
 #include "ft_randomize_array.c"
-
-#define WORST 999999
-#define IGNORE_AVERAGE 1
+#include "mersenne_twister_algorithm.c"
 
 typedef struct s_args {
-    int **table;
+    uint **table;
 } t_args;
 
-void print_arr(int *arr, int last_index) {
+void print_arr(uint *arr, int last_index) {
     for (int i = 0; i <= last_index; i++) printf("%d ", arr[i]);
     printf("\n");
 }
 
-int *seq_except(int exclude) {
+uint *seq_except(int exclude) {
     int j = 0;
     int i = 0;
-    int *arr = (int *)malloc(99 * sizeof(int));
+    uint *arr = malloc(99 * sizeof(uint));
     for (; ++i != 101;)
         if (i != exclude) arr[j++] = i;
     return arr;
 }
 
-int **init_permutation_table(void) {
+int is_repeated(uint **table, uint *tmp_arr) {
+    int i = -1;
+    while (table[++i])
+        if (!memcmp(table[i], tmp_arr, 499 * sizeof(uint)))
+			return 1;
+    return 0;
+}
+
+uint **init_permutation_table(void) {
     int count = 0;
     int j = 1;
-    int *tmp_arr = calloc(sizeof(int), 99);
-    int **table = calloc(sizeof(int *), 16000);
+    uint *tmp_arr = calloc(sizeof(uint), 99);
+    uint **table = calloc(sizeof(uint *), 1200);
 
     for (int i = 1; i <= 100; i++) {
         tmp_arr = seq_except(i);
-        for (int k = 1; k <= 160; k++) {
-            table[count] = malloc(sizeof(int) * 100);
+        for (int k = 1; k <= 12; k++) {
+            table[count] = malloc(sizeof(uint) * 100);
             table[count][0] = i;
-            ft_randomize_array(tmp_arr, 99);
+            shuffle_array(tmp_arr, 99);
+            if (is_repeated(table, tmp_arr)) {
+                k--, free(table[count]);
+                continue;
+            }
             int k = 0;
             for (j = 1; j < 100; j++) {
                 table[count][j] = tmp_arr[k];
@@ -54,7 +64,7 @@ int **init_permutation_table(void) {
     return table;
 }
 
-void build_command_string(int i, int **table, char command[500]) {
+void build_command_string(int i, uint **table, char command[500]) {
     sprintf(
         command,
         "./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -85,7 +95,7 @@ void build_command_string(int i, int **table, char command[500]) {
 }
 void *execute_push_swap_t1(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     int i = 0;
@@ -105,13 +115,14 @@ void *execute_push_swap_t1(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
 
 void *execute_push_swap_t2(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     FILE *output;
@@ -139,7 +150,7 @@ void *execute_push_swap_t2(void *args_void) {
 
 void *execute_push_swap_t3(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     FILE *output;
@@ -166,7 +177,7 @@ void *execute_push_swap_t3(void *args_void) {
 
 void *execute_push_swap_t4(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     FILE *output;
@@ -186,13 +197,14 @@ void *execute_push_swap_t4(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
 
 void *execute_push_swap_t5(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     int i = 0;
@@ -212,13 +224,14 @@ void *execute_push_swap_t5(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
 
 void *execute_push_swap_t6(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     FILE *output;
@@ -238,13 +251,14 @@ void *execute_push_swap_t6(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
 
 void *execute_push_swap_t7(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     FILE *output;
@@ -264,13 +278,14 @@ void *execute_push_swap_t7(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
 
 void *execute_push_swap_t8(void *args_void) {
     t_args *args = (t_args *)args_void;
-    int **table = args->table;
+    uint **table = args->table;
     char command[500];
     char buffer[10];
     FILE *output;
@@ -290,6 +305,7 @@ void *execute_push_swap_t8(void *args_void) {
         i++;
     }
 
+	fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -298,14 +314,11 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
     printf("\nInitializing permutation table...\n\n");
+    printf("running 1200 the tests...\n");
     args->table = init_permutation_table();
-    printf(
-        "Get ready to witness the ultimate push_swap breaker.\nWe'll have 8 "
-        "threads pushing your push_swap to the limits at the same time.\n"
-        "It will be a total of 16000 different arrays tested.\n"
-        "Don't worry, these permutations are very well distributed...\n"
-        "Unlike your life choices.\n\n");
-    printf("This shouldn't take much more than 30 seconds...\n\n");
+    printf("This shouldn't take much more than 8 seconds in a slow computer...\n\n");
+    printf("If it does, then make sure you compiled everything in your "
+           "pushswap project with the -O3 flag\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
