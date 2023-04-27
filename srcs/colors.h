@@ -1,0 +1,5 @@
+#define GREEN "\033[0;32m"
+#define DEF_COLOR "\033[0;39m"
+#define CYAN "\033[0;36m"
+#define WHITE "\033[1;97m"
+#define GRAY "\033[0;97m"

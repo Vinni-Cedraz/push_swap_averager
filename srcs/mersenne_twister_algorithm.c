@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "colors.h"
 #define MT_LEN 624
 #define MT_IA 397
 

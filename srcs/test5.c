@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "ft_free_arr.c"
+#include "colors.h"
 
 typedef struct s_args {
     int **table;
@@ -204,8 +205,8 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[5];
     args->table = init_permutation_table();
-    printf("\n\nTESTS FOR SIZE 5\n");
-	printf("testing all 120 permutations for arrays of 5 elements from -2 to 2 ...\n\n");
+    printf(WHITE"TESTS FOR SIZE 5\n\n"DEF_COLOR);
+	printf("\ntesting all 120 permutations for arrays of 5 elements from -2 to 2 ...\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "colors.h"
 #include "ft_free_arr.c"
 #include "mersenne_twister_algorithm.c"
 
