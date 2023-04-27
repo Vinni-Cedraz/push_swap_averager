@@ -8,9 +8,9 @@ GRAY      	=  \033[0;37m
 CYAN      	=  \033[0;96m
 WHITE     	=  \033[0;97m
 GREEN     	=  \033[0;92m
-YELLOW          =  \033[0;93m
-MAGENTA         =  \033[0;95m
-DEF_COLOR       =  \033[0;39m
+YELLOW      =  \033[0;93m
+MAGENTA     =  \033[0;95m
+DEF_COLOR   =  \033[0;39m
 
 CFLAGS = $(CC) -w -g -pthread
 

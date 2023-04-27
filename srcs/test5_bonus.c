@@ -87,7 +87,8 @@ void execute_checker(void *args_void) {
         fgets(reference, 5000, reference_output);
         printf("arr[%d]: { ", i);
         for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
-        printf("} \nyour checker: %sofficial checker: %s", buffer, reference);
+        printf("}"); 
+		printf(GRAY"\n    your checker: %sofficial checker: %s"DEF_COLOR, buffer, reference);
         if (strcmp(buffer, reference) != 0) {
             printf("ERROR\n");
             exit(1);
@@ -101,7 +102,7 @@ void execute_checker(void *args_void) {
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     args->table = init_permutation_table();
-	printf("\n\n\n		Running tests with valgrind -q \n\n\n\n");
+	printf(WHITE"\n\n\n		Running tests with valgrind -q \n\n\n\n"DEF_COLOR);
 	execute_checker(args);
     ft_free_arr_size((void **)args->table, 13);
     free(args);

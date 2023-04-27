@@ -1,4 +1,7 @@
 #!/bin/bash
+GREEN="\033[0;32m"
+DEF_COLOR="\033[0;39m"
+CYAN="\033[0;36m"
 
 # take the directory with the logfiles as an argument:
 log_file=$1
@@ -30,6 +33,4 @@ printf "worst case arrays: \n"
 grep "number of operations: $highest$" $log_file
 
 # print the lowest, highest, and average number of operations
-printf "best case: $lowest\n"
-printf "worst case: $highest\n"
-printf "\n\n< MOST IMPORTANT FOR THE EVALUATION > average case: $average\n"
+printf "\n\n$GREEN< MOST IMPORTANT FOR THE EVALUATION > $CYAN average case: $average$DEF_COLOR\n"
