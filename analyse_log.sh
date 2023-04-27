@@ -32,4 +32,4 @@ grep "number of operations: $highest$" $log_file
 # print the lowest, highest, and average number of operations
 printf "best case: $lowest\n"
 printf "worst case: $highest\n"
-printf "\n\n<MOST IMPORTANT FOR THE EVALUATION> average case: $average\n"
+printf "\n\n< MOST IMPORTANT FOR THE EVALUATION > average case: $average\n"

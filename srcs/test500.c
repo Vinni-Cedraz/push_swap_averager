@@ -430,6 +430,7 @@ void *execute_push_swap_t8(void *args_void) {
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
+    printf("\n\nTESTS FOR SIZE 500\n");
     printf("\nInitializing permutation table...\n\n");
     args->table = init_permutation_table();
     printf(

@@ -92,6 +92,7 @@ void build_command_string(int i, uint **table, char command[500]) {
         table[i][90], table[i][91], table[i][92], table[i][93], table[i][94],
         table[i][95], table[i][96], table[i][97], table[i][98], table[i][99]);
 }
+
 void *execute_push_swap_t1(void *args_void) {
     t_args *args = (t_args *)args_void;
     uint **table = args->table;
@@ -312,12 +313,12 @@ void *execute_push_swap_t8(void *args_void) {
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
+    printf("\n\nTESTS FOR SIZE 100\n");
     printf("\nInitializing permutation table...\n\n");
-    printf("running 1200 the tests...\n");
+    printf("Running 1200 tests on 8 different threads\n\n");
     args->table = init_permutation_table();
-    printf("This shouldn't take much more than 8 seconds in a slow computer...\n\n");
-    printf("If it does, then make sure you compiled everything in your "
-           "pushswap project with the -O3 flag\n\n");
+    printf("If this takes more than 8 seconds,make sure you compiled everything in your "
+           "push_swap project with the -O3 flag\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
