@@ -76,6 +76,9 @@ test500: compile
 	@mv test500 ./executables
 
 bonus: $(PUSH_SWAP_BONUS)
+	@if [ ! -f push_swap ]; then \
+		make --no-print-directory -C ..; \
+	fi
 	@if [ ! -f test5_bonus ]; then \
 		$(CFLAGS) srcs/test5_bonus.c -o test5_bonus; \
 		printf "test5_bonus created\n"; \
@@ -95,7 +98,7 @@ $(PUSH_SWAP_BONUS):
 	@make --no-print-directory -C .. bonus;
 
 clean:
-	rm -f test* push_swap checker basic_test
+	@rm -f test* push_swap checker basic_test
 	@rm -rf ./executables
 	@rm -f tmp*
 

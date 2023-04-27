@@ -6,8 +6,22 @@
 #include <unistd.h>
 
 #include "ft_free_arr.c"
-#include "colors.h"
 #include "mersenne_twister_algorithm.c"
+
+void	ft_free_arr_size(void **arr, uint size)
+{
+	uint	i;
+
+	if (arr == NULL)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
 
 typedef struct s_args {
     uint **table;
@@ -30,34 +44,24 @@ uint *seq_except(int exclude) {
 int is_repeated(uint **table, uint *tmp_arr) {
     int i = -1;
     while (table[++i])
-        if (!memcmp(table[i], tmp_arr, 499 * sizeof(uint)))
-			return 1;
+        if (!memcmp(table[i], tmp_arr, 499 * sizeof(uint))) return 1;
     return 0;
 }
 
 uint **init_permutation_table(void) {
     int count = 0;
-    int j = 1;
-    uint *tmp_arr;
-    uint **table = calloc(sizeof(uint *), 1500);
-
-    for (int i = 1; i <= 500; i++) {
-        tmp_arr = seq_except(i);
-        for (int k = 1; k <= 3; k++) {
-            table[count] = malloc(sizeof(uint) * 500);
-            table[count][0] = i;
-            shuffle_array(tmp_arr, 499);
-            if (is_repeated(table, tmp_arr)) {
-                k--, free(table[count]);
-                continue;
-            }
-            int k = 0;
-            for (j = 1; j < 500; j++) {
-                table[count][j] = tmp_arr[k];
-                k++;
-            }
-            count++;
+    uint *tmp_arr = malloc(sizeof(uint *) * 500);
+    uint **table = calloc(sizeof(uint *), 241);
+    for (int i = 0; i < 500; i++) tmp_arr[i] = i;
+    shuffle_array(tmp_arr, 500);
+    while (count < 240) {
+		if (count % 30 == 0) table[count] = NULL;
+		else if (!is_repeated(table, tmp_arr)) {
+            table[count] = calloc(sizeof(uint), 500);
+            memcpy(table[count], tmp_arr, 500 * sizeof(uint));
         }
+        shuffle_array(tmp_arr, 500);
+        count++;
     }
 
     free(tmp_arr);
@@ -68,26 +72,46 @@ void build_command_string(int i, uint **table, char command[3000]) {
     sprintf(
         command,
         "./push_swap "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d "
         "| wc -l",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
@@ -221,8 +245,7 @@ void *execute_push_swap_t1(void *args_void) {
     FILE *fp;
 
     fp = fopen("tmp1", "a");
-    while (table[i][0] != 1) i++;
-    while (table[i][0] >= 1 && table[i][0] <= 60) {
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -243,14 +266,18 @@ void *execute_push_swap_t2(void *args_void) {
     uint **table = args->table;
     char command[3000];
     char buffer[10];
+	int null_count = 0;
     FILE *output;
     FILE *fp;
     int i = 0;
 
     fp = fopen("tmp2", "a");
-
-    while (table[i][0] != 61) i++;
-    while (table[i][0] >= 61 && table[i][0] <= 120) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 1) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -274,10 +301,15 @@ void *execute_push_swap_t3(void *args_void) {
     FILE *output;
     FILE *fp;
     int i = 0;
+	int null_count = 0;
 
     fp = fopen("tmp3", "a");
-    while (table[i][0] != 121) i++;
-    while (table[i][0] >= 121 && table[i][0] <= 180) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 3) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -301,10 +333,15 @@ void *execute_push_swap_t4(void *args_void) {
     FILE *output;
     FILE *fp;
     int i = 0;
+	int null_count = 0;
 
     fp = fopen("tmp4", "a");
-    while (table[i][0] != 181) i++;
-    while (table[i][0] >= 181 && table[i][0] <= 240) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 4) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -328,10 +365,15 @@ void *execute_push_swap_t5(void *args_void) {
     int i = 0;
     FILE *output;
     FILE *fp;
+	int null_count = 0;
 
     fp = fopen("tmp5", "a");
-    while (table[i][0] != 241) i++;
-    while (table[i][0] >= 241 && table[i][0] <= 305) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 5) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -355,10 +397,15 @@ void *execute_push_swap_t6(void *args_void) {
     FILE *output;
     FILE *fp;
     int i = 0;
+	int null_count = 0;
 
     fp = fopen("tmp6", "a");
-    while (table[i][0] != 306) i++;
-    while (table[i][0] >= 306 && table[i][0] <= 370) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 6) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -382,10 +429,15 @@ void *execute_push_swap_t7(void *args_void) {
     FILE *output;
     FILE *fp;
     int i = 0;
+	int null_count = 0;
 
     fp = fopen("tmp7", "a");
-    while (table[i][0] != 371) i++;
-    while (table[i][0] >= 371 && table[i][0] <= 435) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 7) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -409,10 +461,15 @@ void *execute_push_swap_t8(void *args_void) {
     FILE *output;
     FILE *fp;
     int i = 0;
+	int null_count = 0;
 
     fp = fopen("tmp8", "a");
-    while (table[i][0] != 436) i++;
-    while (table[i] != NULL) {
+    while (1) {
+		if (table[i] == NULL) null_count++;
+		i++;
+		if (null_count == 8) break ;
+	}
+    while (table[i]) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -431,14 +488,17 @@ void *execute_push_swap_t8(void *args_void) {
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
-    printf(WHITE"\n\nTESTS FOR SIZE 500\n\n"DEF_COLOR);
+    printf("\n\nTESTS FOR SIZE 500\n");
     printf("\nInitializing permutation table...\n\n");
     args->table = init_permutation_table();
     printf(
         "Running tests on 8 different threads at the same time.\n"
-        "It will be a total of 1500 different arrays tested.\n");
-    printf("This shouldn't take much more than 3 minutes on a slow computer...\n");
-    printf("If it does, make sure you compiled everything with with the -O3 flag\n\n");
+        "It will be a total of 240 different arrays tested.\n");
+    printf(
+        "This shouldn't take much more than 20 seconds on a slow computer...\n");
+    printf(
+        "If it does, make sure you compiled everything with the -O3 "
+        "flag\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
@@ -449,6 +509,6 @@ int main(void) {
     pthread_create(&pthread[7], NULL, execute_push_swap_t8, (void *)args);
     int count = -1;
     while (++count < 8) pthread_join(pthread[count], NULL);
-    ft_free_arr((char **)args->table, (void **)args->table);
+	ft_free_arr_size((void **)args->table, 241);
     free(args);
 }
