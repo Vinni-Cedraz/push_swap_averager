@@ -60,6 +60,11 @@ int **init_permutation_table(void) {
     return table;
 }
 
+void build_command_string(char command[100], int i, int **table) {
+    sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
+            table[i][1], table[i][2], table[i][3], table[i][4]);
+}
+
 void *execute_push_swap_t1(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
@@ -70,11 +75,9 @@ void *execute_push_swap_t1(void *args_void) {
     int i = 0;
 
     fp = fopen("tmp1", "a");
-    while (table[i][0] != -1 ) i++;
+    while (table[i][0] != -1) i++;
     while (table[i][0] == -1) {
-        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
-                table[i][1], table[i][2], table[i][3], table[i][4]);
-
+		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, "arr[%d]: { ", i);
@@ -84,7 +87,7 @@ void *execute_push_swap_t1(void *args_void) {
         i++;
     }
 
-	fclose(fp);
+    fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -101,9 +104,7 @@ void *execute_push_swap_t2(void *args_void) {
     fp = fopen("tmp2", "a");
     while (table[i][0] != 0) i++;
     while (table[i][0] == 0) {
-        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
-                table[i][1], table[i][2], table[i][3], table[i][4]);
-
+		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, "arr[%d]: { ", i);
@@ -113,7 +114,7 @@ void *execute_push_swap_t2(void *args_void) {
         i++;
     }
 
-	fclose(fp);
+    fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -130,9 +131,7 @@ void *execute_push_swap_t3(void *args_void) {
     fp = fopen("tmp3", "a");
     while (table[i][0] != 1) i++;
     while (table[i][0] == 1) {
-        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
-                table[i][1], table[i][2], table[i][3], table[i][4]);
-
+		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, "arr[%d]: { ", i);
@@ -142,7 +141,7 @@ void *execute_push_swap_t3(void *args_void) {
         i++;
     }
 
-	fclose(fp);
+    fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -159,9 +158,7 @@ void *execute_push_swap_t4(void *args_void) {
     fp = fopen("tmp4", "a");
     while (table[i][0] != 2) i++;
     while (table[i][0] == 2) {
-        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
-                table[i][1], table[i][2], table[i][3], table[i][4]);
-
+		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, "arr[%d]: { ", i);
@@ -171,7 +168,7 @@ void *execute_push_swap_t4(void *args_void) {
         i++;
     }
 
-	fclose(fp);
+    fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -188,9 +185,7 @@ void *execute_push_swap_t5(void *args_void) {
     fp = fopen("tmp5", "a");
     while (table[i][0] != 3) i++;
     while (table[i] != NULL) {
-        sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
-                table[i][1], table[i][2], table[i][3], table[i][4]);
-
+		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, "arr[%d]: { ", i);
@@ -200,7 +195,7 @@ void *execute_push_swap_t5(void *args_void) {
         i++;
     }
 
-	fclose(fp);
+    fclose(fp);
     pthread_exit(NULL);
     return NULL;
 }
@@ -209,6 +204,8 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[5];
     args->table = init_permutation_table();
+    printf("\n\nTESTS FOR SIZE 5\n");
+	printf("testing all 120 permutations for arrays of 5 elements from -2 to 2 ...\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);

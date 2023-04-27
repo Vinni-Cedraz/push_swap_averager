@@ -12,28 +12,37 @@ YELLOW          =  \033[0;93m
 MAGENTA         =  \033[0;95m
 DEF_COLOR       =  \033[0;39m
 
-CFLAGS = $(CC) -w -O3 -pthread
+CFLAGS = $(CC) -w -g -pthread
 
-all: $(PUSH_SWAP)
+mandatory: compile 
+	@make --no-print-directory basic 
+	@make --no-print-directory test5
+	@make --no-print-directory test100
+	@make --no-print-directory test500
+	@make clean
+
+compile: $(PUSH_SWAP)
 	@cp -f $(PUSH_SWAP) .
 	@if [ ! -f test5 ]; then \
 		$(CFLAGS) srcs/test5.c -o test5; \
-		printf "test5 created\n"; \
 	fi
 	@if [ ! -f test100 ]; then \
 		$(CFLAGS) srcs/test100.c -o test100; \
-		printf "test100 created\n"; \
 	fi
 	@if [ ! -f test500 ]; then \
 		$(CFLAGS) srcs/test500.c -o test500; \
-		printf "test500 created\n"; \
 	fi
-	@printf "$(CYAN)Now run make with the chosen test as argument, example: $(GRAY)make -C pushswap-averager test5$(DEF_COLOR)\n"
 
 $(PUSH_SWAP):
 	@make --no-print-directory -C ..
 
-test5: all
+basic:
+	@if [ ! -f basic_test ]; then \
+		$(CFLAGS) srcs/basic_test.c -o basic_test; \
+	fi
+	@./basic_test
+
+test5: compile 
 	@mkdir -p log_files
 	@if [ ! -f tmp1 ]; then \
 		./test5; \
@@ -44,7 +53,7 @@ test5: all
 	@mkdir -p executables
 	@mv test5 ./executables
 
-test100: all
+test100: compile
 	@mkdir -p log_files
 	@if [ ! -f tmp1 ]; then \
 		./test100; \
@@ -55,7 +64,7 @@ test100: all
 	@mkdir -p executables
 	@mv test100 ./executables
 
-test500: all
+test500: compile
 	@mkdir -p log_files
 	@if [ ! -f tmp1 ]; then \
 		./test500; \
@@ -71,14 +80,22 @@ bonus: $(PUSH_SWAP_BONUS)
 		$(CFLAGS) srcs/test5_bonus.c -o test5_bonus; \
 		printf "test5_bonus created\n"; \
 	fi
+	cp -f ../checker .
+	cp -f ../push_swap .
+	./test5_bonus
+	@if [ ! -f test100_bonus ]; then \
+		$(CFLAGS) srcs/test100_bonus.c -o test100_bonus; \
+		printf "test100_bonus created\n"; \
+	fi
+	cp -f ../checker .
+	cp -f ../push_swap .
+	./test100_bonus
 
-
-test5_bonus: bonus
-	@mkdir -p log_files
-	@cp -f $(PUSH_SWAP_BONUS) .
+$(PUSH_SWAP_BONUS):
+	@make --no-print-directory -C .. bonus;
 
 clean:
-	rm -f test5 test100 test500 push_swap checker
+	rm -f test* push_swap checker basic_test
 	@rm -rf ./executables
 	@rm -f tmp*
 
