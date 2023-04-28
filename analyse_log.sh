@@ -29,10 +29,10 @@ highest=${sorted[-1]}
 
 # print the lines with the lowest, highest, and average number of operations
 printf "$GREEN< best case arrays >\n$DEF_COLOR"
-grep "number of operations: $lowest$" $log_file
+cat $log_file | grep "number of operations: $lowest$" | head -n 2
 
 printf "$GREEN<worst case arrays >\n$DEF_COLOR"
-grep "number of operations: $highest$" $log_file
+cat $log_file | grep "number of operations: $highest$" | head -n 2
 
 # print the lowest, highest, and average number of operations
 printf "\n$HGREEN							< MOST IMPORTANT FOR THE EVALUATION > $CYAN average case: $average$DEF_COLOR\n\n\n"
