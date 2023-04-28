@@ -46,7 +46,7 @@ uint **init_permutation_table(void) {
         for (int k = 1; k <= 12; k++) {
             table[count] = malloc(sizeof(uint) * 100);
             table[count][0] = i;
-            shuffle_array(tmp_arr, 99);
+            shuffle_array(tmp_arr, 99, 571);
             if (is_repeated(table, tmp_arr)) {
                 k--, free(table[count]);
                 continue;

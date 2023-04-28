@@ -44,7 +44,7 @@ int **init_permutation_table(void) {
     arr[0] = -1, arr[1] = 0, arr[2] = 1, arr[3] = 2, arr[4] = 3;
 
     while (count < 12) {
-        shuffle_array((uint *)arr, 5);
+        shuffle_array((uint *)arr, 5, rand());
         table[count] = malloc(sizeof(int) * 5);
         for (int i = 0; i < 5; i++) table[count][i] = arr[i];
         count++;
@@ -88,7 +88,7 @@ void execute_checker(void *args_void) {
         printf("arr[%d]: { ", i);
         for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
         printf("}"); 
-		printf(GRAY"\n    your checker: %sofficial checker: %s"DEF_COLOR, buffer, reference);
+		printf(WHITE"\n    your checker: %sofficial checker: %s"DEF_COLOR, buffer, reference);
         if (strcmp(buffer, reference) != 0) {
             printf("ERROR\n");
             exit(1);
