@@ -60,12 +60,12 @@ uint mt_generate(struct MT *m) {
     return y;
 }
 
-void shuffle_array(uint *arr, int len) {
+void shuffle_array(uint *arr, int len, uint seed) {
     struct MT mt;
     int i, j;
     uint tmp;
 
-    mt_init(&mt, (uint)time(NULL));
+    mt_init(&mt, seed);
 
     for (i = len - 1; i > 0; i--) {
         j = mt_generate(&mt) % (i + 1);

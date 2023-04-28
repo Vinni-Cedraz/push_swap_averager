@@ -28,7 +28,7 @@ int **init_permutation_table(void) {
 	for (int i = 0; i < 20; i++) arr[i] = i - 10;
 
     while (count < 10) {
-        shuffle_array((uint *)arr, 20);
+        shuffle_array((uint *)arr, 20, rand());
         table[count] = malloc(sizeof(int) * 20);
         for (int i = 0; i < 20; i++) table[count][i] = arr[i];
         count++;
