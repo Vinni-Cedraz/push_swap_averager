@@ -553,169 +553,13 @@ void build_memtest500_string(int i, int **table, char command[]) {
         table[i][497], table[i][498], table[i][499]);
 }
 
-void build_memtest1000_string(int i, int **table, char command[]) {
+void build_memtest1000_string(int i, int **table, char *command) {
     sprintf(
         command,
         "valgrind -q ./push_swap "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d | ./checker_linux %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d ",
+		"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d | "
+		"./checker_linux "
+		"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
@@ -812,8 +656,8 @@ void build_memtest1000_string(int i, int **table, char command[]) {
         table[i][392], table[i][393], table[i][394], table[i][395],
         table[i][396], table[i][397], table[i][398], table[i][399],
         table[i][400], table[i][401], table[i][402], table[i][403],
-        table[i][408], table[i][409], table[i][410], table[i][411],
         table[i][404], table[i][405], table[i][406], table[i][407],
+        table[i][408], table[i][409], table[i][410], table[i][411],
         table[i][412], table[i][413], table[i][414], table[i][415],
         table[i][416], table[i][417], table[i][418], table[i][419],
         table[i][420], table[i][421], table[i][422], table[i][423],
@@ -1056,9 +900,9 @@ void build_memtest1000_string(int i, int **table, char command[]) {
         table[i][389], table[i][390], table[i][391], table[i][392],
         table[i][393], table[i][394], table[i][395], table[i][396],
         table[i][397], table[i][398], table[i][399], table[i][400],
-        table[i][401], table[i][402], table[i][403], table[i][408],
-        table[i][409], table[i][410], table[i][411], table[i][404],
-        table[i][405], table[i][406], table[i][407], table[i][412],
+        table[i][401], table[i][402], table[i][403], table[i][404],
+        table[i][405], table[i][406], table[i][407], table[i][408],
+        table[i][409], table[i][410], table[i][411], table[i][412],
         table[i][413], table[i][414], table[i][415], table[i][416],
         table[i][417], table[i][418], table[i][419], table[i][420],
         table[i][421], table[i][422], table[i][423], table[i][424],
@@ -1214,138 +1058,132 @@ void execute_memtest(void *args_void) {
     char buffer[10];
     FILE *output;
     int i = 0;
-
-    while (table[i]) {
-        char command[10000];
-        build_memtest3_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf("ERROR\n");
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i += 2;
-    while (table[i]) {
-        char command[10000];
-        build_memtest5_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf("ERROR\n");
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i++;
-    while (table[i]) {
-        char command[10000];
-        build_memtest10_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf("ERROR\n");
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i = 15;
-    while (table[i]) {
-        char command[10000];
-        build_memtest15_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf("ERROR\n");
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i++;
-    while (table[i]) {
-        char command[10000];
-        build_memtest20_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf("ERROR\n");
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i = 27;
-    while (table[i]) {
-        char command[10000];
-        build_memtest100_string(i, table, command);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf("ERROR\n");
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i++;
-    while (table[i]) {
-        char command[100000];
-        build_memtest500_string(i, table, command);
-		printf("command: %s\n", command);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf("arr[%d]: { ", i);
-        for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
-        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-        pclose(output);
-        i++;
-    }
-
-    // i = 35;
+    //
     // while (table[i]) {
-    // 	char command[10000];
-    // 	build_memtest1000_string(i, table, command);
-    // 	output = popen(command, "r");
-    // 	fgets(buffer, 10, output);
-    // 	printf("arr[%d]: { ", i);
-    // 	for (int j = 0; j < 1000; j++) printf("%d ", table[i][j]);
-    // 	printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    // 	if (strncmp(buffer, "OK\n", 2) != 0) {
-    // 		printf("ERROR\n");
-    // 		exit(1);
-    // 	}
-    // 	pclose(output);
-    // 	i++;
+    //     char command[10000];
+    //     build_memtest3_string(command, i, table);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     if (strncmp(buffer, "OK\n", 2) != 0) {
+    //         printf("ERROR\n");
+    //         exit(1);
+    //     }
+    //     pclose(output);
+    //     i++;
     // }
+    //
+    // i += 2;
+    // while (table[i]) {
+    //     char command[10000];
+    //     build_memtest5_string(command, i, table);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     if (strncmp(buffer, "OK\n", 2) != 0) {
+    //         printf("ERROR\n");
+    //         exit(1);
+    //     }
+    //     pclose(output);
+    //     i++;
+    // }
+    //
+    // i++;
+    // while (table[i]) {
+    //     char command[10000];
+    //     build_memtest10_string(command, i, table);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     if (strncmp(buffer, "OK\n", 2) != 0) {
+    //         printf("ERROR\n");
+    //         exit(1);
+    //     }
+    //     pclose(output);
+    //     i++;
+    // }
+    //
+    // i = 15;
+    // while (table[i]) {
+    //     char command[10000];
+    //     build_memtest15_string(command, i, table);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     if (strncmp(buffer, "OK\n", 2) != 0) {
+    //         printf("ERROR\n");
+    //         exit(1);
+    //     }
+    //     pclose(output);
+    //     i++;
+    // }
+    //
+    // i++;
+    // while (table[i]) {
+    //     char command[10000];
+    //     build_memtest20_string(command, i, table);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     if (strncmp(buffer, "OK\n", 2) != 0) {
+    //         printf("ERROR\n");
+    //         exit(1);
+    //     }
+    //     pclose(output);
+    //     i++;
+    // }
+    //
+    // i = 27;
+    // while (table[i]) {
+    //     char command[10000];
+    //     build_memtest100_string(i, table, command);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     if (strncmp(buffer, "OK\n", 2) != 0) {
+    //         printf("ERROR\n");
+    //         exit(1);
+    //     }
+    //     pclose(output);
+    //     i++;
+    // }
+    //
+    // i++;
+    // while (table[i]) {
+    //     char command[100000];
+    //     build_memtest500_string(i, table, command);
+    //     output = popen(command, "r");
+    //     fgets(buffer, 10, output);
+    //     printf("arr[%d]: { ", i);
+    //     for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
+    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+    //     pclose(output);
+    //     i++;
+    // }
+
+    i = 35;
+	char *command = calloc(sizeof(char), 8000);
+	build_memtest1000_string(i, table, command);
+	output = popen(command, "r");
+	printf("command: %s\n", command);
+	fgets(buffer, 10, output);
+	printf("arr[%d]: { ", i);
+	for (int j = 0; j < 1000; j++) printf("%d ", table[i][j]);
+	printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+	pclose(output);
+	free(command);
 }
 
 int main(void) {
