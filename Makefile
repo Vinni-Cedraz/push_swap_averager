@@ -12,7 +12,7 @@ YELLOW      =  \033[0;93m
 MAGENTA     =  \033[0;95m
 DEF_COLOR   =  \033[0;39m
 
-CFLAGS = $(CC) -w -g -pthread
+CFLAGS = $(CC) -w -g -pthread -fsanitize=address
 
 mandatory: compile 
 	@make --no-print-directory basic 
@@ -105,4 +105,4 @@ clean:
 fclean: clean
 	@rm -rf ./log_files
 
-re: fclean all
+re: fclean mandatory
