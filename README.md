@@ -7,7 +7,7 @@
 - [The Why](#Why)
 - [Installation](#installation)
 - [Usage](#usage)
-- [How I did it](#How I did it)
+- [How I did it](#Development)
 - [Trivia](#trivia)
 
 ## Why
@@ -72,7 +72,19 @@ example:
 
 `cat pushswap-averager/log_files/test100.log | grep "operations: 600"`
 
-## How I did it
+## Development
+
+Since the number of permutations and the computation can be intense, I decided
+to take a multithreaded approach. I chose 8 to be the number of threads since
+the 42 iMacs have 4 cores and support 2 threads per core, this way, true
+parallelism can be achieved. I even tested subdividing the tasks into more than
+8 threads but the performance did not improve and even started to go down. So I
+stuck with 8 threads.
+
+For this, I only had to use two functions from the C library pthread.h: 
+`pthread_create` and `pthread_join`. I use a micro-managed subdivision of tasks to
+avoid race conditions instead of mutexes, which would complitace slow down
+things in this context.
 
 To test thousands of permutations in a semi-random pattern that would be as
 representative as possible, I have divided the total number of permutations
@@ -88,23 +100,24 @@ a very consistent measurement of your average case and it can be finished
 within 2 seconds on the 4 cores / 2 threads per core iMacs we have at the 42
 school.
 
-As it was, if I ran the `push_swap-averager` 15 times in a row, I would see a
-slightly different result each time so I had to calculate the average
-oscillations between the different averages and choose to see if the average is
-being calculated with enough accuracy. For example, out of 15 tests, my
-`push_swap` program ranked averages between 574 and 605. This is a "margin of error"
-of 31 operations, so I had to increase the number of tests (up to 15,000) to get to an
-acceptable margin of 10. It was taking 30 seconds now instead of 2, so I
-thought it was ok.
+As it was, if I ran the `push_swap-averager` 30 times in a row, I would see a
+slightly different result each time so I had to calculate the difference
+between the highest and the lowest of the 30 averages to see check if the test
+is reliable enough.
+
+For example, out of 30 tests, my `push_swap` program ranked averages between
+547 and 647. This is a "margin of error" of 100 operations, so I had to increase
+the number of tests (up to 15,000) to get to an acceptable margin of 10. It was
+taking 30 seconds now instead of 2, so I thought it was ok.
 
 However, when I applied the same Fisher-Yates algorithm to randomize the 500
 elements array, I realized the result (the measurement of the average) was not
 consistent enough unless the test took 5 to 10 minutes, and that is definitely
 too much time.
 
-So I had to do some research on the basics of Pseudorandomness in computer science
-and decided to implement the Mersenne-Twister algorithm to improve both the
-consistency of the average-case calculations and the execution speed of the
+Then I've sone some research on the basics of Pseudorandomness in computer
+science and decided to implement the Mersenne-Twister algorithm to improve both
+the consistency of the average-case calculations and the execution speed of the
 program. 
 
 The Mersenne Twister algorithm is a well-known and widely used algorithm for
@@ -116,21 +129,15 @@ chose it. You can find its implementation in the source file called
 `mersenne_twister_algorithm.c`.
 
 Now, with more well-distributed permutations the program takes 2 seconds to
-calculate the avereage of the size 100 with the same margin of error of 10
-operations. Remember it was taking 30 seconds to do the same with the old
-algorithm. And for the size 500 it narrows down to a margin of error of 46
-operations in a one and a half minute test instead of the 22 minutes it
-would take with the Fisher-Yates algorihm to achieve the same accuracy.
+calculate the avereage of the size 100 with a margin of error of 4 operations.
+That is an improvement of 2400% in accuracy, without adding any extra time to the
+program executtion.
 
 I know I could have done it all with a short `Bash` script, and it would make
 for a shorter code and a simpler program. In fact, I had done it before... But
 it was taking three and one half hours to test 10,000 combinations of size
 500. This is why this tester was written in `C`: a compiled language with
 low-level scope which is usually faster and supports a multithreaded approach.
-
-So this is why I bothered to make this test: to have a quick and accurate way
-of assessing the average-cases of push_swap programs, but mostly to learn a lot
-of stuff in the process of (hopefully) achieving that.
 
 ## Trivia
 - The longest English word with all its letters in alphabetical order is
