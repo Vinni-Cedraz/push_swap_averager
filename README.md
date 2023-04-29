@@ -47,7 +47,8 @@ it found, so that if you want to be extremely safe, you can guide yourself by
 the worst case instead.
 
 ## Installation
-Just clone it inside your push_swap directory.
+Just clone it inside of your push_swap directory:
+
 `git clone https://github.com/Vinni-Cedraz/pushswap-averager.git`
 
 ## Usage
