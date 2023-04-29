@@ -60,8 +60,19 @@ Just do this from your push_swap root directory and your program will be
 compiled and all tests will be ran in sequence:
 `make -C pushswap-averager`
 
-If you passed on the mandatory with a hundred percent then try the bonus:
+The first test will be the basic_test, it tests if you are really sorting the
+ararys and accuses any memory leaks. It will do so with:
+- all unsorted arrays of size 3
+- three arrays of each size 5, 10, 15, 20, 50, 100 and 500
+- one array of size 1000
+
+Then the tests for the averages will start.
+
+And if you passed on all of those and did the bonus part:
 `make -C pushswap-averager bonus`
+
+The bonus will test the correctness of your checker against the official
+checker for "OK" cases and will accuse any memory leaks it finds.
 
 ### advanced features
 
