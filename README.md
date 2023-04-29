@@ -4,42 +4,35 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [The Why](#Why)
+- [Installation](#installation)
 - [Usage](#usage)
-- [Foreword](#installation)
+- [How I did it](#How I did it)
 - [Trivia](#trivia)
 
-## Installation
-This is the installation section.
-
-## Usage
-This is the usage section.
-
-## Foreword (or, Why bother?)
-
-Buckle up for a long ride!
+## Why
 
 This tester is designed to try out a very broad range of combinations for the
 5, 100, and 500 array sizes that your `push_swap` program is supposed to sort.
 
 As you probably know by now, during your `push_swap` evaluation, your evaluator
-will be asked to take the average case of your program and then rank your
-project according to this average case for each array size.
+will be asked to run your program a few times with random arrays of specific sizes
+and then rank your project according to the resutls he finds in his tests.
 
-However, evaluations where the average case is measured with some accuracy have
-been very hard to find. This is because the number of permutations that can be
-generated from an N sized array is N!, which is an astronomical number. And I
-mean, it is a number so big that it couldn't fit in a million `size_t` variables,
-even if we divided it by a billion.
+There is a myth going around in the 42 community that says the evaluator is
+asked by the ruler to take the average of the tests he has run, but that is not
+what the ruler asks. The ruler only requires him to run "a couple of tests with
+several permutations" and check it against the scores.]
 
-So, for any case beyond the array 5 elements, it is impossible for the
-evaluator to calculate the exact average case of your `push_swap` algorithm. But
-this is not an excuse to simply test your program with 5 or 10 random arrays of
-size 100 and 500 and draw conclusions out of it!
+Which means that if your average case is not safely below the number of
+operations allowed to get the grade, you'll have a very annoying chance that
+the evaluator will incur precisely into a case where you're slightly above the
+limit and you wont get the highest grade.
 
-This is so much of a big deal that it could make or break your project! Imagine
-how insufficient it is to measure 10 cases out of 100! The average of those ten
-could be really far from the truth. It would be 10 random cases out of:
+This could make or break your bonus project. Imagine
+how insufficient it is to measure 5 cases out of 100 factorial:
+
+It would be 5 samples out of:
 
 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
 
@@ -47,7 +40,39 @@ For an array of size 500 the number is even more obscene:
 
 1220136825991110068701238785423046926253574342803192842192413588385845373153881997605496447502203281863013616477148203584163378722078177200480785205159329285477907571939330603772960859086270429174547882424912726344305670173270769461062802310452644218878789465754777149863494367781037644274033827365397471386477878495438489595537537990423241061271326984327745715546309977202781014561081188373709531016356324432987029563896628911658974769572087926928871281780070265174507768410719624390394322536422605234945850129918571501248706961568141625359056693423813008856249246891564126775654481886506593847951775360894005745238940335798476363944905313062323749066445048824665075946735862074637925184200459369692981022263971952597190945217823331756934581508552332820762820023402626907898342451712006207714640979456116127629145951237229913340169552363850942885592018727433795173014586357570828355780158735432768888680120399882384702151467605445407663535984174430480128938313896881639487469658817504506926365338175055478128640000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
-This is why the `push_swap-averager` was born
+This is **why** the `push_swap-averager` was born: to give you a broader perpective
+on your push_swap performance before you submit it to evaluation. And it does
+that not only by taking precise averages but also by giving you the worst cases
+it found, so that if you want to be extremely safe, you can guide yourself by
+the worst case instead.
+
+## Installation
+Just clone it inside your push_swap directory.
+`git clone https://github.com/Vinni-Cedraz/pushswap-averager.git`
+
+## Usage
+
+### basic usage
+
+*it is **CRUCIAL** that you set your push_swap Makefiles to compile everything with the -O3 flag!*
+
+Just do this from your push_swap root directory and your program will be
+compiled and all tests will be ran in sequence:
+`make -C pushswap-averager`
+
+If you passed on the mandatory with a hundred percent then try the bonus:
+`make -C pushswap-averager bonus`
+
+### advanced features
+
+You can open the logfiles containing all array permutations that were tested
+for each size and the ammount of operations push_swap took to sort it. You can
+also use grep to figure out which and how many arrays scored a given number,
+example:
+
+`cat pushswap-averager/log_files/test100.log | grep "operations: 600"`
+
+## How I did it
 
 To test thousands of permutations in a semi-random pattern that would be as
 representative as possible, I have divided the total number of permutations
