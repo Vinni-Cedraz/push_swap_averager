@@ -1058,120 +1058,120 @@ void execute_memtest(void *args_void) {
     char buffer[10];
     FILE *output;
     int i = 0;
-    //
-    // while (table[i]) {
-    //     char command[10000];
-    //     build_memtest3_string(command, i, table);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     if (strncmp(buffer, "OK\n", 2) != 0) {
-    //         printf("ERROR\n");
-    //         exit(1);
-    //     }
-    //     pclose(output);
-    //     i++;
-    // }
-    //
-    // i += 2;
-    // while (table[i]) {
-    //     char command[10000];
-    //     build_memtest5_string(command, i, table);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     if (strncmp(buffer, "OK\n", 2) != 0) {
-    //         printf("ERROR\n");
-    //         exit(1);
-    //     }
-    //     pclose(output);
-    //     i++;
-    // }
-    //
-    // i++;
-    // while (table[i]) {
-    //     char command[10000];
-    //     build_memtest10_string(command, i, table);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     if (strncmp(buffer, "OK\n", 2) != 0) {
-    //         printf("ERROR\n");
-    //         exit(1);
-    //     }
-    //     pclose(output);
-    //     i++;
-    // }
-    //
-    // i = 15;
-    // while (table[i]) {
-    //     char command[10000];
-    //     build_memtest15_string(command, i, table);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     if (strncmp(buffer, "OK\n", 2) != 0) {
-    //         printf("ERROR\n");
-    //         exit(1);
-    //     }
-    //     pclose(output);
-    //     i++;
-    // }
-    //
-    // i++;
-    // while (table[i]) {
-    //     char command[10000];
-    //     build_memtest20_string(command, i, table);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     if (strncmp(buffer, "OK\n", 2) != 0) {
-    //         printf("ERROR\n");
-    //         exit(1);
-    //     }
-    //     pclose(output);
-    //     i++;
-    // }
-    //
-    // i = 27;
-    // while (table[i]) {
-    //     char command[10000];
-    //     build_memtest100_string(i, table, command);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     if (strncmp(buffer, "OK\n", 2) != 0) {
-    //         printf("ERROR\n");
-    //         exit(1);
-    //     }
-    //     pclose(output);
-    //     i++;
-    // }
-    //
-    // i++;
-    // while (table[i]) {
-    //     char command[100000];
-    //     build_memtest500_string(i, table, command);
-    //     output = popen(command, "r");
-    //     fgets(buffer, 10, output);
-    //     printf("arr[%d]: { ", i);
-    //     for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
-    //     printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
-    //     pclose(output);
-    //     i++;
-    // }
+
+	while (table[i]) {
+        char command[10000];
+        build_memtest3_string(command, i, table);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        if (strncmp(buffer, "OK\n", 2) != 0) {
+            printf("ERROR\n");
+            exit(1);
+        }
+        pclose(output);
+        i++;
+    }
+
+    i += 2;
+    while (table[i]) {
+        char command[10000];
+        build_memtest5_string(command, i, table);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        if (strncmp(buffer, "OK\n", 2) != 0) {
+            printf("ERROR\n");
+            exit(1);
+        }
+        pclose(output);
+        i++;
+    }
+
+    i++;
+    while (table[i]) {
+        char command[10000];
+        build_memtest10_string(command, i, table);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        if (strncmp(buffer, "OK\n", 2) != 0) {
+            printf("ERROR\n");
+            exit(1);
+        }
+        pclose(output);
+        i++;
+    }
+
+    i = 15;
+    while (table[i]) {
+        char command[10000];
+        build_memtest15_string(command, i, table);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        if (strncmp(buffer, "OK\n", 2) != 0) {
+            printf("ERROR\n");
+            exit(1);
+        }
+        pclose(output);
+        i++;
+    }
+
+    i++;
+    while (table[i]) {
+        char command[10000];
+        build_memtest20_string(command, i, table);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        if (strncmp(buffer, "OK\n", 2) != 0) {
+            printf("ERROR\n");
+            exit(1);
+        }
+        pclose(output);
+        i++;
+    }
+
+    i = 27;
+    while (table[i]) {
+        char command[10000];
+        build_memtest100_string(i, table, command);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        if (strncmp(buffer, "OK\n", 2) != 0) {
+            printf("ERROR\n");
+            exit(1);
+        }
+        pclose(output);
+        i++;
+    }
+
+    i++;
+    while (table[i]) {
+        char command[100000];
+        build_memtest500_string(i, table, command);
+        output = popen(command, "r");
+        fgets(buffer, 10, output);
+        printf("arr[%d]: { ", i);
+        for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
+        printf("} \nOfficial Sorting Instructions Checker: %s", buffer);
+        pclose(output);
+        i++;
+    }
 
     i = 35;
 	char *command = calloc(sizeof(char), 8000);

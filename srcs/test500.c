@@ -17,15 +17,6 @@ void print_arr(int *arr, int last_index) {
     printf("\n");
 }
 
-uint *seq_except(int exclude) {
-    int j = 0;
-    int i = 0;
-    uint *arr = malloc(499 * sizeof(uint));
-    for (; ++i != 501;)
-        if (i != exclude) arr[j++] = i;
-    return arr;
-}
-
 int is_repeated(uint **table, uint *tmp_arr) {
     int i = -1;
     while (table[++i])
@@ -38,7 +29,8 @@ uint **init_permutation_table(void) {
     uint *tmp_arr = malloc(sizeof(uint *) * 500);
     uint **table = calloc(sizeof(uint *), 241);
     for (int i = 0; i < 500; i++) tmp_arr[i] = i;
-    shuffle_array(tmp_arr, 500, 571);
+	srand(time(NULL) ^ (getpid() << 16));
+    shuffle_array(tmp_arr, 500, rand());
 	
     while (count < 240) {
 		if (count % 30 == 0) table[count] = NULL;
@@ -46,7 +38,7 @@ uint **init_permutation_table(void) {
             table[count] = calloc(sizeof(uint), 500);
             memcpy(table[count], tmp_arr, 500 * sizeof(uint));
         }
-        shuffle_array(tmp_arr, 500, 571);
+        shuffle_array(tmp_arr, 500, rand());
         count++;
     }
 
