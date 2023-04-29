@@ -40,13 +40,14 @@ uint **init_permutation_table(void) {
     int j = 1;
     uint *tmp_arr;
     uint **table = calloc(sizeof(uint *), 1201);
+	srand(time(NULL) ^ (getpid() << 16));
 
     for (int i = 1; i <= 100; i++) {
         tmp_arr = seq_except(i);
         for (int k = 1; k <= 12; k++) {
             table[count] = malloc(sizeof(uint) * 100);
             table[count][0] = i;
-            shuffle_array(tmp_arr, 99, 571);
+            shuffle_array(tmp_arr, 99, rand());
             if (is_repeated(table, tmp_arr, count)) {
                 k--, free(table[count]);
                 continue;
