@@ -8,21 +8,6 @@
 #include "ft_free_arr.c"
 #include "mersenne_twister_algorithm.c"
 
-void	ft_free_arr_size(void **arr, uint size)
-{
-	uint	i;
-
-	if (arr == NULL)
-		return ;
-	i = 0;
-	while (i < size)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
 typedef struct s_args {
     uint **table;
 } t_args;
@@ -54,6 +39,7 @@ uint **init_permutation_table(void) {
     uint **table = calloc(sizeof(uint *), 241);
     for (int i = 0; i < 500; i++) tmp_arr[i] = i;
     shuffle_array(tmp_arr, 500, 571);
+	
     while (count < 240) {
 		if (count % 30 == 0) table[count] = NULL;
 		else if (!is_repeated(table, tmp_arr)) {
@@ -68,7 +54,7 @@ uint **init_permutation_table(void) {
     return table;
 }
 
-void build_command_string(int i, uint **table, char command[3000]) {
+void build_command_string(int i, uint **table, char command[]) {
     sprintf(
         command,
         "./push_swap "
@@ -470,7 +456,7 @@ void *execute_push_swap_t7(void *args_void) {
 void *execute_push_swap_t8(void *args_void) {
     t_args *args = (t_args *)args_void;
     uint **table = args->table;
-    char command[3000];
+    char command[30000];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -504,7 +490,7 @@ void *execute_push_swap_t8(void *args_void) {
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
-    printf(WHITE"\n\nTESTS FOR SIZE 500\n"DEF_COLOR);
+    printf(WHITE"\nTESTS FOR SIZE 500\n"DEF_COLOR);
     printf("\nInitializing permutation table...\n\n");
     args->table = init_permutation_table();
     printf(

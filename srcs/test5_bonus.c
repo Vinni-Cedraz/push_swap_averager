@@ -7,21 +7,6 @@
 #include "ft_free_arr.c"
 #include "mersenne_twister_algorithm.c"
 
-void	ft_free_arr_size(void **arr, uint size)
-{
-	uint	i;
-
-	if (arr == NULL)
-		return ;
-	i = 0;
-	while (i < size)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
 typedef struct s_args {
     int **table;
 } t_args;
@@ -42,6 +27,7 @@ int **init_permutation_table(void) {
     int *arr = malloc(sizeof(int) * 5);
     int **table = calloc(sizeof(int *), 13);
     arr[0] = -1, arr[1] = 0, arr[2] = 1, arr[3] = 2, arr[4] = 3;
+	srand(time(NULL) ^ (getpid() << 16));
 
     while (count < 12) {
         shuffle_array((uint *)arr, 5, rand());

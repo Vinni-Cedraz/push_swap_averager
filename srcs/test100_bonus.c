@@ -28,6 +28,7 @@ int **init_permutation_table(void) {
     int *arr = malloc(sizeof(int) * 100);
     int **table = calloc(sizeof(int *), 13);
 	for (int i = 1; i <= 100; i++) arr[i - 1] = (i - 50);
+	srand(time(NULL) ^ (getpid() << 16));
 
     while (count < 12) {
         shuffle_array((uint *)arr, 100, 571);
