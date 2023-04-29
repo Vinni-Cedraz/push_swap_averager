@@ -55,14 +55,15 @@ Just clone it inside of your push_swap directory:
 
 ### basic usage
 
-*it is **CRUCIAL** that you set your push_swap Makefiles to compile everything with the -O3 flag!*
+*First: it is **CRUCIAL** that you set your push_swap Makefiles to compile everything with the -O3 flag!*
 
-Just do this from your push_swap root directory and your program will be
-compiled and all tests will be ran in sequence:
+Then, just do this from your push_swap root directory and your program will be
+compiled and the tests will be ran:
+
 `make -C pushswap-averager`
 
 The first test will be the basic_test, it tests if you are really sorting the
-ararys and accuses any memory leaks. It will do so with:
+arrays and accuses any memory leaks. It will do so with:
 - all unsorted arrays of size 3
 - three unsorted arrays of each size 5, 10, 15, 20, 50, 100 and 500
 - and a single one of size 1000
@@ -70,6 +71,7 @@ ararys and accuses any memory leaks. It will do so with:
 Then the tests for the averages will start.
 
 And if you passed on all of those and did the bonus part:
+
 `make -C pushswap-averager bonus`
 
 The bonus will test the correctness of your checker against the official
