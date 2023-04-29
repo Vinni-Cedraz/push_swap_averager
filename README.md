@@ -64,8 +64,8 @@ compiled and all tests will be ran in sequence:
 The first test will be the basic_test, it tests if you are really sorting the
 ararys and accuses any memory leaks. It will do so with:
 - all unsorted arrays of size 3
-- three arrays of each size 5, 10, 15, 20, 50, 100 and 500
-- one array of size 1000
+- three unsorted arrays of each size 5, 10, 15, 20, 50, 100 and 500
+- and a single one of size 1000
 
 Then the tests for the averages will start.
 
