@@ -1,6 +1,6 @@
 # pushswap-averager
 
-# STILL IN CONSTRUCTION (to be finished by the 28th of April)
+### STILL IN BETA (to be updated by the 8th of May)
 
 ## Table of Contents
 
