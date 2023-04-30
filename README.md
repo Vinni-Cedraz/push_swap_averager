@@ -52,7 +52,6 @@ Just clone it inside of your push_swap directory:
 `git clone https://github.com/Vinni-Cedraz/pushswap-averager.git`
 
 ## Usage
-
 ### basic usage
 
 *First: it is **CRUCIAL** that you set your push_swap Makefiles to compile everything with the -O3 flag!*
@@ -67,10 +66,10 @@ arrays and accuses any memory leaks. It will do so with:
 - all unsorted arrays of size 3
 - three unsorted arrays of each size 5, 10, 15, 20, 50, 100 and 500
 - and a single one of size 1000
-
 Then the tests for the averages will start.
 
-And if you passed on all of those and did the bonus part:
+- Bonus
+If you passed on all of those and did the bonus part:
 
 `make -C pushswap-averager bonus`
 
@@ -79,12 +78,24 @@ checker for "OK" cases and will accuse any memory leaks it finds.
 
 ### advanced features
 
-You can open the logfiles containing all array permutations that were tested
+- You can open the logfiles containing all array permutations that were tested
 for each size and the ammount of operations push_swap took to sort it. You can
 also use grep to figure out which and how many arrays scored a given number,
 example:
 
 `cat pushswap-averager/log_files/test100.log | grep "operations: 600"`
+
+- You can run parts of the test separately:
+
+`make -C pushswap-averager basic`
+
+`make -C pushswap-averager test5`
+
+`make -C pushswap-averager test100`
+
+`make -C pushswap-averager test500`
+
+`make -C pushswap-averager averager`
 
 ## Development
 
