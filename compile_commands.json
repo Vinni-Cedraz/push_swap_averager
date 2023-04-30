@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/basic_test.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/basic_test.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/basic_test.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/test5.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test5.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test5.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/test100.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test100.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test100.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/test500.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test500.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test500.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/bonus/basic_bonus.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/bonus/basic_bonus.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/bonus/basic_bonus.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build/srcs/lib",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/lib.dir/ft_free_arr.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/lib/ft_free_arr.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/ft_free_arr.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build/srcs/lib",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/lib.dir/mersenne_twister_algorithm.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/lib/mersenne_twister_algorithm.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/mersenne_twister_algorithm.c"
+},
+{
+  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build/srcs/lib",
+  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/lib.dir/permutation_utils.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/lib/permutation_utils.c",
+  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/permutation_utils.c"
+}
+]
