@@ -85,26 +85,19 @@ bonus: $(PUSH_SWAP_BONUS)
 	@if [ ! -f push_swap ]; then \
 		make --no-print-directory -C ..; \
 	fi
-	@if [ ! -f test5_bonus ]; then \
-		$(CFLAGS) srcs/test5_bonus.c -o test5_bonus; \
-		printf "test5_bonus created\n"; \
+	@if [ ! -f basic_bonus ]; then \
+		$(CFLAGS) srcs/basic_bonus.c -o basic_bonus; \
+		printf "basic_bonus created\n"; \
 	fi
 	cp -f ../checker .
 	cp -f ../push_swap .
-	./test5_bonus
-	@if [ ! -f test100_bonus ]; then \
-		$(CFLAGS) srcs/test100_bonus.c -o test100_bonus; \
-		printf "test100_bonus created\n"; \
-	fi
-	cp -f ../checker .
-	cp -f ../push_swap .
-	./test100_bonus
+	./basic_bonus
 
 $(PUSH_SWAP_BONUS):
 	@make --no-print-directory -C .. bonus;
 
 clean:
-	@rm -f test* push_swap checker basic_test
+	@rm -f test* push_swap checker basic_test basic_bonus
 	@rm -rf ./executables
 	@rm -f tmp*
 
