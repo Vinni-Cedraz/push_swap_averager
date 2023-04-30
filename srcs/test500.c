@@ -465,7 +465,7 @@ void *execute_push_swap_t8(void *args_void) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, BLUE"arr[%d]:"DEF_COLOR, i);
+        fprintf(fp, HBLUE"arr[%d]:"DEF_COLOR, i);
 		fprintf(fp, " { ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "}	"
@@ -483,16 +483,7 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
     printf(WHITE"\nTESTS FOR SIZE 500\n"DEF_COLOR);
-    printf("\nInitializing permutation table...\n\n");
     args->table = init_permutation_table();
-    printf(
-        "Running tests on 8 different threads at the same time.\n"
-        "It will be a total of 240 different arrays tested.\n");
-    printf(
-        "This shouldn't take much more than 20 seconds on a slow computer...\n");
-    printf(
-        "If it does, make sure you compiled everything with the -O3 "
-        "flag\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);

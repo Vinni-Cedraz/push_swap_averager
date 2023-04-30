@@ -21,6 +21,12 @@ mandatory: compile
 	@make --no-print-directory test500
 	@make clean
 
+averager: compile
+	@make --no-print-directory test5
+	@make --no-print-directory test100
+	@make --no-print-directory test500
+	@make clean
+
 compile: $(PUSH_SWAP)
 	@cp -f $(PUSH_SWAP) .
 	@if [ ! -f test5 ]; then \

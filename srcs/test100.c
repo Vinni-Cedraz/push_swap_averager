@@ -110,7 +110,8 @@ void *execute_push_swap_t1(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -138,7 +139,8 @@ void *execute_push_swap_t2(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -165,7 +167,8 @@ void *execute_push_swap_t3(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -192,7 +195,8 @@ void *execute_push_swap_t4(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -219,7 +223,8 @@ void *execute_push_swap_t5(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -246,7 +251,8 @@ void *execute_push_swap_t6(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -273,7 +279,8 @@ void *execute_push_swap_t7(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -300,7 +307,8 @@ void *execute_push_swap_t8(void *args_void) {
 		build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -316,11 +324,7 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[8];
     printf(WHITE"\nTESTS FOR SIZE 100\n"DEF_COLOR);
-    printf("\nInitializing permutation table...\n\n");
-    printf("Running 1200 tests on 8 different threads\n\n");
     args->table = init_permutation_table();
-    printf("If this takes more than 8 seconds,make sure you compiled everything in your "
-           "push_swap project with the -O3 flag\n\n");
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
