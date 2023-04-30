@@ -81,7 +81,8 @@ void *execute_push_swap_t1(void *args_void) {
 		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -108,7 +109,8 @@ void *execute_push_swap_t2(void *args_void) {
 		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -135,7 +137,8 @@ void *execute_push_swap_t3(void *args_void) {
 		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -162,7 +165,8 @@ void *execute_push_swap_t4(void *args_void) {
 		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -189,7 +193,8 @@ void *execute_push_swap_t5(void *args_void) {
 		build_command_string(command, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, "arr[%d]: { ", i);
+        fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
+		" { ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, "} number of operations: %s", out_str);
         pclose(output);
@@ -205,8 +210,9 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     pthread_t pthread[5];
     args->table = init_permutation_table();
-    printf(WHITE"TESTS FOR SIZE 5\n\n"DEF_COLOR);
-	printf("\ntesting all 120 permutations for arrays of 5 elements from -2 to 2 ...\n\n");
+	printf(HGREEN"<	< THE AVERAGER >	>\n\n"DEF_COLOR);
+	sleep(5);
+    printf(WHITE"TESTS FOR SIZE 5\n"DEF_COLOR);
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
     pthread_create(&pthread[2], NULL, execute_push_swap_t3, (void *)args);
