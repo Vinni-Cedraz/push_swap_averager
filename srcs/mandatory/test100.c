@@ -1,41 +1,6 @@
-#include <fcntl.h>
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "averager.h"
 
-#include "colors.h"
-#include "ft_free_arr.c"
-#include "mersenne_twister_algorithm.c"
-
-typedef struct s_args {
-    uint **table;
-} t_args;
-
-void print_arr(uint *arr, int last_index) {
-    for (int i = 0; i <= last_index; i++) printf("%d ", arr[i]);
-    printf("\n");
-}
-
-uint *seq_except(int exclude) {
-    int j = 0;
-    int i = 0;
-    uint *arr = malloc(99 * sizeof(uint));
-    for (; ++i != 101;)
-        if (i != exclude) arr[j++] = i;
-    return arr;
-}
-
-int is_repeated(uint **table, uint *tmp_arr, int count) {
-    int i = -1;
-    while (++i <= count)
-        if (!memcmp(table[i], tmp_arr, 70 * sizeof(uint)))
-			return 1;
-    return 0;
-}
-
-uint **init_permutation_table(void) {
+static uint **init_permutation_table(void) {
     int count = 0;
     int j = 1;
     uint *tmp_arr;
@@ -48,7 +13,7 @@ uint **init_permutation_table(void) {
             table[count] = malloc(sizeof(uint) * 100);
             table[count][0] = i;
             shuffle_array(tmp_arr, 99, rand());
-            if (is_repeated(table, tmp_arr, count)) {
+            if (is_repeated100(table, tmp_arr, count)) {
                 k--, free(table[count]);
                 continue;
             }
@@ -61,11 +26,10 @@ uint **init_permutation_table(void) {
         }
 		free(tmp_arr);
     }
-
     return table;
 }
 
-void build_command_string(int i, uint **table, char command[]) {
+static void build_command_string(int i, uint **table, char command[]) {
     sprintf(
         command,
         "./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -95,8 +59,8 @@ void build_command_string(int i, uint **table, char command[]) {
         table[i][95], table[i][96], table[i][97], table[i][98], table[i][99]);
 }
 
-void *execute_push_swap_t1(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t1(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -123,8 +87,8 @@ void *execute_push_swap_t1(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t2(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t2(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -152,8 +116,8 @@ void *execute_push_swap_t2(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t3(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t3(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -180,8 +144,8 @@ void *execute_push_swap_t3(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t4(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t4(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -208,8 +172,8 @@ void *execute_push_swap_t4(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t5(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t5(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -236,8 +200,8 @@ void *execute_push_swap_t5(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t6(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t6(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -264,8 +228,8 @@ void *execute_push_swap_t6(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t7(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t7(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[500];
     char buffer[10];
@@ -292,8 +256,8 @@ void *execute_push_swap_t7(void *args_void) {
     return NULL;
 }
 
-void *execute_push_swap_t8(void *args_void) {
-    t_args *args = (t_args *)args_void;
+static void *execute_push_swap_t8(void *args_void) {
+    t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
     char command[5000];
     char buffer[10];
@@ -321,7 +285,7 @@ void *execute_push_swap_t8(void *args_void) {
 }
 
 int main(void) {
-    t_args *args = malloc(sizeof(t_args));
+    t_uargs *args = malloc(sizeof(t_uargs));
     pthread_t pthread[8];
     printf(WHITE"\nTESTS FOR SIZE 100\n"DEF_COLOR);
     args->table = init_permutation_table();

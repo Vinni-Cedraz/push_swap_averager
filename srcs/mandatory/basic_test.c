@@ -1,201 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "averager.h"
 
-#include "colors.h"
-#include "ft_free_arr.c"
-#include "mersenne_twister_algorithm.c"
-
-typedef struct s_args {
-    int **table;
-} t_args;
-
-int is_reverse_sorted(int *arr, int last_index) {
-    for (int i = 0; i < last_index; i++)
-        if (arr[i] < arr[i + 1]) return 0;
-    return 1;
-}
-
-void print_arr(int *arr, int last_index) {
-    for (int i = 0; i <= last_index; i++) printf("%d ", arr[i]);
-    printf("\n");
-}
-
-void print_arr_table(int **table, int last_index) {
-    for (int i = 0; i <= last_index; i++) {
-        if (table[i] == NULL) continue;
-        for (int j = 0; j <= 999; j++) printf("%d ", table[i][j]);
-        printf("\n");
-    }
-}
-
-int *next_permutation(int *arr, int last_index) {
-    if (is_reverse_sorted(arr, last_index)) return NULL;
-    int i = last_index;
-    while (arr[i - 1] >= arr[i]) i--;
-    int j = last_index;
-    while (arr[j] <= arr[i - 1]) j--;
-
-    int temp = arr[i - 1];
-    arr[i - 1] = arr[j];
-    arr[j] = temp;
-
-    j = last_index;
-    while (i < j) {
-        temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-        i++, j--;
-    }
-    return arr;
-}
-
-int **init_permutation_table(void) {
-    // size 3
-    int count = 0;
-    int *arr = malloc(sizeof(int) * 3);
-    int **table = calloc(sizeof(int *), 100);
-    arr[0] = -1, arr[1] = 0, arr[2] = 1;
-    int *is_still_going_on = next_permutation(arr, 2);
-
-    while (is_still_going_on) {
-        is_still_going_on = next_permutation(arr, 2);
-        table[count] = calloc(sizeof(int), 3);
-        for (int i = 0; i < 3; i++) table[count][i] = arr[i];
-        count++;
-    }
-    free(arr);
-    count += 2;
-
-    // size 5
-    if (count != 7) {
-        printf("Error: count == %d\n", count);
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 5);
-    for (int i = 0; i < 5; i++) arr[i] = i;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 10) {
-        shuffle_array((uint *)arr, 5, rand());
-        table[count] = calloc(sizeof(int), 5);
-        for (int i = 0; i < 5; i++) table[count][i] = arr[i];
-        count++;
-    }
-    count++;
-    free(arr);
-
-    // size 10
-    if (count != 11) {
-        printf("Error: count == %d\n", count);
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 10);
-    for (int i = 0; i < 10; i++) arr[i] = i - 5;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 14) {
-        shuffle_array((uint *)arr, 10, rand());
-        table[count] = calloc(sizeof(int), 10);
-        for (int i = 0; i < 10; i++) table[count][i] = arr[i];
-        count++;
-    }
-    count++;
-    free(arr);
-
-    // size 15
-    if (count != 15) {
-        printf("Error: count != 12\n");
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 15);
-    for (int i = 0; i < 15; i++) arr[i] = i - 5;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 18) {
-        shuffle_array((uint *)arr, 15, rand());
-        table[count] = calloc(sizeof(int), 15);
-        for (int i = 0; i < 15; i++) table[count][i] = arr[i];
-        count++;
-    }
-    free(arr);
-    count++;
-
-    // size 20
-    if (count != 19) {
-        printf("Error: count != 16\n");
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 20);
-    for (int i = 0; i < 20; i++) arr[i] = i;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 22) {
-        shuffle_array((uint *)arr, 20, rand());
-        table[count] = calloc(sizeof(int), 20);
-        for (int i = 0; i < 20; i++) table[count][i] = arr[i];
-        count++;
-    }
-    free(arr);
-    count = 27;
-
-    // size 100
-    if (count != 27) {
-        printf("Error: count != 24\n");
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 100);
-    for (int i = 0; i < 100; i++) arr[i] = i;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 30) {
-        shuffle_array((uint *)arr, 100, rand());
-        table[count] = calloc(sizeof(int), 100);
-        for (int i = 0; i < 100; i++) table[count][i] = arr[i];
-        count++;
-    }
-    free(arr);
-    count++;
-
-    // size 500
-    if (count != 31) {
-        printf("Error: count != 28\n");
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 500);
-    for (int i = 0; i < 500; i++) arr[i] = i;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 34) {
-        shuffle_array((uint *)arr, 500, rand());
-        table[count] = calloc(sizeof(int), 500);
-        for (int i = 0; i < 500; i++) table[count][i] = arr[i];
-        count++;
-    }
-    free(arr);
-    count++;
-
-    // size 1000
-    if (count != 35) {
-        printf("Error: count != 32\n");
-        exit(1);
-    }
-    arr = malloc(sizeof(int) * 1000);
-    for (int i = 0; i < 1000; i++) arr[i] = i;
-    srand(time(NULL) ^ (getpid() << 16));
-    while (count < 38) {
-        shuffle_array((uint *)arr, 1000, rand());
-        table[count] = calloc(sizeof(int), 1000);
-        for (int i = 0; i < 1000; i++) table[count][i] = arr[i];
-        count++;
-    }
-    free(arr);
-
-    // print_arr_table(table, 35);
-    return (table);
-}
-
-void build_test3_string(char memtest[], int i, int **table) {
+static void build_test3_string(char memtest[], int i, int **table) {
     sprintf(memtest, "./push_swap %d %d %d | wc -l", table[i][0], table[i][1],
             table[i][2]);
 }
 
-void build_memtest3_string(char memtest[], int i, int **table) {
+static void build_memtest3_string(char memtest[], int i, int **table) {
     sprintf(memtest,
             "valgrind -q ./push_swap %d %d %d |"
             "./checker_linux %d %d %d",
@@ -203,7 +13,7 @@ void build_memtest3_string(char memtest[], int i, int **table) {
             table[i][2]);
 }
 
-void build_memtest5_string(char memtest[], int i, int **table) {
+static void build_memtest5_string(char memtest[], int i, int **table) {
     sprintf(memtest,
             "valgrind -q ./push_swap %d %d %d %d %d |"
             "./checker_linux %d %d %d %d %d",
@@ -211,7 +21,7 @@ void build_memtest5_string(char memtest[], int i, int **table) {
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4]);
 }
 
-void build_memtest10_string(char memtest[], int i, int **table) {
+static void build_memtest10_string(char memtest[], int i, int **table) {
     sprintf(memtest,
             "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d |"
             "./checker_linux %d %d %d %d %d %d %d %d %d %d",
@@ -221,7 +31,7 @@ void build_memtest10_string(char memtest[], int i, int **table) {
             table[i][5], table[i][6], table[i][7], table[i][8], table[i][9]);
 }
 
-void build_memtest15_string(char memtest[], int i, int **table) {
+static void build_memtest15_string(char memtest[], int i, int **table) {
     sprintf(
         memtest,
         "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d |"
@@ -234,7 +44,7 @@ void build_memtest15_string(char memtest[], int i, int **table) {
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14]);
 }
 
-void build_memtest20_string(char memtest[], int i, int **table) {
+static void build_memtest20_string(char memtest[], int i, int **table) {
     sprintf(memtest,
             "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
             "%d %d %d %d %d %d |"
@@ -251,7 +61,7 @@ void build_memtest20_string(char memtest[], int i, int **table) {
             table[i][17], table[i][18], table[i][19]);
 }
 
-void build_memtest100_string(int i, int **table, char command[]) {
+static void build_memtest100_string(int i, int **table, char command[]) {
     sprintf(
         command,
         "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -308,7 +118,7 @@ void build_memtest100_string(int i, int **table, char command[]) {
         table[i][95], table[i][96], table[i][97], table[i][98], table[i][99]);
 }
 
-void build_memtest500_string(int i, int **table, char command[]) {
+static void build_memtest500_string(int i, int **table, char command[]) {
     sprintf(
         command,
         "valgrind -q ./push_swap "
@@ -599,7 +409,7 @@ void build_memtest500_string(int i, int **table, char command[]) {
         table[i][497], table[i][498], table[i][499]);
 }
 
-void build_memtest1000_string(int i, int **table, char *command) {
+static void build_memtest1000_string(int i, int **table, char *command) {
     sprintf(
         command,
         "valgrind -q ./push_swap "
@@ -1184,7 +994,7 @@ void build_memtest1000_string(int i, int **table, char *command) {
         table[i][997], table[i][998], table[i][999]);
 }
 
-void execute_memtest(void *args_void) {
+static void execute_memtest(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
     char buffer[10];
@@ -1375,7 +1185,7 @@ void execute_memtest(void *args_void) {
 
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
-    args->table = init_permutation_table();
+    args->table = init_table();
     printf(HRED
         "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
         "FLAG\n\n\n"DEF_COLOR);
