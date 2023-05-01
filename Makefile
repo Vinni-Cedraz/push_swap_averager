@@ -1,4 +1,5 @@
-SHELL := /bin/bash
+LIB = srcs/lib/lib.a
+INC = srcs/include/
 PUSH_SWAP = ../push_swap
 PUSH_SWAP_BONUS = ../checker
 
@@ -12,96 +13,75 @@ YELLOW      =  \033[0;93m
 MAGENTA     =  \033[0;95m
 DEF_COLOR   =  \033[0;39m
 
-CFLAGS = $(CC) -w -pthread -O3
+CFLAGS = -w -pthread -I$(INC) -O3
+C_BFLAGS = -w -I$(INC) -O3
 
-mandatory: compile 
-	@make --no-print-directory basic 
-	@make --no-print-directory test5
-	@make --no-print-directory test100
-	@make --no-print-directory test500
-	@make clean
+SRCS_ = \
+		basic_test \
+		test5 \
+		test100 \
+		test500
 
-averager: compile
-	@make --no-print-directory test5
-	@make --no-print-directory test100
-	@make --no-print-directory test500
-	@make clean
+BSRCS_ = \
+		main \
+		build_bonus_command \
+		execute_bonus \
+		basic_bonus \
 
-compile: $(PUSH_SWAP)
-	@cp -f $(PUSH_SWAP) .
-	@if [ ! -f test5 ]; then \
-		$(CFLAGS) srcs/test5.c -o test5; \
-	fi
-	@if [ ! -f test100 ]; then \
-		$(CFLAGS) srcs/test100.c -o test100; \
-	fi
-	@if [ ! -f test500 ]; then \
-		$(CFLAGS) srcs/test500.c -o test500; \
-	fi
+SRCS = $(addprefix srcs/mandatory/, $(SRCS_))
+BSRCS = $(wildcard srcs/bonus/*.c)
+OBJS = $(SRCS:%=%.o)
+BOBJS = $(BSRCS:%=%.o)
 
-$(PUSH_SWAP):
+EXECS = $(SRCS_:srcs/mandatory/%=%)
+BEXECS = basic_bonus
+
+all: lib $(EXECS)
 	@make --no-print-directory -C ..
+	@cp -f $(PUSH_SWAP) .
+	@make --no-print-directory run
 
-basic:
-	@if [ ! -f basic_test ]; then \
-		$(CFLAGS) srcs/basic_test.c -o basic_test; \
-	fi
-	@./basic_test
+lib:
+	@make --no-print-directory -C srcs/lib
 
-test5: compile 
+$(EXECS):
+	$(CC) $(CFLAGS) srcs/mandatory/$@.c $(LIB) -o $@
+
+$(BEXECS):
+	$(CC) $(C_BFLAGS) $(BSRCS) $(LIB) -o $@
+
+bonus: lib $(BEXECS)
+	@make bonus --no-print-directory -C ..
+	@cp -f $(PUSH_SWAP) .
+	@cp -f $(PUSH_SWAP_BONUS) .
+	# ./basic_bonus
+
+run:
+	./basic_test
 	@mkdir -p log_files
-	@if [ ! -f tmp1 ]; then \
-		./test5; \
-	fi;
+	@rm -f tmp*
+	./test5
 	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
 	@./analyse_log.sh test5.log
 	@mv test5.log ./log_files
-	@mkdir -p executables
-	@mv test5 ./executables
-
-test100: compile
-	@mkdir -p log_files
-	@if [ ! -f tmp1 ]; then \
-		./test100; \
-	fi;
+	./test100
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test100.log && rm tmp*
 	@./analyse_log.sh test100.log
 	@mv test100.log ./log_files
-	@mkdir -p executables
-	@mv test100 ./executables
-
-test500: compile
-	@mkdir -p log_files
-	@if [ ! -f tmp1 ]; then \
-		./test500; \
-	fi;
+	./test500
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test500.log && rm tmp*
 	@./analyse_log.sh test500.log
 	@mv test500.log ./log_files
-	@mkdir -p executables
-	@mv test500 ./executables
-
-bonus: $(PUSH_SWAP_BONUS)
-	@if [ ! -f push_swap ]; then \
-		make --no-print-directory -C ..; \
-	fi
-	@if [ ! -f basic_bonus ]; then \
-		$(CFLAGS) srcs/basic_bonus.c -o basic_bonus; \
-		printf "basic_bonus created\n"; \
-	fi
-	cp -f ../checker .
-	cp -f ../push_swap .
-	./basic_bonus
-
-$(PUSH_SWAP_BONUS):
-	@make --no-print-directory -C .. bonus;
 
 clean:
 	@rm -f test* push_swap checker basic_test basic_bonus
-	@rm -rf ./executables
 	@rm -f tmp*
+	@make --no-print-directory -C srcs/lib clean
 
 fclean: clean
 	@rm -rf ./log_files
+	@make --no-print-directory -C srcs/lib fclean
 
 re: fclean mandatory
+
+.PHONY: all clean
