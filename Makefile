@@ -13,7 +13,7 @@ YELLOW      =  \033[0;93m
 MAGENTA     =  \033[0;95m
 DEF_COLOR   =  \033[0;39m
 
-CFLAGS = -w -pthread -I$(INC) -O3
+CFLAGS = -w -pthread -I$(INC) -g -fsanitize=address
 C_BFLAGS = -w -I$(INC) -O3
 
 SRCS_ = \
@@ -82,6 +82,6 @@ fclean: clean
 	@rm -rf ./log_files
 	@make --no-print-directory -C srcs/lib fclean
 
-re: fclean mandatory
+re: fclean all
 
 .PHONY: all clean

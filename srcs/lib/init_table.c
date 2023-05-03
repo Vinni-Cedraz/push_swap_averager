@@ -1,5 +1,6 @@
 #include "averager.h"
 
+static void init3(int *count, int **table, int rand);
 static void init5(int *count, int **table, int rand);
 static void init10(int *count, int **table, int rand);
 static void init15(int *count, int **table, int rand);
@@ -9,10 +10,11 @@ static void init500(int *count, int **table, int rand);
 static void init1000(int *count, int **table, int rand);
 
 int **init_table(void) {
-    int count = 7;
     int *arr = NULL;
     int **table = calloc(sizeof(int *), 100);
     srand(time(NULL) ^ (getpid() << 16));
+    int count = 1;
+	init3(&count, table, rand());
     init5(&count, table, rand());
     init10(&count, table, rand());
     init15(&count, table, rand());
@@ -21,6 +23,20 @@ int **init_table(void) {
     init500(&count, table, rand());
     init1000(&count, table, rand());
     return (table);
+}
+
+static void init3(int *count, int **table, int rand) {
+    int *arr = malloc(sizeof(int) * 3);
+    for (int i = 1; i < 4; i++) arr[i - 1] = i;
+
+    int *going_on;
+    while ((going_on = next_permutation(arr, 2))) {
+        table[*count] = calloc(sizeof(int), 3);
+        for (int i = 0; i < 3; i++) table[*count][i] = arr[i];
+        (*count)++;
+    }
+    (*count)++;
+    free(arr);
 }
 
 static void init5(int *count, int **table, int rand) {
