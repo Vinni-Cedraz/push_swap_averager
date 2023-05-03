@@ -999,7 +999,7 @@ static void execute_memtest(void *args_void) {
     int **table = args->table;
     char buffer[10];
     FILE *output;
-    int i = 0;
+    int i = 1;
 
     while (table[i]) {
         char command[10000];
@@ -1019,7 +1019,7 @@ static void execute_memtest(void *args_void) {
         pclose(output);
         i++;
     }
-    i = 0;
+    i = 1;
     while (table[i]) {
         char command[10000];
         build_test3_string(command, i, table);
