@@ -54,7 +54,7 @@ bonus: lib $(BEXECS)
 	@make bonus --no-print-directory -C ..
 	@cp -f $(PUSH_SWAP) .
 	@cp -f $(PUSH_SWAP_BONUS) .
-	# ./basic_bonus
+	./basic_bonus
 
 run:
 	./basic_test
