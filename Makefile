@@ -18,6 +18,7 @@ C_BFLAGS = -w -I$(INC) -O3
 
 SRCS_ = \
 		error_management \
+		identity_test \
 		basic_test \
 		test5 \
 		test100 \
@@ -59,6 +60,7 @@ bonus: lib $(BEXECS)
 
 run:
 	./error_management
+	./identity_test
 	./basic_test
 	@mkdir -p log_files
 	@rm -f tmp*
@@ -76,7 +78,7 @@ run:
 	@mv test500.log ./log_files
 
 clean:
-	@rm -f test* push_swap checker basic_test basic_bonus error_management
+	@rm -f test* push_swap checker basic_test basic_bonus error_management identity_test
 	@rm -f tmp*
 	@make --no-print-directory -C srcs/lib clean
 

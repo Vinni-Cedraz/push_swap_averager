@@ -35,26 +35,29 @@ static void no_args(char *cmd, FILE *fp, char *output) {
 static void duplicate_arg(char *cmd, FILE *fp, char *output) {
     sprintf(cmd, "./push_swap %d %d %d 2>&1", 1, 2, 1);
     fp = popen(cmd, "r");
-	exec_test_process(cmd, fp, output, "duplicate_arg ---");
+    exec_test_process(cmd, fp, output, "duplicate_arg ---");
     pclose(fp);
 }
 
 static void duplicate_sorted(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd,
-            "./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-            "%d 2>&1",
-            10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 23, 24, 25,
-            26, 27, 28, 29, 29);
+    sprintf(cmd, "./push_swap %d %d %d %d %d %d 2>&1", 10, 11, 12, 13, 14, 14);
     fp = popen(cmd, "r");
-	exec_test_process(cmd, fp, output, "duplicate_sorted ");
+    exec_test_process(cmd, fp, output, "duplicate_sorted ");
     pclose(fp);
 }
 
 static void non_numeric(char *cmd, FILE *fp, char *output) {
     sprintf(cmd, "./push_swap %d %d %d %s 2>&1", 3, 2, 1, "9a");
+    fp = popen(cmd, "r");
+    exec_test_process(cmd, fp, output, "non_numeric -----");
+    pclose(fp);
+}
+
+static void max_int_overf(char *cmd, FILE *fp, char *output) {
+	sprintf(cmd, "./push_swap %d %d %d %lu 2>&1", 35, 24, 21, 21474836498);
 	fp = popen(cmd, "r");
-	exec_test_process(cmd, fp, output, "non_numeric -----");
-	pclose(fp);
+	exec_test_process(cmd, fp, output, "max_int_overflow ");
+    pclose(fp);
 }
 
 int main(void) {
@@ -68,8 +71,9 @@ int main(void) {
     no_args(cmd, fp, output);
     duplicate_arg(cmd, fp, output);
     duplicate_sorted(cmd, fp, output);
-	non_numeric(cmd, fp, output);
+    non_numeric(cmd, fp, output);
+	max_int_overf(cmd, fp, output);
     free(cmd);
     free(output);
-    printf(WHITE "\nERROR MANAGEMENT TESTS: " GREEN "OK\n\n" DEF_COLOR);
+    printf(WHITE "\nERROR MANAGEMENT: " GREEN "OK\n\n" DEF_COLOR);
 }
