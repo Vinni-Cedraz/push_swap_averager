@@ -76,7 +76,7 @@ run:
 	@mv test500.log ./log_files
 
 clean:
-	@rm -f test* push_swap checker basic_test basic_bonus
+	@rm -f test* push_swap checker basic_test basic_bonus error_management
 	@rm -f tmp*
 	@make --no-print-directory -C srcs/lib clean
 
