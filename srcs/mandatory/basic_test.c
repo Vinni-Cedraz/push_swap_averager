@@ -998,20 +998,19 @@ static void execute_memtest(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
     char buffer[10];
+    char command[10000];
     FILE *output;
     int i = 1;
 
+	printf(HBLUE"arrays of size 3\n"DEF_COLOR);
     while (table[i]) {
-        char command[10000];
         build_memtest3_string(command, i, table);
         output = popen(command, "r");
         fgets(buffer, 10, output);
-        printf(BLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
+        printf(BLUE "arr[%d]:" DEF_COLOR " { ", i);
         for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
+        printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+               buffer);
         if (strncmp(buffer, "OK\n", 2) != 0) {
             printf(RED "ERROR\n" DEF_COLOR);
             exit(1);
@@ -1019,18 +1018,16 @@ static void execute_memtest(void *args_void) {
         pclose(output);
         i++;
     }
+
     i = 1;
     while (table[i]) {
-        char command[10000];
         build_test3_string(command, i, table);
         output = popen(command, "r");
         fgets(buffer, 10, output);
-        printf(BLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
+        printf(BLUE "arr[%d]:" DEF_COLOR " { ", i);
         for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
-        printf("}"
-		CYAN"	Operations: "DEF_COLOR
-		WHITE"%s"DEF_COLOR, buffer);
+        printf("}" CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR,
+               buffer);
         if (atoi(buffer) > 2) {
             printf(RED "ERROR\n" DEF_COLOR);
             exit(1);
@@ -1038,164 +1035,125 @@ static void execute_memtest(void *args_void) {
         pclose(output);
         i++;
     }
-	printf(YELLOW"\nchecker_linux: "DEF_COLOR
-	GREEN"OK\n"DEF_COLOR);
-	printf("\n");
+    printf(YELLOW "checker_linux: " DEF_COLOR GREEN "OK\n" DEF_COLOR);
+    printf("\n");
 
     i += 2;
-    while (table[i]) {
-        char command[10000];
-        build_memtest5_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf(BLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
-        for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf(RED "ERROR\n" DEF_COLOR);
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i++;
-    while (table[i]) {
-        char command[10000];
-        build_memtest10_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf(BLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
-        for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf(RED "ERROR\n" DEF_COLOR);
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i = 15;
-    while (table[i]) {
-        char command[10000];
-        build_memtest15_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf(BLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
-        for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf(RED "ERROR\n" DEF_COLOR);
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i++;
-    while (table[i]) {
-        char command[10000];
-        build_memtest20_string(command, i, table);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf(BLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
-        for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf(RED "ERROR\n" DEF_COLOR);
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i = 27;
-    while (table[i]) {
-        char command[10000];
-        build_memtest100_string(i, table, command);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf(HBLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
-        for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf(RED "ERROR\n" DEF_COLOR);
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i++;
-    while (table[i]) {
-        char command[100000];
-        build_memtest500_string(i, table, command);
-        output = popen(command, "r");
-        fgets(buffer, 10, output);
-        printf(HBLUE"arr[%d]:"DEF_COLOR
-		" { ", i);
-        for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
-		printf("}"
-		YELLOW"\nchecker_linux: "DEF_COLOR
-		GREEN"%s"DEF_COLOR, buffer);
-        if (strncmp(buffer, "OK\n", 2) != 0) {
-            printf(RED "ERROR\n" DEF_COLOR);
-            exit(1);
-        }
-        pclose(output);
-        i++;
-    }
-
-    i = 35;
-    char *command = calloc(sizeof(char), 8000);
-    build_memtest1000_string(i, table, command);
-	printf(WHITE"\nNow running valgrind and checker on array of size 1000.\n\n"DEF_COLOR);
-	printf(HCYAN"It might take several seconds...\n\n"DEF_COLOR);
+    build_memtest5_string(command, i, table);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"arr[%d]:"DEF_COLOR
-	" { ", i);
+    printf(HBLUE"(SIZE 5):" DEF_COLOR " { ");
+    for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
+    if (strncmp(buffer, "OK\n", 2) != 0) {
+        printf(RED "ERROR\n" DEF_COLOR);
+        exit(1);
+    }
+    pclose(output);
+
+    i = 11;
+    build_memtest10_string(command, i, table);
+    output = popen(command, "r");
+    fgets(buffer, 10, output);
+    printf(HBLUE"(SIZE 10):" DEF_COLOR " { ");
+    for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
+    if (strncmp(buffer, "OK\n", 2) != 0) {
+        printf(RED "ERROR\n" DEF_COLOR);
+        exit(1);
+    }
+    pclose(output);
+
+    i = 15;
+    build_memtest15_string(command, i, table);
+    output = popen(command, "r");
+    fgets(buffer, 10, output);
+    printf(HBLUE"(SIZE 15):" DEF_COLOR " { ");
+    for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
+    if (strncmp(buffer, "OK\n", 2) != 0) {
+        printf(RED "ERROR\n" DEF_COLOR);
+        exit(1);
+    }
+    pclose(output);
+
+    i = 19;
+    build_memtest20_string(command, i, table);
+    output = popen(command, "r");
+    fgets(buffer, 10, output);
+    printf(HBLUE"(SIZE 20):" DEF_COLOR " { ");
+    for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
+    if (strncmp(buffer, "OK\n", 2) != 0) {
+        printf(RED "ERROR\n" DEF_COLOR);
+        exit(1);
+    }
+    pclose(output);
+
+    i = 27;
+    build_memtest100_string(i, table, command);
+    output = popen(command, "r");
+    fgets(buffer, 10, output);
+    printf(HBLUE"(SIZE 100):" DEF_COLOR " { ");
+    for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
+    if (strncmp(buffer, "OK\n", 2) != 0) {
+        printf(RED "ERROR\n" DEF_COLOR);
+        exit(1);
+    }
+    pclose(output);
+
+    i = 31;
+    build_memtest500_string(i, table, command);
+    output = popen(command, "r");
+    fgets(buffer, 10, output);
+    printf(HBLUE"(SIZE 500):" DEF_COLOR " { ");
+    for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
+    if (strncmp(buffer, "OK\n", 2) != 0) {
+        printf(RED "ERROR\n" DEF_COLOR);
+        exit(1);
+    }
+    pclose(output);
+
+    i = 35;
+    build_memtest1000_string(i, table, command);
+    printf(WHITE
+           "\nNow running valgrind and checker on array of size "
+           "1000.\n\n" DEF_COLOR);
+    printf(HCYAN "It might take several seconds...\n\n" DEF_COLOR);
+    output = popen(command, "r");
+    fgets(buffer, 10, output);
+    printf(HBLUE"(SIZE 1000):" DEF_COLOR " { ");
     for (int j = 0; j < 1000; j++) printf("%d ", table[i][j]);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
     }
-	printf("}"
-	YELLOW"\nchecker_linux: "DEF_COLOR
-	GREEN"%s"DEF_COLOR, buffer);
+    printf("}" YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
+           buffer);
     pclose(output);
-    free(command);
 }
 
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     args->table = init_table();
     printf(HRED
-        "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
-        "FLAG\n\n\n"DEF_COLOR);
-	sleep(5);
-	printf(WHITE"BASIC TESTS"DEF_COLOR);
-    printf(CYAN"	with valgrind -q \n\n\n"DEF_COLOR);
+           "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
+           "FLAG\n\n\n" DEF_COLOR);
+    sleep(5);
+    printf(WHITE "BASIC TESTS" DEF_COLOR);
+    printf(CYAN "	with valgrind -q \n\n\n" DEF_COLOR);
     execute_memtest(args);
     ft_free_arr_size((void **)args->table, 100);
     free(args);
-    printf(
-        CYAN"\n\n\nIf you didnt see any valgrind messages it means no "
-        "memory leaks were found in your program\n\n\n\n"DEF_COLOR);
+    printf(CYAN
+           "\n\n\nIf you didnt see any valgrind messages it means no "
+           "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
 }
