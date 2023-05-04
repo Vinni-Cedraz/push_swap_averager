@@ -33,6 +33,7 @@ void execute_bonus5(void *args_void) {
     }
 }
 
+
 void execute_bonus10(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;

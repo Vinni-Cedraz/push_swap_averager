@@ -72,5 +72,13 @@ void build_reference500_string(int i, int **table, char command[]);
 void build_bonus1000_string(int i, int **table, char *command);
 void build_reference1000_string(int i, int **table, char *command);
 int **init_table(void);
+void max_int_overf(char *cmd, FILE *fp, char *output);
+void non_numeric(char *cmd, FILE *fp, char *output);
+void duplicate_sorted(char *cmd, FILE *fp, char *output);
+void duplicate_arg(char *cmd, FILE *fp, char *output);
+void no_args(char *cmd, FILE *fp, char *output);
+void empty_string(char *cmd, FILE *fp, char *output);
+void invalid_action(char *cmd, FILE *fp, char *output);
+void whitespaced_action(char *cmd, FILE *fp, char *output);
 
 #endif
