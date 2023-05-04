@@ -6,9 +6,23 @@ int main(void) {
     printf(HRED
            "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
            "FLAG\n\n\n" DEF_COLOR);
-    sleep(5);
-    printf(WHITE "BONUS BASIC TESTS" DEF_COLOR);
-    printf(CYAN "	with valgrind -q \n\n\n" DEF_COLOR);
+    sleep(3);
+	FILE *fp;
+    char *cmd = calloc(sizeof(char), 8000);
+    char *output = calloc(sizeof(char), 8000);
+    empty_string(cmd, fp, output);
+    no_args(cmd, fp, output);
+    duplicate_arg(cmd, fp, output);
+    duplicate_sorted(cmd, fp, output);
+    non_numeric(cmd, fp, output);
+	max_int_overf(cmd, fp, output);
+	invalid_action(cmd, fp, output);
+	whitespaced_action(cmd, fp, output);
+    free(cmd);
+    free(output);
+    printf(WHITE "BONUS ERROR MANAGEMENT:        " GREEN "OK\n\n" DEF_COLOR);
+    printf(WHITE "BONUS RIGHT TESTS" DEF_COLOR);
+    printf(CYAN "\n		with valgrind -q \n" DEF_COLOR);
     execute_bonus5(args);
     execute_bonus10(args);
     execute_bonus15(args);

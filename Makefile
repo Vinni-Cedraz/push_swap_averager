@@ -14,7 +14,7 @@ MAGENTA     =  \033[0;95m
 DEF_COLOR   =  \033[0;39m
 
 CFLAGS = -w -pthread -I$(INC) -g -fsanitize=address
-C_BFLAGS = -w -I$(INC) -O3
+C_BFLAGS = -w -I$(INC) -g
 
 SRCS_ = \
 		error_management \
@@ -28,6 +28,7 @@ BSRCS_ = \
 		main \
 		build_bonus_command \
 		execute_bonus \
+		error_management_b \
 		basic_bonus \
 
 SRCS = $(addprefix srcs/mandatory/, $(SRCS_))
