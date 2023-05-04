@@ -75,9 +75,9 @@ static void *execute_push_swap_t1(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -104,9 +104,9 @@ static void *execute_push_swap_t2(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -132,9 +132,9 @@ static void *execute_push_swap_t3(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -160,9 +160,9 @@ static void *execute_push_swap_t4(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -188,9 +188,9 @@ static void *execute_push_swap_t5(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -216,9 +216,9 @@ static void *execute_push_swap_t6(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -244,9 +244,9 @@ static void *execute_push_swap_t7(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
@@ -272,9 +272,9 @@ static void *execute_push_swap_t8(void *args_void) {
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE"arr[%d]: "DEF_COLOR
-		" { ", i);
+		" ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, "} number of operations: %s", out_str);
+        fprintf(fp, " number of operations: %s", out_str);
         pclose(output);
         i++;
     }
