@@ -1,42 +1,82 @@
 [
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/basic_test.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/basic_test.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/basic_test.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/test5.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test5.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test5.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/test100.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test100.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test100.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/mandatory/test500.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test500.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/mandatory/test500.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/averager.dir/srcs/bonus/basic_bonus.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/bonus/basic_bonus.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/bonus/basic_bonus.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build/srcs/lib",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/lib.dir/ft_free_arr.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/lib/ft_free_arr.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/ft_free_arr.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build/srcs/lib",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/lib.dir/mersenne_twister_algorithm.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/lib/mersenne_twister_algorithm.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/mersenne_twister_algorithm.c"
-},
-{
-  "directory": "/home/vcedraz-/pushswap/pushswap-averager/build/srcs/lib",
-  "command": "/usr/bin/cc  -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/../include -I/home/vcedraz-/pushswap/pushswap-averager/srcs/lib -std=gnu99 -o CMakeFiles/lib.dir/permutation_utils.c.o -c /home/vcedraz-/pushswap/pushswap-averager/srcs/lib/permutation_utils.c",
-  "file": "/home/vcedraz-/pushswap/pushswap-averager/srcs/lib/permutation_utils.c"
-}
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/error_management.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "error_management"
+  ],
+  "file": "srcs/mandatory/error_management.c"
+ },
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/basic_test.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "basic_test"
+  ],
+  "file": "srcs/mandatory/basic_test.c"
+ },
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/test5.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "test5"
+  ],
+  "file": "srcs/mandatory/test5.c"
+ },
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/test100.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "test100"
+  ],
+  "file": "srcs/mandatory/test100.c"
+ },
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/test500.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "test500"
+  ],
+  "file": "srcs/mandatory/test500.c"
+ }
 ]

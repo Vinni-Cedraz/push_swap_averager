@@ -17,6 +17,7 @@ CFLAGS = -w -pthread -I$(INC) -g -fsanitize=address
 C_BFLAGS = -w -I$(INC) -O3
 
 SRCS_ = \
+		error_management \
 		basic_test \
 		test5 \
 		test100 \
@@ -57,6 +58,7 @@ bonus: lib $(BEXECS)
 	./basic_bonus
 
 run:
+	./error_management
 	./basic_test
 	@mkdir -p log_files
 	@rm -f tmp*
