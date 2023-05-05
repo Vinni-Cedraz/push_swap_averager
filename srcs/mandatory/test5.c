@@ -164,6 +164,9 @@ int main(void) {
     pthread_t pthread[5];
     args->table = init_permutation_table();
     printf(HGREEN "<	< THE AVERAGER >	>\n\n" DEF_COLOR);
+    printf(HRED
+           "\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
+           "FLAG\n\n\n" DEF_COLOR);
     sleep(5);
     printf(WHITE "TESTS FOR SIZE 5\n" DEF_COLOR);
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
