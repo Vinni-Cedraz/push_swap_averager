@@ -6,7 +6,7 @@
 #    By: vcedraz- <vcedraz-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:37:30 by vcedraz-          #+#    #+#              #
-#    Updated: 2023/05/05 18:38:48 by vcedraz-         ###   ########.fr        #
+#    Updated: 2023/05/05 19:38:59 by vcedraz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,23 @@ all: lib $(OBJS)
 	@cp -f ../push_swap .
 	@make --no-print-directory run
 
+lib:
+	@make --no-print-directory -C srcs/lib
+
+execs: $(OBJS)
+	@$(foreach file,$(OBJS), \
+		if [ $(file) -nt $(patsubst $(OBJSDIR)%.o,%,$(file)) ] || \
+		   [ ! -f $(patsubst $(OBJSDIR)%.o,%,$(file)) ]; then \
+			printf "Compiling $(file) -> "; \
+			printf "$(HGREEN)$(patsubst $(OBJSDIR)%.o,%,$(file))\n$(DEF_COLOR)"; \
+			$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(patsubst $(OBJSDIR)%.o,%,$(file)); \
+		fi; \
+	)
+
+$(OBJSDIR)%.o: $(SRCSDIR)%.c
+	mkdir -p $(OBJSDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 bonus: lib $(BOBJS)
 	@make --no-print-directory -C .. bonus
 	@cp -f ../push_swap .
@@ -46,26 +63,9 @@ bonus: lib $(BOBJS)
 	@make --no-print-directory bexec
 	./basic_bonus
 
-lib:
-	@make --no-print-directory -C srcs/lib
-
 bexec: $(BLIB)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(BLIB) $(LIB) -o basic_bonus
 	@printf "$(CC) $(CFLAGS) $(INCLUDES) $(BLIB) $(LIB) -o $(HGREEN)basic_bonus$(DEF_COLOR)\n\n";
-
-execs: $(OBJS)
-	@$(foreach file,$(OBJS), \
-		if [ $(file) -nt $(file:$(OBJSDIR)%.o=%) ] || \
-		[ ! -f $(file:$(OBJSDIR)/%.o=%) ]; then \
-		printf "Compiling $(file) -> " ; \
-		printf "$(HGREEN)$(file:$(OBJSDIR)%.o=%)\n$(DEF_COLOR)"; \
-		$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(file:$(OBJSDIR)%.o=%); \
-		fi; \
-	)
-
-$(OBJSDIR)%.o: $(SRCSDIR)%.c
-	mkdir -p $(OBJSDIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(BOBJSDIR)%.o: $(BSRCSDIR)%.c
 	mkdir -p $(BOBJSDIR)
