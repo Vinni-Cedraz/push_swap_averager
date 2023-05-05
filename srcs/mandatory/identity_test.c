@@ -10,21 +10,21 @@ static void get_test_process_output(FILE *fp, char *output, char *test) {
 }
 
 static void single_element(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "./push_swap %d 2>&1", 42);
+    sprintf(cmd, "valgrind -q ./push_swap %d 2>&1", 42);
     fp = popen(cmd, "r");
     get_test_process_output(fp, output, "<sorted> single_element -");
     pclose(fp);
 }
 
 static void four_elements(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "./push_swap %d %d %d %d 2>&1", 0, 1, 2, 3);
+    sprintf(cmd, "valgrind -q ./push_swap %d %d %d %d 2>&1", 0, 1, 2, 3);
     fp = popen(cmd, "r");
     get_test_process_output(fp, output, "<sorted> four_elements --");
     pclose(fp);
 }
 
 static void nine_elements(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "./push_swap %d %d %d %d %d %d %d %d %d 2>&1", 0, 1, 2, 3, 4,
+    sprintf(cmd, "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d 2>&1", 0, 1, 2, 3, 4,
             5, 6, 7, 8);
     fp = popen(cmd, "r");
     get_test_process_output(fp, output, "<sorted> nine_elements --");
