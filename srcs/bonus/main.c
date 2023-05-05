@@ -20,9 +20,9 @@ int main(void) {
 	whitespaced_action(cmd, fp, output);
     free(cmd);
     free(output);
-    printf(WHITE "BONUS ERROR MANAGEMENT:        " GREEN "OK\n\n" DEF_COLOR);
-    printf(WHITE "BONUS RIGHT TESTS" DEF_COLOR);
-    printf(CYAN "\n		with valgrind -q \n" DEF_COLOR);
+    printf(WHITE "\n       BONUS ERROR MANAGEMENT: " GREEN "OK\n" DEF_COLOR);
+    printf(WHITE "\n\n\n\n\nBONUS RIGHT TESTS" DEF_COLOR);
+    printf(HRED"\n		with valgrind -q \n\n" DEF_COLOR);
     execute_bonus5(args);
     execute_bonus10(args);
     execute_bonus15(args);

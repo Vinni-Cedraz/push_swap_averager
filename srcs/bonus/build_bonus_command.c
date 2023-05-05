@@ -1,3 +1,4 @@
+
 #include "averager.h"
 
 void build_bonus5_string(char memtest[], int i, int **table) {
