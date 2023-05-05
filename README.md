@@ -1,6 +1,12 @@
-# pushswap-averager
+# push_swap_averager
 
-### STILL IN BETA (to be updated by the 8th of May)
+## TL;DR (too long, didn't read):
+
+This tester is called push_swap_averager because it is accurate and detailed in calculating the best case, worst case and the average case of your push_swap. However, it also tests sorting correctness, error handling and memory safety (with Valgrind) of both the mandatory and bonus projects.
+#### And this is how to use it (first clone it in your push_swap directory):
+     make -C push_swap_averager
+#### and/or
+     make -C push_swap_averager bonus
 
 ## Table of Contents
 
@@ -17,17 +23,17 @@ This tester is designed to try out a very broad range of combinations for the
 
 As you probably know by now, during your `push_swap` evaluation, your evaluator
 will be asked to run your program a few times with random arrays of specific sizes
-and then rank your project according to the resutls he finds in his tests.
+and then rank your project according to the results he finds in his tests.
 
 There is a myth going around in the 42 community that says the evaluator is
 asked by the ruler to take the average of the tests he has run, but that is not
 what the ruler asks. The ruler only requires him to run "a couple of tests with
 several permutations" and check it against the scores.]
 
-Which means that if your average case is not safely below the number of
+This means that if your average case is not safely below the number of
 operations allowed to get the grade, you'll have a very annoying chance that
 the evaluator will incur precisely into a case where you're slightly above the
-limit and you wont get the highest grade.
+limit and you won't get the highest grade.
 
 This could make or break your bonus project. Imagine
 how insufficient it is to measure 5 cases out of 100 factorial:
@@ -61,41 +67,45 @@ compiled and the tests will be run:
 
 `make -C push_swap-averager`
 
-The first test will be the basic_test, it tests if you are actually sorting the
+The first tests will be error_management and identity_test which are based on
+the first items in the guide for the evaluation of the project
+
+The second test will be the basic_test, it tests if you are sorting the
 arrays and accuses any memory leaks. It will do so with:
-- all unsorted arrays of size 3
-- three unsorted arrays of each size 5, 10, 15, 20, 50, 100 and 500
-- and a single one of size 1000
+- all unsorted arrays of size 3 (checking the limit of 2 operations for size 3)
+- one unsorted array of each size 5, 10, 15, 20, 50, 100, 500 and 1000
 Then the tests for the averages will start.
 
-- Bonus
 If you passed on all of those and did the bonus part:
+- Bonus
 
-`make -C pushswap-averager bonus`
+`make -C push_swap_averager bonus`
 
-The bonus will test the correctness of your checker against the official
-checker for "OK" cases and will accuse any memory leaks it finds.
+Error management is going to be the first test. Not only incorrect arguments to
+the checker will be tested but also incorrect input such as "   pa  ". Then the
+bonus rule will test the correctness of your checker against the official
+checker_linux for "OK" cases and will accuse any memory leaks it finds.
 
 ### advanced features
 
-- You can open the logfiles containing all array permutations that were tested
-for each size and the amount of operations push_swap took to sort it. You can
+- You can open the log files containing all array permutations that were tested
+for each size and the number of operations push_swap took to sort it. You can
 also use grep to figure out which and how many arrays scored a given number,
 for example:
 
-`cat pushswap-averager/log_files/test100.log | grep "operations: 600"`
+`cat push_swap_averager/log_files/test100.log | grep "operations: 600"`
 
 - You can run parts of the test separately:
 
-`make -C pushswap-averager basic`
+`make -C push_swap_averager basic`
 
-`make -C pushswap-averager test5`
+`make -C push_swap_averager test5`
 
-`make -C pushswap-averager test100`
+`make -C push_swap_averager test100`
 
-`make -C pushswap-averager test500`
+`make -C push_swap_averager test500`
 
-`make -C pushswap-averager averager`
+`make -C push_swap_averager averager`
 
 ## Development
 
@@ -106,7 +116,7 @@ parallelism can be achieved. I even tested subdividing the tasks into more than
 8 threads but the performance did not improve and even started to go down. So I
 stuck with 8 threads.
 
-For this, I only had to use two functions from the C library pthread.h: 
+For this, I only had to use two functions from the C library `pthread.h`: 
 `pthread_create` and `pthread_join`. I use a micro-managed subdivision of tasks to
 avoid race conditions instead of mutexes, which would complexify and slow down
 things in this context.
