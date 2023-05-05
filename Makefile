@@ -1,63 +1,38 @@
+
+# Define flags
+CFLAGS = -w -O3 -pthread
+INCLUDES = -Isrcs/include/
+
+# Define the source and object file directories
+SRCDIR = srcs/mandatory
+OBJDIR = objs
 LIB = srcs/lib/lib.a
-INC = srcs/include/
-PUSH_SWAP = ../push_swap
-PUSH_SWAP_BONUS = ../checker
 
-# Colors
-RED    	  	=  \033[0;91m
-GRAY      	=  \033[0;37m
-CYAN      	=  \033[0;96m
-WHITE     	=  \033[0;97m
-GREEN     	=  \033[0;92m
-YELLOW      =  \033[0;93m
-MAGENTA     =  \033[0;95m
-DEF_COLOR   =  \033[0;39m
+# Define the source and object files
+SRCS = $(wildcard $(SRCDIR)/*.c)
+OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-CFLAGS = -w -pthread -I$(INC) -g -fsanitize=address
-C_BFLAGS = -w -I$(INC) -g
-
-SRCS_ = \
-		error_management \
-		identity_test \
-		basic_test \
-		test5 \
-		test100 \
-		test500
-
-BSRCS_ = \
-		main \
-		build_bonus_command \
-		execute_bonus \
-		error_management_b \
-		basic_bonus \
-
-SRCS = $(addprefix srcs/mandatory/, $(SRCS_))
-BSRCS = $(wildcard srcs/bonus/*.c)
-OBJS = $(SRCS:%=%.o)
-BOBJS = $(BSRCS:%=%.o)
-
-EXECS = $(SRCS_:srcs/mandatory/%=%)
-BEXECS = basic_bonus
-
-all: lib $(EXECS)
+all: $(OBJS) lib
+	@make --no-print-directory execs
 	@make --no-print-directory -C ..
-	@cp -f $(PUSH_SWAP) .
+	@cp -f ../push_swap .
 	@make --no-print-directory run
 
 lib:
 	@make --no-print-directory -C srcs/lib
 
-$(EXECS):
-	$(CC) $(CFLAGS) srcs/mandatory/$@.c $(LIB) -o $@
+execs: $(OBJS)
+	@$(foreach file,$(OBJS), \
+		if [ $(file) -nt $(patsubst $(OBJDIR)/%.o,%,$(file)) ] || \
+		   [ ! -f $(patsubst $(OBJDIR)/%.o,%,$(file)) ]; then \
+			printf "Compiling $(file) -> $(patsubst $(OBJDIR)/%.o,%,$(file))\n"; \
+			$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(patsubst $(OBJDIR)/%.o,%,$(file)); \
+		fi; \
+	)
 
-$(BEXECS):
-	$(CC) $(C_BFLAGS) $(BSRCS) $(LIB) -o $@
-
-bonus: lib $(BEXECS)
-	@make bonus --no-print-directory -C ..
-	@cp -f $(PUSH_SWAP) .
-	@cp -f $(PUSH_SWAP_BONUS) .
-	./basic_bonus
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 run:
 	./error_management
@@ -79,6 +54,7 @@ run:
 	@mv test500.log ./log_files
 
 clean:
+	@rm -rf objs
 	@rm -f test* push_swap checker basic_test basic_bonus error_management identity_test
 	@rm -f tmp*
 	@make --no-print-directory -C srcs/lib clean
@@ -88,5 +64,3 @@ fclean: clean
 	@make --no-print-directory -C srcs/lib fclean
 
 re: fclean all
-
-.PHONY: all clean
