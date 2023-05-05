@@ -1,38 +1,78 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vcedraz- <vcedraz-@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/05 15:37:30 by vcedraz-          #+#    #+#              #
+#    Updated: 2023/05/05 18:38:48 by vcedraz-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#Colors
+HGREEN = \033[1;32m
+RED = \033[0;31m
+DEF_COLOR =	\033[0m
 
 # Define flags
-CFLAGS = -w -O3 -pthread
+CFLAGS = -w -pthread
 INCLUDES = -Isrcs/include/
+BLIB = blib.a
 
 # Define the source and object file directories
-SRCDIR = srcs/mandatory
-OBJDIR = objs
+SRCSDIR = srcs/mandatory/
+BSRCSDIR = srcs/bonus/
+OBJSDIR = objs/
+BOBJSDIR = bobjs/
 LIB = srcs/lib/lib.a
 
 # Define the source and object files
-SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+SRCS = $(wildcard $(SRCSDIR)*.c)
+BSRCS = $(wildcard $(BSRCSDIR)*.c)
+OBJS = $(patsubst $(SRCSDIR)%.c, $(OBJSDIR)%.o, $(SRCS))
+BOBJS = $(patsubst $(BSRCSDIR)%.c, $(BOBJSDIR)%.o, $(BSRCS))
 
-all: $(OBJS) lib
+all: lib $(OBJS)
 	@make --no-print-directory execs
 	@make --no-print-directory -C ..
 	@cp -f ../push_swap .
 	@make --no-print-directory run
 
+bonus: lib $(BOBJS)
+	@make --no-print-directory -C .. bonus
+	@cp -f ../push_swap .
+	@cp -f ../checker .
+	@make --no-print-directory bexec
+	./basic_bonus
+
 lib:
 	@make --no-print-directory -C srcs/lib
 
+bexec: $(BLIB)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(BLIB) $(LIB) -o basic_bonus
+	@printf "$(CC) $(CFLAGS) $(INCLUDES) $(BLIB) $(LIB) -o $(HGREEN)basic_bonus$(DEF_COLOR)\n\n";
+
 execs: $(OBJS)
 	@$(foreach file,$(OBJS), \
-		if [ $(file) -nt $(patsubst $(OBJDIR)/%.o,%,$(file)) ] || \
-		   [ ! -f $(patsubst $(OBJDIR)/%.o,%,$(file)) ]; then \
-			printf "Compiling $(file) -> $(patsubst $(OBJDIR)/%.o,%,$(file))\n"; \
-			$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(patsubst $(OBJDIR)/%.o,%,$(file)); \
+		if [ $(file) -nt $(file:$(OBJSDIR)%.o=%) ] || \
+		[ ! -f $(file:$(OBJSDIR)/%.o=%) ]; then \
+		printf "Compiling $(file) -> " ; \
+		printf "$(HGREEN)$(file:$(OBJSDIR)%.o=%)\n$(DEF_COLOR)"; \
+		$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(file:$(OBJSDIR)%.o=%); \
 		fi; \
 	)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	mkdir -p $(OBJDIR)
+$(OBJSDIR)%.o: $(SRCSDIR)%.c
+	mkdir -p $(OBJSDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BOBJSDIR)%.o: $(BSRCSDIR)%.c
+	mkdir -p $(BOBJSDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BLIB): $(BOBJS)
+	ar rcs $(BLIB) $?
 
 run:
 	./error_management
@@ -55,9 +95,11 @@ run:
 
 clean:
 	@rm -rf objs
+	@rm -rf bobjs
 	@rm -f test* push_swap checker basic_test basic_bonus error_management identity_test
 	@rm -f tmp*
 	@make --no-print-directory -C srcs/lib clean
+	@rm -f $(BLIB)
 
 fclean: clean
 	@rm -rf ./log_files
