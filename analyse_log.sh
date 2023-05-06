@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#Colors
 GREEN="\033[0;32m"
 HGREEN="\033[0;92m"
 DEF_COLOR="\033[0;39m"
