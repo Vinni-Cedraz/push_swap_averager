@@ -6,13 +6,14 @@
 #    By: vcedraz- <vcedraz-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:37:30 by vcedraz-          #+#    #+#              #
-#    Updated: 2023/05/05 19:38:59 by vcedraz-         ###   ########.fr        #
+#    Updated: 2023/05/08 14:22:55 by vcedraz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Colors
 HGREEN = \033[1;32m
 RED = \033[0;31m
+HRED = \033[1;31m
 DEF_COLOR =	\033[0m
 
 # Define flags
@@ -75,6 +76,7 @@ $(BLIB): $(BOBJS)
 	ar rcs $(BLIB) $?
 
 run:
+	@printf "$(HRED)running tests with valgrind -q$(DEF_COLOR)\n";
 	./error_management
 	./identity_test
 	./basic_test
