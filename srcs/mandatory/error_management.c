@@ -74,7 +74,6 @@ int main(void) {
 
     cmd = calloc(sizeof(char), 8000);
     output = calloc(sizeof(char), 8000);
-	printf(HRED"\nrunning tests with valgrind -q\n"DEF_COLOR);
     empty_string(cmd, fp, output);
     no_args(cmd, fp, output);
     duplicate_arg(cmd, fp, output);
