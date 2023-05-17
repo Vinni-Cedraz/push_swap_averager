@@ -46,7 +46,8 @@ lib:
 execs: $(OBJS)
 	@$(foreach file,$(OBJS), \
 		if [ $(file) -nt $(patsubst $(OBJSDIR)%.o,%,$(file)) ] || \
-		   [ ! -f $(patsubst $(OBJSDIR)%.o,%,$(file)) ]; then \
+		   [ ! -f $(patsubst $(OBJSDIR)%.o,%,$(file)) ] || \
+		   [ $(LIB) -nt $(file) ]; then \
 			printf "Compiling $(file) -> "; \
 			printf "$(HGREEN)$(patsubst $(OBJSDIR)%.o,%,$(file))\n$(DEF_COLOR)"; \
 			$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(patsubst $(OBJSDIR)%.o,%,$(file)); \

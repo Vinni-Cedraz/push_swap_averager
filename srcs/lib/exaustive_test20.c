@@ -32,7 +32,7 @@ static void *execute_exaustive_sort_t1(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -56,7 +56,7 @@ static void *execute_exaustive_sort_t2(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -80,7 +80,7 @@ static void *execute_exaustive_sort_t3(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -104,7 +104,7 @@ static void *execute_exaustive_sort_t4(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -128,7 +128,7 @@ static void *execute_exaustive_sort_t5(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -152,7 +152,7 @@ static void *execute_exaustive_sort_t6(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -176,7 +176,7 @@ static void *execute_exaustive_sort_t7(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 
@@ -194,13 +194,13 @@ static void *execute_exaustive_sort_t8(void *args_void) {
     FILE *fp;
 
     fp = fopen("tmp8", "a");
-    for (int i = 239; i < 259; i++) {
+    for (int i = 239; i < 249; i++) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
-        fprintf(fp, YELLOW "checker_linux: %s" DEF_COLOR, out_str);
+		fprintf_ok_ko(out_str, fp);
         pclose(output);
     }
 

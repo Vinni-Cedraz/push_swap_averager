@@ -1,5 +1,4 @@
 #include "averager.h"
-
 static void build_test3_string(char memtest[], int i, int **table) {
     sprintf(memtest, "./push_swap %d %d %d | wc -l", table[i][0], table[i][1],
             table[i][2]);
@@ -1143,15 +1142,16 @@ int main(void) {
            "FLAG\n\n\n" DEF_COLOR);
     // sleep(5);
     printf(WHITE "BASIC TESTS" DEF_COLOR);
-    printf(CYAN "	with valgrind -q \n\n\n" DEF_COLOR);
+    printf(CYAN "	with valgrind -q" DEF_COLOR);
     // execute_memtest(args);
     printf(CYAN
            "\n\n\nIf you didnt see any valgrind messages it means no "
            "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
     printf(HCYAN
-           "Now 800 tests will run to check sorting correctness on different "
+           "Now, we will check sorting correctness with several different "
            "permutations...\n\n" DEF_COLOR);
     exaustive_test20(args);
+	// exaustive_test100(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
 }
