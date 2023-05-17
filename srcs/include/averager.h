@@ -80,5 +80,7 @@ void no_args(char *cmd, FILE *fp, char *output);
 void empty_string(char *cmd, FILE *fp, char *output);
 void invalid_action(char *cmd, FILE *fp, char *output);
 void whitespaced_action(char *cmd, FILE *fp, char *output);
+void exaustive_test20(void *args_void);
+void exaustive_test100(void *args_void);
 
 #endif
