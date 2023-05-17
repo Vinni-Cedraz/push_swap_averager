@@ -25,8 +25,6 @@
 #define MT_LEN 624
 #define MT_IA 397
 
-short GLOBAL = 0;
-
 // USER DEFINED TYPES
 typedef unsigned int uint;
 
@@ -85,7 +83,7 @@ void invalid_action(char *cmd, FILE *fp, char *output);
 void whitespaced_action(char *cmd, FILE *fp, char *output);
 void exaustive_test20(void *args_void);
 void exaustive_test100(void *args_void);
-void fprintf_ok_ko(char *out_str, FILE *fp);
+void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
 

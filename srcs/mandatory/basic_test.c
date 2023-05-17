@@ -1,4 +1,5 @@
 #include "averager.h"
+
 static void build_test3_string(char memtest[], int i, int **table) {
     sprintf(memtest, "./push_swap %d %d %d | wc -l", table[i][0], table[i][1],
             table[i][2]);
@@ -1149,8 +1150,9 @@ int main(void) {
            "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
     printf(HCYAN
            "Now, we will check sorting correctness with several different "
-           "permutations...\n\n" DEF_COLOR);
+           "permutations...\n" DEF_COLOR);
     exaustive_test20(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
+	printf(CYAN"no error messages will mean its OK\n\n"DEF_COLOR);
 }

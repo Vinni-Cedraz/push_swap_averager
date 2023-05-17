@@ -78,13 +78,13 @@ $(BLIB): $(BOBJS)
 
 run:
 	@printf "$(HRED)running tests with valgrind -q$(DEF_COLOR)\n";
-	# ./error_management
-	# ./identity_test
+	./error_management
+	./identity_test
 	@rm -f tmp*
 	@rm -rf log_files
 	@mkdir -p log_files
-	./basic_test
-	./exaustive_test100
+	@./basic_test
+	@./exaustive_test100
 	./test5
 	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
 	@./analyse_log.sh test5.log

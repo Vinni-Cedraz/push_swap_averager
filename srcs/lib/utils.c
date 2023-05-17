@@ -52,11 +52,11 @@ int is_repeated500(uint **table, uint *tmp_arr, int count) {
     return 0;
 }
 
-void fprintf_ok_ko(char *out_str, FILE *fp) {
+void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL) {
     if (!strncmp("OK", out_str, 2))
         fprintf(fp, "	checker_linux:" GREEN " %s" DEF_COLOR, out_str);
     else {
-		GLOBAL = 1;
+		(*GLOBAL) = 1;
         fprintf(fp, "	checker_linux:" HRED " %s" DEF_COLOR, out_str);
 	}
 }
