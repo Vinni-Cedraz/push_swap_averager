@@ -9,10 +9,11 @@ static void init100(int *count, int **table, int rand);
 static void init500(int *count, int **table, int rand);
 static void init1000(int *count, int **table, int rand);
 static void init_exaustive_20(int *count, int **table, int rand);
+static void init_exaustive_100(int *count, int **table, int rand);
 
 int **init_table(void) {
     int *arr = NULL;
-    int **table = calloc(sizeof(int *), 500);
+    int **table = calloc(sizeof(int *), 1000);
     srand(time(NULL) ^ (getpid() << 16));
     int count = 1;
     init3(&count, table, rand());
@@ -24,7 +25,7 @@ int **init_table(void) {
     init500(&count, table, rand());
     init1000(&count, table, rand());
     init_exaustive_20(&count, table, rand());
-
+	// init_exaustive_100(&count, table, rand());
     return (table);
 }
 
@@ -165,8 +166,8 @@ static void init_exaustive_20(int *count, int **table, int rand) {
     }
 	while (*count != 99) (*count)++;
     int *arr = malloc(sizeof(int) * 20);
-    for (int i = 0; i < 20; i++) arr[i] = i;
-    while (*count < 258) {
+    for (int i = 0; i < 20; i++) arr[i] = i; // init sequential array
+    while (*count < 259) {
         shuffle_array((uint *)arr, 20, rand);
         table[*count] = calloc(sizeof(int), 20);
         for (int i = 0; i < 20; i++) table[*count][i] = arr[i];
@@ -175,15 +176,15 @@ static void init_exaustive_20(int *count, int **table, int rand) {
     free(arr);
 }
 
-static void init_exaustive100(int *count, int **table, int rand) {
-	if (*count != 258) {
+static void init_exaustive_100(int *count, int **table, int rand) {
+	if (*count != 259) {
 		printf("Error: count != 258\n");
 		exit(1);
 	}
 	while (*count != 299) (*count)++;
 	int *arr = malloc(sizeof(int) * 100);
 	for (int i = 0; i < 100; i++) arr[i] = i;
-	while (*count < 458) {
+	while (*count < 459) {
 		shuffle_array((uint *)arr, 100, rand);
 		table[*count] = calloc(sizeof(int), 100);
 		for (int i = 0; i < 100; i++) table[*count][i] = arr[i];

@@ -82,5 +82,6 @@ void invalid_action(char *cmd, FILE *fp, char *output);
 void whitespaced_action(char *cmd, FILE *fp, char *output);
 void exaustive_test20(void *args_void);
 void exaustive_test100(void *args_void);
+void fprintf_ok_ko(char *out_str, FILE *fp);
 
 #endif

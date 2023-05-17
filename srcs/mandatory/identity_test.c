@@ -1,4 +1,3 @@
-
 #include "averager.h"
 
 static void get_test_process_output(FILE *fp, char *output, char *test) {
