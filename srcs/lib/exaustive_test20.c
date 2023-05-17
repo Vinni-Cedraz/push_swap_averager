@@ -26,7 +26,7 @@ static void *execute_exaustive_sort_t1(void *args_void) {
     FILE *fp;
 
     fp = fopen("tmp1", "a");
-    for (int i = 100; i < 119; i++) {
+    for (int i = 99; i < 119; i++) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
@@ -194,7 +194,7 @@ static void *execute_exaustive_sort_t8(void *args_void) {
     FILE *fp;
 
     fp = fopen("tmp8", "a");
-    for (int i = 239; i < 249; i++) {
+    for (int i = 239; i < 259; i++) {
         build_command_string(i, table, command);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
