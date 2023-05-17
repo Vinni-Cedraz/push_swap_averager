@@ -1150,8 +1150,8 @@ int main(void) {
     printf(HCYAN
            "Now, we will check sorting correctness with several different "
            "permutations...\n\n" DEF_COLOR);
-    exaustive_test20(args);
-	// exaustive_test100(args);
+    // exaustive_test20(args);
+	exaustive_test100(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
 }

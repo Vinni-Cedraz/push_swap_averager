@@ -25,7 +25,7 @@ int **init_table(void) {
     init500(&count, table, rand());
     init1000(&count, table, rand());
     init_exaustive_20(&count, table, rand());
-	// init_exaustive_100(&count, table, rand());
+	init_exaustive_100(&count, table, rand());
     return (table);
 }
 
