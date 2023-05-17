@@ -55,6 +55,34 @@ int is_repeated500(uint **table, uint *tmp_arr, int count) {
 void fprintf_ok_ko(char *out_str, FILE *fp) {
     if (!strncmp("OK", out_str, 2))
         fprintf(fp, "	checker_linux:" GREEN " %s" DEF_COLOR, out_str);
-    else
+    else {
+		GLOBAL = 1;
         fprintf(fp, "	checker_linux:" HRED " %s" DEF_COLOR, out_str);
+	}
+}
+
+void create_unified_log_file20(void) {
+    system("cat tmp8 >> tmp7");
+    system("cat tmp7 >> tmp6");
+    system("cat tmp6 >> tmp5");
+    system("cat tmp5 >> tmp4");
+    system("cat tmp4 >> tmp3");
+    system("cat tmp3 >> tmp2");
+    system("cat tmp2 >> tmp1");
+    system("cat tmp1 > exaustive20.log");
+    system("mv exaustive20.log log_files/");
+    system("rm tmp*");
+}
+
+void create_unified_log_file100(void) {
+    system("cat tmp8 >> tmp7");
+    system("cat tmp7 >> tmp6");
+    system("cat tmp6 >> tmp5");
+    system("cat tmp5 >> tmp4");
+    system("cat tmp4 >> tmp3");
+    system("cat tmp3 >> tmp2");
+    system("cat tmp2 >> tmp1");
+    system("cat tmp1 > exaustive100.log");
+    system("mv exaustive100.log log_files/");
+    system("rm tmp*");
 }

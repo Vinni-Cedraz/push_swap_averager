@@ -1140,18 +1140,17 @@ int main(void) {
     printf(HRED
            "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
            "FLAG\n\n\n" DEF_COLOR);
-    // sleep(5);
-    printf(WHITE "BASIC TESTS" DEF_COLOR);
-    printf(CYAN "	with valgrind -q" DEF_COLOR);
-    // execute_memtest(args);
+    sleep(3);
+    printf(WHITE "BASIC TESTS\n" DEF_COLOR);
+    printf(CYAN "	with valgrind -q\n" DEF_COLOR);
+    execute_memtest(args);
     printf(CYAN
            "\n\n\nIf you didnt see any valgrind messages it means no "
            "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
     printf(HCYAN
            "Now, we will check sorting correctness with several different "
            "permutations...\n\n" DEF_COLOR);
-    // exaustive_test20(args);
-	exaustive_test100(args);
+    exaustive_test20(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
 }

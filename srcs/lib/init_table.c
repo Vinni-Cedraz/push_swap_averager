@@ -12,7 +12,6 @@ static void init_exaustive_20(int *count, int **table, int rand);
 static void init_exaustive_100(int *count, int **table, int rand);
 
 int **init_table(void) {
-    int *arr = NULL;
     int **table = calloc(sizeof(int *), 1000);
     srand(time(NULL) ^ (getpid() << 16));
     int count = 1;
@@ -25,8 +24,15 @@ int **init_table(void) {
     init500(&count, table, rand());
     init1000(&count, table, rand());
     init_exaustive_20(&count, table, rand());
-	init_exaustive_100(&count, table, rand());
     return (table);
+}
+
+int **init_table2(void) {
+    int **table = calloc(sizeof(int *), 1000);
+    srand(time(NULL) ^ (getpid() << 16));
+    int count = 299;
+    init_exaustive_100(&count, table, rand());
+	return table;
 }
 
 static void init3(int *count, int **table, int rand) {
@@ -164,9 +170,9 @@ static void init_exaustive_20(int *count, int **table, int rand) {
         printf("Error: count != 36\n");
         exit(1);
     }
-	while (*count != 99) (*count)++;
+    while (*count != 99) (*count)++;
     int *arr = malloc(sizeof(int) * 20);
-    for (int i = 0; i < 20; i++) arr[i] = i; // init sequential array
+    for (int i = 0; i < 20; i++) arr[i] = i;  // init sequential array
     while (*count < 259) {
         shuffle_array((uint *)arr, 20, rand);
         table[*count] = calloc(sizeof(int), 20);
@@ -177,18 +183,13 @@ static void init_exaustive_20(int *count, int **table, int rand) {
 }
 
 static void init_exaustive_100(int *count, int **table, int rand) {
-	if (*count != 259) {
-		printf("Error: count != 258\n");
-		exit(1);
-	}
-	while (*count != 299) (*count)++;
-	int *arr = malloc(sizeof(int) * 100);
-	for (int i = 0; i < 100; i++) arr[i] = i;
-	while (*count < 459) {
-		shuffle_array((uint *)arr, 100, rand);
-		table[*count] = calloc(sizeof(int), 100);
-		for (int i = 0; i < 100; i++) table[*count][i] = arr[i];
-		(*count)++;
-	}
-	free(arr);
+    int *arr = malloc(sizeof(int) * 100);
+    for (int i = 0; i < 100; i++) arr[i] = i;
+    while (*count < 459) {
+        shuffle_array((uint *)arr, 100, rand);
+        table[*count] = calloc(sizeof(int), 100);
+        for (int i = 0; i < 100; i++) table[*count][i] = arr[i];
+        (*count)++;
+    }
+    free(arr);
 }
