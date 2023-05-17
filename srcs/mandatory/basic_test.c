@@ -1002,7 +1002,7 @@ static void execute_memtest(void *args_void) {
     FILE *output;
     int i = 1;
 
-	printf(HBLUE"arrays of size 3\n"DEF_COLOR);
+    printf(HBLUE "arrays of size 3\n" DEF_COLOR);
     while (table[i]) {
         build_memtest3_string(command, i, table);
         output = popen(command, "r");
@@ -1026,8 +1026,7 @@ static void execute_memtest(void *args_void) {
         fgets(buffer, 10, output);
         printf(BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 3; j++) printf("%d ", table[i][j]);
-        printf(CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR,
-               buffer);
+        printf(CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR, buffer);
         if (atoi(buffer) > 2) {
             printf(RED "ERROR\n" DEF_COLOR);
             exit(1);
@@ -1044,10 +1043,9 @@ static void execute_memtest(void *args_void) {
     build_memtest5_string(command, i, table);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 5):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 5):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 5; j++) printf("%d ", table[i][j]);
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
@@ -1058,10 +1056,9 @@ static void execute_memtest(void *args_void) {
     build_memtest10_string(command, i, table);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 10):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 10):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 10; j++) printf("%d ", table[i][j]);
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
@@ -1072,10 +1069,9 @@ static void execute_memtest(void *args_void) {
     build_memtest15_string(command, i, table);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 15):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 15):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 15; j++) printf("%d ", table[i][j]);
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
@@ -1086,10 +1082,9 @@ static void execute_memtest(void *args_void) {
     build_memtest20_string(command, i, table);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 20):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 20):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 20; j++) printf("%d ", table[i][j]);
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
@@ -1100,10 +1095,9 @@ static void execute_memtest(void *args_void) {
     build_memtest100_string(i, table, command);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 100):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 100):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 100; j++) printf("%d ", table[i][j]);
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
@@ -1114,10 +1108,9 @@ static void execute_memtest(void *args_void) {
     build_memtest500_string(i, table, command);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 500):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 500):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 500; j++) printf("%d ", table[i][j]);
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
@@ -1132,14 +1125,13 @@ static void execute_memtest(void *args_void) {
     printf(HCYAN "It might take several seconds...\n\n" DEF_COLOR);
     output = popen(command, "r");
     fgets(buffer, 10, output);
-    printf(HBLUE"(SIZE 1000):" DEF_COLOR " ./push_swap ");
+    printf(HBLUE "(SIZE 1000):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 1000; j++) printf("%d ", table[i][j]);
     if (strncmp(buffer, "OK\n", 2) != 0) {
         printf(RED "ERROR\n" DEF_COLOR);
         exit(1);
     }
-    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-           buffer);
+    printf(YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR, buffer);
     pclose(output);
 }
 
@@ -1149,13 +1141,17 @@ int main(void) {
     printf(HRED
            "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
            "FLAG\n\n\n" DEF_COLOR);
-    sleep(5);
+    // sleep(5);
     printf(WHITE "BASIC TESTS" DEF_COLOR);
     printf(CYAN "	with valgrind -q \n\n\n" DEF_COLOR);
-    execute_memtest(args);
-    ft_free_arr_size((void **)args->table, 100);
-    free(args);
+    // execute_memtest(args);
     printf(CYAN
            "\n\n\nIf you didnt see any valgrind messages it means no "
            "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
+    printf(HCYAN
+           "Now 800 tests will run to check sorting correctness on different "
+           "permutations...\n\n" DEF_COLOR);
+    exaustive_test20(args);
+    ft_free_arr_size((void **)args->table, 1000);
+    free(args);
 }

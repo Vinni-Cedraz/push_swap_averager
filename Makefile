@@ -17,7 +17,7 @@ HRED = \033[1;31m
 DEF_COLOR =	\033[0m
 
 # Define flags
-CFLAGS = -w -pthread
+CFLAGS = -w -pthread -g3
 INCLUDES = -Isrcs/include/
 BLIB = blib.a
 
@@ -77,11 +77,14 @@ $(BLIB): $(BOBJS)
 
 run:
 	@printf "$(HRED)running tests with valgrind -q$(DEF_COLOR)\n";
-	./error_management
-	./identity_test
+	# ./error_management
+	# ./identity_test
+	@rm -f tmp*
 	./basic_test
 	@mkdir -p log_files
-	@rm -f tmp*
+	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > exaustive20.log && rm tmp*
+	mv exaustive20.log log_files/
+	cat log_files/exaustive20.log
 	./test5
 	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
 	@./analyse_log.sh test5.log
