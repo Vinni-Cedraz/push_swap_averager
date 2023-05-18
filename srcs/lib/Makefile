@@ -1,7 +1,7 @@
 NAME = lib.a
 AR = ar
 ARFLAGS = -rcs
-CFLAGS = -O3
+CFLAGS = -O3 -w
 INC = ../include/
 
 SRCS = $(wildcard *.c)
