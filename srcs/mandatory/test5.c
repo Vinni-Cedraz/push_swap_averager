@@ -1,5 +1,7 @@
 #include "averager.h"
 
+int GLOBAL = 0;
+
 static int **init_permutation_table(void) {
     int count = 0;
     int *arr = malloc(sizeof(int) * 5);
@@ -20,7 +22,7 @@ static int **init_permutation_table(void) {
 }
 
 static inline void build_command_string(char command[100], int i, int **table) {
-    sprintf(command, "./push_swap %d %d %d %d %d | wc -l", table[i][0],
+    sprintf(command, "(./push_swap %d %d %d %d %d | wc -l) 2>&1 ", table[i][0],
             table[i][1], table[i][2], table[i][3], table[i][4]);
 }
 
@@ -42,6 +44,10 @@ static void *execute_push_swap_t1(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, " number of operations: %s", out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 5, i);
+            GLOBAL = 1;
+        };
         pclose(output);
         i++;
     }
@@ -69,6 +75,10 @@ static void *execute_push_swap_t2(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, " number of operations: %s", out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 5, i);
+            GLOBAL = 1;
+        };
         pclose(output);
         i++;
     }
@@ -96,6 +106,10 @@ static void *execute_push_swap_t3(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, " number of operations: %s", out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 5, i);
+            GLOBAL = 1;
+        };
         pclose(output);
         i++;
     }
@@ -123,6 +137,10 @@ static void *execute_push_swap_t4(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, " number of operations: %s", out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 5, i);
+            GLOBAL = 1;
+        };
         pclose(output);
         i++;
     }
@@ -150,6 +168,10 @@ static void *execute_push_swap_t5(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, " number of operations: %s", out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 5, i);
+            GLOBAL = 1;
+        };
         pclose(output);
         i++;
     }
@@ -164,10 +186,7 @@ int main(void) {
     pthread_t pthread[5];
     args->table = init_permutation_table();
     printf(HGREEN "<	< THE AVERAGER >	>\n\n" DEF_COLOR);
-    printf(HRED
-           "\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
-           "FLAG\n\n\n" DEF_COLOR);
-    sleep(5);
+    sleep(3);
     printf(WHITE "TESTS FOR SIZE 5\n" DEF_COLOR);
     pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
     pthread_create(&pthread[1], NULL, execute_push_swap_t2, (void *)args);
@@ -178,4 +197,8 @@ int main(void) {
     while (++count < 5) pthread_join(pthread[count], NULL);
     ft_free_arr((char **)args->table, (void **)args->table);
     free(args);
+    if (GLOBAL) {
+		system("rm tmp*");
+		return (1);
+	}
 }

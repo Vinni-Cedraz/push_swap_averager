@@ -8,6 +8,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <signal.h>
 
 // COLORS
 #define GREEN "\033[0;32m"
@@ -86,5 +87,7 @@ void exaustive_test100(void *args_void);
 void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
+__sighandler_t handle_segfault(int **table, int size, int i);
 
 #endif
+
