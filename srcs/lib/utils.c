@@ -1,3 +1,5 @@
+#include <signal.h>
+
 #include "averager.h"
 
 static int is_reverse_sorted(int *arr, int last_index) {
@@ -53,12 +55,16 @@ int is_repeated500(uint **table, uint *tmp_arr, int count) {
 }
 
 void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL) {
-    if (!strncmp("OK", out_str, 2))
-        fprintf(fp, "	checker_linux:" GREEN " %s" DEF_COLOR, out_str);
-    else {
-		(*GLOBAL) = 1;
-        fprintf(fp, "	checker_linux:" HRED " %s" DEF_COLOR, out_str);
-	}
+    if (!strncmp("OK", out_str, 2) && GLOBAL) {
+        fprintf(fp, "	checker_linux:" GREEN "%s" DEF_COLOR, out_str);
+    } else if (!strncmp("KO", out_str, 2) && GLOBAL) {
+        (*GLOBAL) = 1;
+        fprintf(fp, "	checker_linux:" HRED "%s" DEF_COLOR, out_str);
+    } else if (!strncmp("OK", out_str, 2) && !GLOBAL) {
+        dprintf(1, GREEN " %s" DEF_COLOR, out_str);
+    } else if (!strncmp("KO", out_str, 2) && !GLOBAL) {
+        dprintf(1, HRED " %s" DEF_COLOR, out_str);
+    }
 }
 
 void create_unified_log_file20(void) {
@@ -85,4 +91,10 @@ void create_unified_log_file100(void) {
     system("cat tmp1 > exaustive100.log");
     system("mv exaustive100.log log_files/");
     system("rm tmp*");
+}
+
+__sighandler_t handle_segfault(int **table, int size, int i) {
+    dprintf(1, HRED"\nSegfault occurred with the test:"DEF_COLOR " ./push_swap  "DEF_COLOR);
+    for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
+	dprintf(1, "\n\n\n");
 }

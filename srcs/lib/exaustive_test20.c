@@ -226,6 +226,8 @@ void exaustive_test20(void *args_void) {
         pthread_join(pthread[count], NULL);
     }
 	create_unified_log_file20();
-	if (1 == GLOBAL_20)
-		dprintf(1, WHITE"One or more sorting tests " HRED"(FAILED)\n" WHITE"to see the details run: " YELLOW"cat log_files/exaustive_test100.log\n");
+	if (1 == GLOBAL_20) {
+		dprintf(1, RED"One or more sorting tests " HRED"FAILED!!!\n" YELLOW"to see the details run: "DEF_COLOR"cat push_swap_averager/log_files/exaustive20.log\n\n\n");
+		exit(1);
+	}
 }

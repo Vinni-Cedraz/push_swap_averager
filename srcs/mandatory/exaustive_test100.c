@@ -272,10 +272,10 @@ int main(void) {
     t_args *args = malloc(sizeof(t_args));
     args->table = init_table2();
     exaustive_test100(args);
-	if (1 == GLOBAL_100)
-		dprintf(1, WHITE"One or more sorting tests " HRED"(FAILED)\n" WHITE"to see the details run: " YELLOW"cat log_files/exaustive_test100.log\n");
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
-	printf("you can check the tests on: " YELLOW"log_files/exaustive_test20.log"DEF_COLOR", and: "YELLOW"log_files/exaustive_test100.log\n\n\n"DEF_COLOR);
-	sleep(4);
+	if (1 == GLOBAL_100) {
+		dprintf(1, RED"One or more sorting tests " HRED"FAILED!!!\n" YELLOW"to see the details run: "DEF_COLOR"cat push_swap_averager/log_files/exaustive100.log\n\n\n");
+		return 1;
+	}
 }

@@ -7,7 +7,6 @@ static void init15(int *count, int **table, int rand);
 static void init20(int *count, int **table, int rand);
 static void init100(int *count, int **table, int rand);
 static void init500(int *count, int **table, int rand);
-static void init1000(int *count, int **table, int rand);
 static void init_exaustive_20(int *count, int **table, int rand);
 static void init_exaustive_100(int *count, int **table, int rand);
 
@@ -22,7 +21,6 @@ int **init_table(void) {
     init20(&count, table, rand());
     init100(&count, table, rand());
     init500(&count, table, rand());
-    init1000(&count, table, rand());
     init_exaustive_20(&count, table, rand());
     return (table);
 }
@@ -151,25 +149,7 @@ static void init500(int *count, int **table, int rand) {
     (*count)++;
 }
 
-static void init1000(int *count, int **table, int rand) {
-    if (*count != 35) {
-        printf("Error: count != 32\n");
-        exit(1);
-    }
-    int *arr = malloc(sizeof(int) * 1000);
-    for (int i = 0; i < 1000; i++) arr[i] = i;
-    shuffle_array((uint *)arr, 1000, rand);
-    table[*count] = calloc(sizeof(int), 1000);
-    for (int i = 0; i < 1000; i++) table[*count][i] = arr[i];
-    (*count)++;
-    free(arr);
-}
-
 static void init_exaustive_20(int *count, int **table, int rand) {
-    if (*count != 36) {
-        printf("Error: count != 36\n");
-        exit(1);
-    }
     while (*count != 99) (*count)++;
     int *arr = malloc(sizeof(int) * 20);
     for (int i = 0; i < 20; i++) arr[i] = i;  // init sequential array
