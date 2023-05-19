@@ -1,6 +1,6 @@
-#include "averager.h"
+#include "../include/averager.h"
 
-int GLOBAL = 0;
+bool SEGFAULT_t5 = 0;
 
 static int **init_permutation_table(void) {
     int count = 0;
@@ -46,7 +46,7 @@ static void *execute_push_swap_t1(void *args_void) {
         fprintf(fp, " number of operations: %s", out_str);
         if (!strncmp("Segmentation", out_str, 5)) {
             handle_segfault(table, 5, i);
-            GLOBAL = 1;
+            SEGFAULT_t5 = 1;
         };
         pclose(output);
         i++;
@@ -77,7 +77,7 @@ static void *execute_push_swap_t2(void *args_void) {
         fprintf(fp, " number of operations: %s", out_str);
         if (!strncmp("Segmentation", out_str, 5)) {
             handle_segfault(table, 5, i);
-            GLOBAL = 1;
+            SEGFAULT_t5 = 1;
         };
         pclose(output);
         i++;
@@ -108,7 +108,7 @@ static void *execute_push_swap_t3(void *args_void) {
         fprintf(fp, " number of operations: %s", out_str);
         if (!strncmp("Segmentation", out_str, 5)) {
             handle_segfault(table, 5, i);
-            GLOBAL = 1;
+            SEGFAULT_t5 = 1;
         };
         pclose(output);
         i++;
@@ -139,7 +139,7 @@ static void *execute_push_swap_t4(void *args_void) {
         fprintf(fp, " number of operations: %s", out_str);
         if (!strncmp("Segmentation", out_str, 5)) {
             handle_segfault(table, 5, i);
-            GLOBAL = 1;
+            SEGFAULT_t5 = 1;
         };
         pclose(output);
         i++;
@@ -170,7 +170,7 @@ static void *execute_push_swap_t5(void *args_void) {
         fprintf(fp, " number of operations: %s", out_str);
         if (!strncmp("Segmentation", out_str, 5)) {
             handle_segfault(table, 5, i);
-            GLOBAL = 1;
+            SEGFAULT_t5 = 1;
         };
         pclose(output);
         i++;
@@ -197,7 +197,7 @@ int main(void) {
     while (++count < 5) pthread_join(pthread[count], NULL);
     ft_free_arr((char **)args->table, (void **)args->table);
     free(args);
-    if (GLOBAL) {
+    if (SEGFAULT_t5) {
 		system("rm tmp*");
 		return (1);
 	}

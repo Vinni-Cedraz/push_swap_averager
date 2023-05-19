@@ -1,4 +1,6 @@
-#include "averager.h"
+#include "../include/averager.h"
+
+bool SEGFAULT_t500 = 0;
 
 static uint **init_permutation_table(void) {
     int count = 0;
@@ -26,7 +28,7 @@ static uint **init_permutation_table(void) {
 static void build_command_string(int i, uint **table, char command[]) {
     sprintf(
         command,
-        "./push_swap "
+        "(./push_swap "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -66,8 +68,7 @@ static void build_command_string(int i, uint **table, char command[]) {
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d "
-        "| wc -l",
+        "%d %d | wc -l) 2>&1 ",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
@@ -208,6 +209,10 @@ static void *execute_push_swap_t1(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -241,6 +246,10 @@ static void *execute_push_swap_t2(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -274,6 +283,10 @@ static void *execute_push_swap_t3(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -307,6 +320,10 @@ static void *execute_push_swap_t4(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -340,6 +357,10 @@ static void *execute_push_swap_t5(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -373,6 +394,10 @@ static void *execute_push_swap_t6(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -406,6 +431,10 @@ static void *execute_push_swap_t7(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -439,6 +468,10 @@ static void *execute_push_swap_t8(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
+        if (!strncmp("Segmentation", out_str, 5)) {
+            handle_segfault(table, 500, i);
+            SEGFAULT_t500 = 1;
+        };
         pclose(output);
         i++;
     }
@@ -465,4 +498,8 @@ int main(void) {
     while (++count < 8) pthread_join(pthread[count], NULL);
     ft_free_arr_size((void **)args->table, 241);
     free(args);
+    if (SEGFAULT_t500) {
+		system("rm tmp*");
+		return (1);
+	}
 }

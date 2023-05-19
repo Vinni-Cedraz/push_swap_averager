@@ -1,11 +1,12 @@
-#include "averager.h"
+#include "../include/averager.h"
 
-short GLOBAL_100 = 0;
+bool GLOBAL_100 = 0;
+bool SEGFAULT_100 = 0;
 
 static void build_cmd_string(int i, int **table, char command[]) {
     sprintf(
         command,
-        "./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "(./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -16,7 +17,7 @@ static void build_cmd_string(int i, int **table, char command[]) {
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d) 2>&1",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
@@ -75,6 +76,10 @@ static void *execute_exaustive_sort_t1(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -99,6 +104,10 @@ static void *execute_exaustive_sort_t2(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -123,6 +132,10 @@ static void *execute_exaustive_sort_t3(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -147,6 +160,10 @@ static void *execute_exaustive_sort_t4(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -171,6 +188,10 @@ static void *execute_exaustive_sort_t5(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -195,6 +216,10 @@ static void *execute_exaustive_sort_t6(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -219,6 +244,10 @@ static void *execute_exaustive_sort_t7(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -243,6 +272,10 @@ static void *execute_exaustive_sort_t8(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 100, i);
+            SEGFAULT_100 = 1;
+        };
         pclose(output);
     }
 
@@ -274,8 +307,15 @@ int main(void) {
     exaustive_test100(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
-	if (1 == GLOBAL_100) {
-		dprintf(1, RED"One or more sorting tests " HRED"FAILED!!!\n" YELLOW"to see the details run: "DEF_COLOR"cat push_swap_averager/log_files/exaustive100.log\n\n\n");
-		return 1;
-	}
+    if (1 == GLOBAL_100) {
+        dprintf(1,
+                RED "One or more sorting tests " HRED "FAILED!!!\n" YELLOW
+                    "to see the details run: " DEF_COLOR
+                    "cat push_swap_averager/log_files/exaustive100.log\n\n\n");
+        return 1;
+    }
+    if (1 == SEGFAULT_100) {
+        dprintf(1, RED "Segmentation fault occured\n" DEF_COLOR);
+        return 1;
+    }
 }
