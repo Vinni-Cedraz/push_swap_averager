@@ -1,0 +1,72 @@
+[
+ {
+  "directory": "/root/pushswap/push_swap_averager/srcs/lib",
+  "arguments": [
+   "cc",
+   "-O3",
+   "-w",
+   "-I../include/",
+   "-c",
+   "exaustive_test20.c",
+   "-o",
+   "exaustive_test20.o"
+  ],
+  "file": "exaustive_test20.c"
+ },
+ {
+  "directory": "/root/pushswap/push_swap_averager/srcs/lib",
+  "arguments": [
+   "cc",
+   "-O3",
+   "-w",
+   "-I../include/",
+   "-c",
+   "ft_free_arr.c",
+   "-o",
+   "ft_free_arr.o"
+  ],
+  "file": "ft_free_arr.c"
+ },
+ {
+  "directory": "/root/pushswap/push_swap_averager/srcs/lib",
+  "arguments": [
+   "cc",
+   "-O3",
+   "-w",
+   "-I../include/",
+   "-c",
+   "init_table.c",
+   "-o",
+   "init_table.o"
+  ],
+  "file": "init_table.c"
+ },
+ {
+  "directory": "/root/pushswap/push_swap_averager/srcs/lib",
+  "arguments": [
+   "cc",
+   "-O3",
+   "-w",
+   "-I../include/",
+   "-c",
+   "mersenne_twister_algorithm.c",
+   "-o",
+   "mersenne_twister_algorithm.o"
+  ],
+  "file": "mersenne_twister_algorithm.c"
+ },
+ {
+  "directory": "/root/pushswap/push_swap_averager/srcs/lib",
+  "arguments": [
+   "cc",
+   "-O3",
+   "-w",
+   "-I../include/",
+   "-c",
+   "utils.c",
+   "-o",
+   "utils.o"
+  ],
+  "file": "utils.c"
+ }
+]
