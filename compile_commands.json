@@ -78,5 +78,37 @@
    "test500"
   ],
   "file": "srcs/mandatory/test500.c"
+ },
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/exaustive_test100.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "exaustive_test100"
+  ],
+  "file": "srcs/mandatory/exaustive_test100.c"
+ },
+ {
+  "directory": "/root/pushswap/pushswap-averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-Isrcs/include/",
+   "-g",
+   "-fsanitize=address",
+   "srcs/mandatory/identity_test.c",
+   "srcs/lib/lib.a",
+   "-o",
+   "identity_test"
+  ],
+  "file": "srcs/mandatory/identity_test.c"
  }
 ]

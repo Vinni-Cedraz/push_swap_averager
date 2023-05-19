@@ -1,30 +1,32 @@
-#include "averager.h"
+#include "../include/averager.h"
+
+bool SEGFAULT = 0;
 
 static void build_test3_string(char memtest[], int i, int **table) {
-    sprintf(memtest, "./push_swap %d %d %d | wc -l", table[i][0], table[i][1],
-            table[i][2]);
+    sprintf(memtest, "(./push_swap %d %d %d | wc -l) 2>&1", table[i][0],
+            table[i][1], table[i][2]);
 }
 
 static void build_memtest3_string(char memtest[], int i, int **table) {
     sprintf(memtest,
-            "valgrind -q ./push_swap %d %d %d |"
-            "./checker_linux %d %d %d",
+            "(valgrind -q ./push_swap %d %d %d |"
+            "./checker_linux %d %d %d) 2>&1",
             table[i][0], table[i][1], table[i][2], table[i][0], table[i][1],
             table[i][2]);
 }
 
 static void build_memtest5_string(char memtest[], int i, int **table) {
     sprintf(memtest,
-            "valgrind -q ./push_swap %d %d %d %d %d |"
-            "./checker_linux %d %d %d %d %d",
+            "(valgrind -q ./push_swap %d %d %d %d %d | "
+            "./checker_linux %d %d %d %d %d) 2>&1",
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4]);
 }
 
 static void build_memtest10_string(char memtest[], int i, int **table) {
     sprintf(memtest,
-            "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d |"
-            "./checker_linux %d %d %d %d %d %d %d %d %d %d",
+            "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d | "
+            "./checker_linux %d %d %d %d %d %d %d %d %d %d) 2>&1",
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
             table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
@@ -34,8 +36,9 @@ static void build_memtest10_string(char memtest[], int i, int **table) {
 static void build_memtest15_string(char memtest[], int i, int **table) {
     sprintf(
         memtest,
-        "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d |"
-        "./checker_linux %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+        "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "|"
+        " ./checker_linux %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d) 2>&1",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
@@ -45,26 +48,26 @@ static void build_memtest15_string(char memtest[], int i, int **table) {
 }
 
 static void build_memtest20_string(char memtest[], int i, int **table) {
-    sprintf(memtest,
-            "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-            "%d %d %d %d %d %d |"
-            "./checker_linux %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-            "%d %d %d %d",
-            table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
-            table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
-            table[i][10], table[i][11], table[i][12], table[i][13],
-            table[i][14], table[i][15], table[i][16], table[i][17],
-            table[i][18], table[i][19], table[i][0], table[i][1], table[i][2],
-            table[i][3], table[i][4], table[i][5], table[i][6], table[i][7],
-            table[i][8], table[i][9], table[i][10], table[i][11], table[i][12],
-            table[i][13], table[i][14], table[i][15], table[i][16],
-            table[i][17], table[i][18], table[i][19]);
+    sprintf(
+        memtest,
+        "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d %d %d %d %d |"
+        "./checker_linux %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "%d %d %d %d) 2>&1",
+        table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
+        table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
+        table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
+        table[i][15], table[i][16], table[i][17], table[i][18], table[i][19],
+        table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
+        table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
+        table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
+        table[i][15], table[i][16], table[i][17], table[i][18], table[i][19]);
 }
 
 static void build_memtest100_string(int i, int **table, char command[]) {
     sprintf(
         command,
-        "valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -75,7 +78,7 @@ static void build_memtest100_string(int i, int **table, char command[]) {
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d) 2>&1",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
@@ -121,7 +124,7 @@ static void build_memtest100_string(int i, int **table, char command[]) {
 static void build_memtest500_string(int i, int **table, char command[]) {
     sprintf(
         command,
-        "valgrind -q ./push_swap "
+        "(valgrind -q ./push_swap "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -166,7 +169,7 @@ static void build_memtest500_string(int i, int **table, char command[]) {
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
-        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+        "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d) 2>&1",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
         table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
         table[i][10], table[i][11], table[i][12], table[i][13], table[i][14],
@@ -425,7 +428,11 @@ static void execute_memtest(void *args_void) {
         dprintf(1, BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 3; j++) dprintf(1, "%d ", table[i][j]);
         dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
-               buffer);
+                buffer);
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 3, i);
+            SEGFAULT = 1;
+        };
         pclose(output);
         i++;
     }
@@ -437,10 +444,16 @@ static void execute_memtest(void *args_void) {
         fgets(buffer, 10, output);
         dprintf(1, BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 3; j++) dprintf(1, "%d ", table[i][j]);
-        dprintf(1, CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR, buffer);
+        dprintf(1, CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR,
+                buffer);
         if (atoi(buffer) > 2) {
-            dprintf(1, HRED "ERROR:	" RED"exceeded the limit of operations (2)\n" DEF_COLOR);
+            dprintf(1, HRED "ERROR:	" RED
+                            "exceeded the limit of operations (2)\n" DEF_COLOR);
         }
+        if (!strncmp("Segmentation", buffer, 5)) {
+            handle_segfault(table, 3, i);
+            SEGFAULT = 1;
+        };
         pclose(output);
         i++;
     }
@@ -456,7 +469,11 @@ static void execute_memtest(void *args_void) {
     dprintf(1, HBLUE "(SIZE 5):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 5; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
-	fprintf_ok_ko(buffer, output, NULL);
+    fprintf_ok_ko(buffer, output, NULL);
+	if (!strncmp("Segmentation", buffer, 5)) {
+		handle_segfault(table, 5, i);
+		SEGFAULT = 1;
+	};
     pclose(output);
 
     i = 11;
@@ -466,7 +483,11 @@ static void execute_memtest(void *args_void) {
     dprintf(1, HBLUE "(SIZE 10):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 10; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
-	fprintf_ok_ko(buffer, output, NULL);
+    fprintf_ok_ko(buffer, output, NULL);
+	if (!strncmp("Segmentation", buffer, 5)) {
+		handle_segfault(table, 10, i);
+		SEGFAULT = 1;
+	};
     pclose(output);
 
     i = 15;
@@ -476,7 +497,11 @@ static void execute_memtest(void *args_void) {
     dprintf(1, HBLUE "(SIZE 15):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 15; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
-	fprintf_ok_ko(buffer, output, NULL);
+    fprintf_ok_ko(buffer, output, NULL);
+	if (!strncmp("Segmentation", buffer, 5)) {
+		handle_segfault(table, 15, i);
+		SEGFAULT = 1;
+	};
     pclose(output);
 
     i = 19;
@@ -486,7 +511,11 @@ static void execute_memtest(void *args_void) {
     dprintf(1, HBLUE "(SIZE 20):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 20; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
-	fprintf_ok_ko(buffer, output, NULL);
+    fprintf_ok_ko(buffer, output, NULL);
+	if (!strncmp("Segmentation", buffer, 5)) {
+		handle_segfault(table, 20, i);
+		SEGFAULT = 1;
+	};
     pclose(output);
 
     i = 27;
@@ -496,7 +525,11 @@ static void execute_memtest(void *args_void) {
     dprintf(1, HBLUE "(SIZE 100):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 100; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
-	fprintf_ok_ko(buffer, output, NULL);
+    fprintf_ok_ko(buffer, output, NULL);
+    if (!strncmp("Segmentation", buffer, 5)) {
+        handle_segfault(table, 100, i);
+        SEGFAULT = 1;
+    };
     pclose(output);
 
     i = 31;
@@ -506,29 +539,36 @@ static void execute_memtest(void *args_void) {
     dprintf(1, HBLUE "(SIZE 500):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 500; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
-	fprintf_ok_ko(buffer, output, NULL);
+    fprintf_ok_ko(buffer, output, NULL);
+    if (!strncmp("Segmentation", buffer, 5)) {
+        handle_segfault(table, 500, i);
+        SEGFAULT = 1;
+    };
     pclose(output);
-
 }
 
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     args->table = init_table();
     dprintf(1, HRED
-           "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
-           "FLAG\n\n\n" DEF_COLOR);
+            "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
+            "FLAG\n\n\n" DEF_COLOR);
     sleep(3);
     dprintf(1, WHITE "BASIC TESTS\n" DEF_COLOR);
     dprintf(1, CYAN "	with valgrind -q\n" DEF_COLOR);
     execute_memtest(args);
     dprintf(1, CYAN
-           "\n\n\nIf you didnt see any valgrind messages it means no "
-           "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
+            "\n\n\nIf you didnt see any valgrind messages it means no "
+            "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
     dprintf(1, HCYAN
-           "Now, we will check sorting correctness with several different "
-           "permutations...\n" DEF_COLOR);
+            "Now, we will check sorting correctness with several different "
+            "permutations...\n" DEF_COLOR);
     exaustive_test20(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
-	dprintf(1, CYAN"no error messages will mean its OK\n\n"DEF_COLOR);
+    dprintf(1, CYAN "no error messages will mean its OK\n\n" DEF_COLOR);
+	if (SEGFAULT) {
+		dprintf(1, RED "SEGFAULT DETECTED\n\n" DEF_COLOR);
+		return (1);
+	}
 }

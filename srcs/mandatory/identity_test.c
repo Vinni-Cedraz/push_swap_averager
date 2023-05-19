@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static void get_test_process_output(FILE *fp, char *output, char *test) {
     size_t bytes_read = fread(output, sizeof(char), 8000, fp);
