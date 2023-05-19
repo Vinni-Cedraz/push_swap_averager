@@ -101,13 +101,13 @@ run:
 clean:
 	@rm -rf objs
 	@rm -rf bobjs
-	@rm -f test* push_swap checker basic_test basic_bonus error_management identity_test
 	@rm -f tmp*
 	@make --no-print-directory -C srcs/lib clean
 	@rm -f $(BLIB)
 
 fclean: clean
 	@rm -rf ./log_files
+	@rm -f test* push_swap checker basic_test basic_bonus error_management identity_test exaustive*
 	@make --no-print-directory -C srcs/lib fclean
 
 re: fclean all
