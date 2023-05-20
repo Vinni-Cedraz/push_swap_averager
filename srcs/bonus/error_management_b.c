@@ -16,56 +16,56 @@ static void get_test_output(char *cmd, FILE *fp, char *output, char *test) {
 }
 
 void empty_string(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "valgrind -q ./checker %s 2>&1", "");
+    sprintf(cmd, "(valgrind -q ./checker %s) 2>&1", "");
     fp = popen(cmd, "r");
     get_test_output(cmd, fp, output, "empty_string ------");
     pclose(fp);
 }
 
 void no_args(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "valgrind -q ./checker 2>&1");
+    sprintf(cmd, "(valgrind -q ./checker) 2>&1");
     fp = popen(cmd, "r");
     get_test_output(cmd, fp, output, "no_args -----------");
     pclose(fp);
 }
 
 void duplicate_arg(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "valgrind -q ./checker %d %d %d 2>&1", 1, 2, 1);
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d) 2>&1", 1, 2, 1);
     fp = popen(cmd, "r");
     get_test_output(cmd, fp, output, "duplicate_arg -----");
     pclose(fp);
 }
 
 void duplicate_sorted(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "valgrind -q ./checker %d %d %d %d %d %d 2>&1", 10, 11, 12, 13, 14, 14);
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d %d %d %d) 2>&1", 10, 11, 12, 13, 14, 14);
     fp = popen(cmd, "r");
     get_test_output(cmd, fp, output, "duplicate_sorted --");
     pclose(fp);
 }
 
 void non_numeric(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "valgrind -q ./checker %d %d %d %s 2>&1", 3, 2, 1, "9a");
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d %s) 2>&1", 3, 2, 1, "9a");
     fp = popen(cmd, "r");
     get_test_output(cmd, fp, output, "non_numeric -------");
     pclose(fp);
 }
 
 void max_int_overf(char *cmd, FILE *fp, char *output) {
-	sprintf(cmd, "valgrind -q ./checker %d %d %d %lu 2>&1", 35, 24, 21, 21474836498);
+	sprintf(cmd, "(valgrind -q ./checker %d %d %d %lu) 2>&1", 35, 24, 21, 21474836498);
 	fp = popen(cmd, "r");
 	get_test_output(cmd, fp, output, "max_int_overflow --");
     pclose(fp);
 }
 
 void invalid_action(char *cmd, FILE *fp, char *output) {
-	sprintf(cmd, "cat cmds | valgrind -q ./checker %d %d %d %d %d %d 2>&1", 11, 10, 12, 13, 14, 15);
+	sprintf(cmd, "(cat cmds | valgrind -q ./checker %d %d %d %d %d %d) 2>&1", 11, 10, 12, 13, 14, 15);
 	fp = popen(cmd, "r");
 	get_test_output(cmd, fp, output, "invalid_action ----");
 	pclose(fp);
 }
 
 void whitespaced_action(char *cmd, FILE *fp, char *output) {
-	sprintf(cmd, "cat cmds2 | valgrind -q ./checker %d %d %d %d %d %d 2>&1", 11, 10, 12, 13, 14, 15);
+	sprintf(cmd, "(cat cmds2 | valgrind -q ./checker %d %d %d %d %d %d) 2>&1", 11, 10, 12, 13, 14, 15);
 	fp = popen(cmd, "r");
 	get_test_output(cmd, fp, output, "whitespaced_action ");
 	pclose(fp);
