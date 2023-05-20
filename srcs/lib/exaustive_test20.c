@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 bool GLOBAL_20 = 0;
 bool SEGFAULT20 = 0;
@@ -36,10 +36,7 @@ static void *execute_exaustive_sort_t1(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -64,10 +61,7 @@ static void *execute_exaustive_sort_t2(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -92,10 +86,7 @@ static void *execute_exaustive_sort_t3(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -120,10 +111,7 @@ static void *execute_exaustive_sort_t4(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -148,10 +136,7 @@ static void *execute_exaustive_sort_t5(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -176,10 +161,7 @@ static void *execute_exaustive_sort_t6(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -204,10 +186,7 @@ static void *execute_exaustive_sort_t7(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
+		handle_err(table, 20, i, out_str, &SEGFAULT20);
         pclose(output);
     }
 
@@ -232,10 +211,6 @@ static void *execute_exaustive_sort_t8(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 20; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_20);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 20, i);
-            SEGFAULT20 = 1;
-        };
         pclose(output);
     }
 
@@ -261,10 +236,5 @@ void exaustive_test20(void *args_void) {
 	create_unified_log_file20();
 	if (1 == GLOBAL_20) {
 		dprintf(1, RED"One or more sorting tests " HRED"FAILED!!!\n" YELLOW"to see the details run: "DEF_COLOR"cat push_swap_averager/log_files/exaustive20.log\n\n\n");
-		exit(1);
 	}
-    if (1 == SEGFAULT20) {
-        dprintf(1, RED "Segmentation fault occured\n" DEF_COLOR);
-        exit(1);
-    }
 }

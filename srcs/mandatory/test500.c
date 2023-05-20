@@ -209,10 +209,7 @@ static void *execute_push_swap_t1(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -246,10 +243,7 @@ static void *execute_push_swap_t2(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -283,10 +277,7 @@ static void *execute_push_swap_t3(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -320,10 +311,7 @@ static void *execute_push_swap_t4(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -357,10 +345,7 @@ static void *execute_push_swap_t5(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -394,10 +379,7 @@ static void *execute_push_swap_t6(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -431,10 +413,7 @@ static void *execute_push_swap_t7(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -468,10 +447,7 @@ static void *execute_push_swap_t8(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        if (!strncmp("Segmentation", out_str, 5)) {
-            handle_segfault(table, 500, i);
-            SEGFAULT_t500 = 1;
-        };
+		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
         pclose(output);
         i++;
     }
@@ -498,8 +474,4 @@ int main(void) {
     while (++count < 8) pthread_join(pthread[count], NULL);
     ft_free_arr_size((void **)args->table, 241);
     free(args);
-    if (SEGFAULT_t500) {
-		system("rm tmp*");
-		return (1);
-	}
 }

@@ -1,6 +1,4 @@
-#include <signal.h>
-
-#include "averager.h"
+#include "../include/averager.h"
 
 static int is_reverse_sorted(int *arr, int last_index) {
     for (int i = 0; i < last_index; i++)
@@ -93,8 +91,26 @@ void create_unified_log_file100(void) {
     system("rm tmp*");
 }
 
-int handle_segfault(int **table, int size, int i) {
-    dprintf(1, HRED"\nSegfault occurred with the test:"DEF_COLOR " ./push_swap  "DEF_COLOR);
-    for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
-	dprintf(1, "\n\n\n");
+static void log_err_to_stdout(int size, int **table, int i, bool SEGF) {
+    if (SEGF) {
+        dprintf(1, HRED "\nSegfault occurred with the test:" DEF_COLOR
+                        " ./push_swap  " DEF_COLOR);
+        for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
+        dprintf(1, "\n\n\n");
+    } else {
+        dprintf(1, HRED "\nMemory error occurred with the test:" DEF_COLOR
+                        " ./push_swap  " DEF_COLOR);
+        for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
+        dprintf(1, "\n\n\n");
+    }
+    exit(1);
+}
+
+int handle_err(int **table, int size, int i, char *buf, bool *SEGF) {
+    if (!strncmp("Segmentation", buf, 5) || !strncmp("segmentation", buf, 5)) {
+        (*SEGF) = 1;
+        log_err_to_stdout(size, table, i, (*SEGF));
+    } else if (!strncmp("==", buf, 2)) {
+        log_err_to_stdout(size, table, i, (*SEGF));
+    }
 }

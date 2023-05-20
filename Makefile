@@ -17,7 +17,7 @@ HRED = \033[1;31m
 DEF_COLOR =	\033[0m
 
 # Define flags
-CFLAGS = -w -pthread -g3
+CFLAGS = -w -pthread -O3
 INCLUDES = -Isrcs/include/
 BLIB = blib.a
 
