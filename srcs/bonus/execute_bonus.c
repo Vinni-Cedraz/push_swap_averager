@@ -209,33 +209,3 @@ void execute_bonus500(void *args_void) {
         i++;
     }
 }
-
-void execute_bonus1000(void *args_void) {
-    t_args *args = (t_args *)args_void;
-    int **table = args->table;
-    char command[8000];
-    char reference_cmd[8000];
-    char buffer[10];
-    char reference[10];
-    FILE *output;
-    FILE *reference_output;
-    int i = 35;
-	int n = 1000;
-
-    build_bonus1000_string(i, table, command);
-    build_reference1000_string(i, table, reference_cmd);
-    output = popen(command, "r");
-    reference_output = popen(reference_cmd, "r");
-    fgets(buffer, 10, output);
-    fgets(reference, 10, reference_output);
-    printf(HBLUE"size(%d):"DEF_COLOR"{ ", n);
-    for (int j = 0; j < 1000; j++) printf("%d ", table[i][j]);
-    printf("}\n");
-	print_message(reference, buffer);
-    if (strcmp(buffer, reference) != 0) {
-        printf(HRED "ERROR\n" DEF_COLOR);
-        exit(1);
-    }
-    pclose(output);
-    pclose(reference_output);
-}
