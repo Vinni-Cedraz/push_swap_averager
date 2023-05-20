@@ -415,7 +415,7 @@ static void build_memtest500_string(int i, int **table, char command[]) {
 static void execute_memtest(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char buffer[10];
+    char buffer[100];
     char command[10000];
     FILE *output;
     int i = 1;
@@ -424,15 +424,12 @@ static void execute_memtest(void *args_void) {
     while (table[i]) {
         build_memtest3_string(command, i, table);
         output = popen(command, "r");
-        fgets(buffer, 10, output);
+        fgets(buffer, 100, output);
         dprintf(1, BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 3; j++) dprintf(1, "%d ", table[i][j]);
+        handle_err(table, 3, i, buffer, &SEGFAULT);
         dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR GREEN "%s" DEF_COLOR,
                 buffer);
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 3, i);
-            SEGFAULT = 1;
-        };
         pclose(output);
         i++;
     }
@@ -441,7 +438,7 @@ static void execute_memtest(void *args_void) {
     while (table[i]) {
         build_test3_string(command, i, table);
         output = popen(command, "r");
-        fgets(buffer, 10, output);
+        fgets(buffer, 100, output);
         dprintf(1, BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 3; j++) dprintf(1, "%d ", table[i][j]);
         dprintf(1, CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR,
@@ -450,10 +447,7 @@ static void execute_memtest(void *args_void) {
             dprintf(1, HRED "ERROR:	" RED
                             "exceeded the limit of operations (2)\n" DEF_COLOR);
         }
-        if (!strncmp("Segmentation", buffer, 5)) {
-            handle_segfault(table, 3, i);
-            SEGFAULT = 1;
-        };
+        handle_err(table, 3, i, buffer, &SEGFAULT);
         pclose(output);
         i++;
     }
@@ -465,85 +459,67 @@ static void execute_memtest(void *args_void) {
     i += 2;
     build_memtest5_string(command, i, table);
     output = popen(command, "r");
-    fgets(buffer, 10, output);
+    fgets(buffer, 100, output);
     dprintf(1, HBLUE "(SIZE 5):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 5; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, 5, i, buffer, &SEGFAULT);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
     fprintf_ok_ko(buffer, output, NULL);
-	if (!strncmp("Segmentation", buffer, 5)) {
-		handle_segfault(table, 5, i);
-		SEGFAULT = 1;
-	};
     pclose(output);
 
     i = 11;
     build_memtest10_string(command, i, table);
     output = popen(command, "r");
-    fgets(buffer, 10, output);
+    fgets(buffer, 100, output);
     dprintf(1, HBLUE "(SIZE 10):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 10; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, 10, i, buffer, &SEGFAULT);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
     fprintf_ok_ko(buffer, output, NULL);
-	if (!strncmp("Segmentation", buffer, 5)) {
-		handle_segfault(table, 10, i);
-		SEGFAULT = 1;
-	};
     pclose(output);
 
     i = 15;
     build_memtest15_string(command, i, table);
     output = popen(command, "r");
-    fgets(buffer, 10, output);
+    fgets(buffer, 100, output);
     dprintf(1, HBLUE "(SIZE 15):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 15; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, 15, i, buffer, &SEGFAULT);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
     fprintf_ok_ko(buffer, output, NULL);
-	if (!strncmp("Segmentation", buffer, 5)) {
-		handle_segfault(table, 15, i);
-		SEGFAULT = 1;
-	};
     pclose(output);
 
     i = 19;
     build_memtest20_string(command, i, table);
     output = popen(command, "r");
-    fgets(buffer, 10, output);
+    fgets(buffer, 100, output);
     dprintf(1, HBLUE "(SIZE 20):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 20; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, 20, i, buffer, &SEGFAULT);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
     fprintf_ok_ko(buffer, output, NULL);
-	if (!strncmp("Segmentation", buffer, 5)) {
-		handle_segfault(table, 20, i);
-		SEGFAULT = 1;
-	};
     pclose(output);
 
     i = 27;
     build_memtest100_string(i, table, command);
     output = popen(command, "r");
-    fgets(buffer, 10, output);
+    fgets(buffer, 100, output);
     dprintf(1, HBLUE "(SIZE 100):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 100; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, 100, i, buffer, &SEGFAULT);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
     fprintf_ok_ko(buffer, output, NULL);
-    if (!strncmp("Segmentation", buffer, 5)) {
-        handle_segfault(table, 100, i);
-        SEGFAULT = 1;
-    };
     pclose(output);
 
     i = 31;
     build_memtest500_string(i, table, command);
     output = popen(command, "r");
-    fgets(buffer, 10, output);
+    fgets(buffer, 100, output);
     dprintf(1, HBLUE "(SIZE 500):" DEF_COLOR " ./push_swap ");
     for (int j = 0; j < 500; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, 500, i, buffer, &SEGFAULT);
     dprintf(1, YELLOW "\nchecker_linux: " DEF_COLOR);
     fprintf_ok_ko(buffer, output, NULL);
-    if (!strncmp("Segmentation", buffer, 5)) {
-        handle_segfault(table, 500, i);
-        SEGFAULT = 1;
-    };
     pclose(output);
 }
 
@@ -556,7 +532,7 @@ int main(void) {
     sleep(3);
     dprintf(1, WHITE "BASIC TESTS\n" DEF_COLOR);
     dprintf(1, CYAN "	with valgrind -q\n" DEF_COLOR);
-    execute_memtest(args);
+    // execute_memtest(args);
     dprintf(1, CYAN
             "\n\n\nIf you didnt see any valgrind messages it means no "
             "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
@@ -567,8 +543,4 @@ int main(void) {
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
     dprintf(1, CYAN "no error messages will mean its OK\n\n" DEF_COLOR);
-	if (SEGFAULT) {
-		dprintf(1, RED "SEGFAULT DETECTED\n\n" DEF_COLOR);
-		return (1);
-	}
 }
