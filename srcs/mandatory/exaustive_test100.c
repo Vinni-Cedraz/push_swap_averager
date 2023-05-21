@@ -1,7 +1,6 @@
 #include "../include/averager.h"
 
 bool GLOBAL_100 = 0;
-bool SEGFAULT_100 = 0;
 
 static void build_cmd_string(int i, int **table, char command[]) {
     sprintf(
@@ -76,7 +75,7 @@ static void *execute_exaustive_sort_t1(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -101,7 +100,7 @@ static void *execute_exaustive_sort_t2(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -126,7 +125,7 @@ static void *execute_exaustive_sort_t3(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -151,7 +150,7 @@ static void *execute_exaustive_sort_t4(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -176,7 +175,7 @@ static void *execute_exaustive_sort_t5(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -201,7 +200,7 @@ static void *execute_exaustive_sort_t6(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -226,7 +225,7 @@ static void *execute_exaustive_sort_t7(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 
@@ -251,7 +250,7 @@ static void *execute_exaustive_sort_t8(void *args_void) {
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
         for (int j = 0; j < 100; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf_ok_ko(out_str, fp, &GLOBAL_100);
-		handle_err(table, 100, i, out_str, &SEGFAULT_100);
+		handle_err(table, 100, i, out_str);
         pclose(output);
     }
 

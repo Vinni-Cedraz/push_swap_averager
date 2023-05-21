@@ -1,7 +1,5 @@
 #include "../include/averager.h"
 
-bool SEGFAULT_t500 = 0;
-
 static uint **init_permutation_table(void) {
     int count = 0;
     uint *tmp_arr = malloc(sizeof(uint *) * 500);
@@ -209,7 +207,7 @@ static void *execute_push_swap_t1(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -243,7 +241,7 @@ static void *execute_push_swap_t2(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -277,7 +275,7 @@ static void *execute_push_swap_t3(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -311,7 +309,7 @@ static void *execute_push_swap_t4(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -345,7 +343,7 @@ static void *execute_push_swap_t5(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -379,7 +377,7 @@ static void *execute_push_swap_t6(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -413,7 +411,7 @@ static void *execute_push_swap_t7(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -447,7 +445,7 @@ static void *execute_push_swap_t8(void *args_void) {
         fprintf(fp, " ./push_swap ");
         for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str, &SEGFAULT_t500);
+		handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }

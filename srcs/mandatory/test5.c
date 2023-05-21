@@ -1,7 +1,5 @@
 #include "../include/averager.h"
 
-bool SEGFAULT_t5 = 0;
-
 static int **init_permutation_table(void) {
 	int count = 0;
 	int *arr = malloc(sizeof(int) * 5);
@@ -44,7 +42,7 @@ static void *execute_push_swap_t1(void *args_void) {
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
 		for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
 		fprintf(fp, " number of operations: %s", out_str);
-		handle_err(table, 5, i, out_str, &SEGFAULT_t5);
+		handle_err(table, 5, i, out_str);
 		pclose(output);
 		i++;
 	}
@@ -72,7 +70,7 @@ static void *execute_push_swap_t2(void *args_void) {
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
 		for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
 		fprintf(fp, " number of operations: %s", out_str);
-		handle_err(table, 5, i, out_str, &SEGFAULT_t5);
+		handle_err(table, 5, i, out_str);
 		pclose(output);
 		i++;
 	}
@@ -100,7 +98,7 @@ static void *execute_push_swap_t3(void *args_void) {
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
 		for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
 		fprintf(fp, " number of operations: %s", out_str);
-		handle_err(table, 5, i, out_str, &SEGFAULT_t5);
+		handle_err(table, 5, i, out_str);
 		pclose(output);
 		i++;
 	}
@@ -128,7 +126,7 @@ static void *execute_push_swap_t4(void *args_void) {
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
 		for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
 		fprintf(fp, " number of operations: %s", out_str);
-		handle_err(table, 5, i, out_str, &SEGFAULT_t5);
+		handle_err(table, 5, i, out_str);
 		pclose(output);
 		i++;
 	}
@@ -156,7 +154,7 @@ static void *execute_push_swap_t5(void *args_void) {
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
 		for (int j = 0; j < 5; j++) fprintf(fp, "%d ", table[i][j]);
 		fprintf(fp, " number of operations: %s", out_str);
-		handle_err(table, 5, i, out_str, &SEGFAULT_t5);
+		handle_err(table, 5, i, out_str);
 		pclose(output);
 		i++;
 	}

@@ -30,6 +30,7 @@
 
 // USER DEFINED TYPES
 typedef unsigned int uint;
+typedef void(t_build_cmdstr)(char[], int, int **);
 
 typedef struct MT {
     uint state[MT_LEN];
@@ -89,8 +90,18 @@ void exaustive_test100(void *args_void);
 void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
-int handle_err(int **table, int size, int i, char *buffer, bool *SEGFAULT);
-void log_cmd_and_output(int **table, int size, int i, char *buf, bool SEGF);
-void log_cmd_and_output_3(int **table, int size, int i, char *buf, bool SEGF);
+int handle_err(int **table, int size, int i, char *buffer);
+void log_cmd_and_output(int **table, int size, int i, char *buf);
+void log_cmd_and_output_3(int **table, int size, int i, char *buf);
+void build_test3_string(char memtest[], int i, int **table);
+void build_memtest3_string(char memtest[], int i, int **table);
+void build_memtest5_string(char memtest[], int i, int **table);
+void build_memtest10_string(char memtest[], int i, int **table);
+void build_memtest15_string(char memtest[], int i, int **table);
+void build_memtest20_string(char memtest[], int i, int **table);
+void build_memtest100_string(char memtest[], int i, int **table);
+void build_memtest500_string(char memtest[], int i, int **table);
+void execute_memtest(int **table, int size, int i, char buffer[], char cmd[],
+                     t_build_cmdstr build_cmdstr);
 
 #endif
