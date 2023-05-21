@@ -170,7 +170,10 @@ int main(void) {
 	t_args *args = malloc(sizeof(t_args));
 	pthread_t pthread[5];
 	args->table = init_permutation_table();
+
+	printf(WHITE"Now here comes...\n\n" DEF_COLOR);
 	printf(HGREEN "<	< THE AVERAGER >	>\n\n" DEF_COLOR);
+	printf(CYAN"It'll test the number of operations\n\n" DEF_COLOR);
 	sleep(3);
 	printf(WHITE "TESTS FOR SIZE 5\n" DEF_COLOR);
 	pthread_create(&pthread[0], NULL, execute_push_swap_t1, (void *)args);
