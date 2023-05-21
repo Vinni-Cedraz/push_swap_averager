@@ -532,7 +532,7 @@ int main(void) {
     sleep(3);
     dprintf(1, WHITE "BASIC TESTS\n" DEF_COLOR);
     dprintf(1, CYAN "	with valgrind -q\n" DEF_COLOR);
-    // execute_memtest(args);
+    execute_memtest(args);
     dprintf(1, CYAN
             "\n\n\nIf you didnt see any valgrind messages it means no "
             "memory leaks were found in your program\n\n\n\n" DEF_COLOR);
