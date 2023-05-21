@@ -91,8 +91,8 @@ void create_unified_log_file100(void) {
     system("rm tmp*");
 }
 
-static void log_err_to_stdout(int size, int **table, int i, bool SEGF) {
-    if (SEGF) {
+static void log_err_to_stdout(int size, int **table, int i, bool segf) {
+    if (segf) {
         dprintf(1, HRED "\nSegfault occurred with the test:" DEF_COLOR
                         " ./push_swap  " DEF_COLOR);
         for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
@@ -106,23 +106,24 @@ static void log_err_to_stdout(int size, int **table, int i, bool SEGF) {
     exit(1);
 }
 
-int handle_err(int **table, int size, int i, char *buf, bool *SEGF) {
+int handle_err(int **table, int size, int i, char *buf) {
     if (!strncmp("Segmentation", buf, 5) || !strncmp("segmentation", buf, 5)) {
-        (*SEGF) = 1;
-        log_err_to_stdout(size, table, i, (*SEGF));
+        bool segf = 1;
+        log_err_to_stdout(size, table, i, segf);
     } else if (!strncmp("==", buf, 2)) {
-        log_err_to_stdout(size, table, i, (*SEGF));
+        bool segf = 0;
+        log_err_to_stdout(size, table, i, segf);
     }
 }
 
-void log_cmd_and_output(int **table, int size, int i, char *buf, bool SEGF) {
+void log_cmd_and_output(int **table, int size, int i, char *buf) {
     dprintf(1, HBLUE "(SIZE %d):" DEF_COLOR " ./push_swap ", size);
     for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
-    handle_err(table, size, i, buf, &SEGF);
+    handle_err(table, size, i, buf);
     dprintf(1, YELLOW "\nchecker_linux: ", DEF_COLOR);
 }
 
-void log_cmd_and_output_3(int **table, int size, int i, char *buf, bool SEGF) {
+void log_cmd_and_output_3(int **table, int size, int i, char *buf) {
     dprintf(1, BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
     for (int j = 0; j < 3; j++) dprintf(1, "%d ", table[i][j]);
     dprintf(1, CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR, buf);
@@ -130,5 +131,5 @@ void log_cmd_and_output_3(int **table, int size, int i, char *buf, bool SEGF) {
         dprintf(1, HRED "ERROR:	" RED
                         "exceeded the limit of operations (2)\n" DEF_COLOR);
     }
-    handle_err(table, 3, i, buf, &SEGF);
+    handle_err(table, 3, i, buf);
 }
