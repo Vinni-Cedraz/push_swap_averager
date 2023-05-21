@@ -114,3 +114,21 @@ int handle_err(int **table, int size, int i, char *buf, bool *SEGF) {
         log_err_to_stdout(size, table, i, (*SEGF));
     }
 }
+
+void log_cmd_and_output(int **table, int size, int i, char *buf, bool SEGF) {
+    dprintf(1, HBLUE "(SIZE %d):" DEF_COLOR " ./push_swap ", size);
+    for (int j = 0; j < size; j++) dprintf(1, "%d ", table[i][j]);
+    handle_err(table, size, i, buf, &SEGF);
+    dprintf(1, YELLOW "\nchecker_linux: ", DEF_COLOR);
+}
+
+void log_cmd_and_output_3(int **table, int size, int i, char *buf, bool SEGF) {
+    dprintf(1, BLUE "arr[%d]:" DEF_COLOR " ./push_swap ", i);
+    for (int j = 0; j < 3; j++) dprintf(1, "%d ", table[i][j]);
+    dprintf(1, CYAN "	Operations: " DEF_COLOR WHITE "%s" DEF_COLOR, buf);
+    if (atoi(buf) > 2) {
+        dprintf(1, HRED "ERROR:	" RED
+                        "exceeded the limit of operations (2)\n" DEF_COLOR);
+    }
+    handle_err(table, 3, i, buf, &SEGF);
+}

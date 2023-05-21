@@ -90,5 +90,7 @@ void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
 int handle_err(int **table, int size, int i, char *buffer, bool *SEGFAULT);
+void log_cmd_and_output(int **table, int size, int i, char *buf, bool SEGF);
+void log_cmd_and_output_3(int **table, int size, int i, char *buf, bool SEGF);
 
 #endif
