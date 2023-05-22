@@ -103,5 +103,7 @@ void build_memtest100_string(char memtest[], int i, int **table);
 void build_memtest500_string(char memtest[], int i, int **table);
 void execute_memtest(int **table, int size, int i, char buffer[], char cmd[],
                      t_build_cmdstr build_cmdstr);
+void init_exaustive(int *count, int **table, int rand, int i_start,
+                           int i_end, int arr_size);
 
 #endif

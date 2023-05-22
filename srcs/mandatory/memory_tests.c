@@ -27,32 +27,30 @@ static void execute_memtests(void *args_void) {
     int **table = args->table;
     char buffer[100];
     char cmd[10000];
-    FILE *output;
 
     dprintf(1, WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN
                      "	with valgrind -q \n\n\n" DEF_COLOR);
-
     execute_memtest(table, size(), 01, buffer, cmd, build_memtest3_string);
     execute_memtest(table, size(), 01, buffer, cmd, build_test3_string);
     execute_memtest(table, size(), 07, buffer, cmd, build_memtest5_string);
     execute_memtest(table, size(), 11, buffer, cmd, build_memtest10_string);
     execute_memtest(table, size(), 15, buffer, cmd, build_memtest15_string);
     execute_memtest(table, size(), 19, buffer, cmd, build_memtest20_string);
-    execute_memtest(table, size(), 27, buffer, cmd, build_memtest100_string);
-    execute_memtest(table, size(), 31, buffer, cmd, build_memtest500_string);
+    execute_memtest(table, size(), 23, buffer, cmd, build_memtest100_string);
+    execute_memtest(table, size(), 27, buffer, cmd, build_memtest500_string);
 }
 
 static int size(void) {
     static short call_counter;
     call_counter++;
-    if (call_counter == 1) return 3;
-    if (call_counter == 2) return 3;
-    if (call_counter == 3) return 5;
-    if (call_counter == 4) return 10;
-    if (call_counter == 5) return 15;
-    if (call_counter == 6) return 20;
-    if (call_counter == 7) return 100;
-    if (call_counter == 8) return 500;
+    if (1 == call_counter) return 3;
+    if (2 == call_counter) return 3;
+    if (3 == call_counter) return 5;
+    if (4 == call_counter) return 10;
+    if (5 == call_counter) return 15;
+    if (6 == call_counter) return 20;
+    if (7 == call_counter) return 100;
+    if (8 == call_counter) return 500;
 }
 
 static void log_memtests_header(void) {
