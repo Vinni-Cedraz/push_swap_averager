@@ -5,12 +5,15 @@ void execute_memtest(int **table, int size, int table_index, char buffer[],
     FILE *output;
 
     if (table_index != 1) {
-        build_cmdstr(cmd, table_index, table);
-        output = popen(cmd, "r");
-        fgets(buffer, 100, output);
-        log_cmd_and_output(table, size, table_index, buffer);
-        fprintf_ok_ko(buffer, output, NULL);
-        pclose(output);
+        for (short three = 0; three < 3; three++) {
+            build_cmdstr(cmd, table_index, table);
+            output = popen(cmd, "r");
+            fgets(buffer, 100, output);
+            log_cmd_and_output(table, size, table_index, buffer);
+            fprintf_ok_ko(buffer, output, NULL);
+            pclose(output);
+			table_index++;
+        }
     } else if (build_cmdstr == build_memtest3_string) {
         while (table[table_index]) {
             build_cmdstr(cmd, table_index, table);

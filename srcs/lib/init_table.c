@@ -9,13 +9,14 @@ static void init100(int *count, int **table, int rand);
 static void init500(int *count, int **table, int rand);
 static void init_exaustive(int *count, int **table, int rand, int i_start,
                            int i_end, int arr_size);
+static void init(int *count, int **table, int rand, int arr_size);
 
 int **init_table(void) {
     int **table = calloc(sizeof(int *), 1000);
     srand(time(NULL) ^ (getpid() << 16));
     int count = 1;
     init3(&count, table, rand());
-    init5(&count, table, rand());
+    init(&count, table, rand(), 5);
     init10(&count, table, rand());
     init15(&count, table, rand());
     init20(&count, table, rand());
@@ -47,14 +48,14 @@ static void init3(int *count, int **table, int rand) {
     free(arr);
 }
 
-static void init5(int *count, int **table, int rand) {
-    int *arr = malloc(sizeof(int) * 5);
-    for (int i = 0; i < 5; i++) arr[i] = i;
-    while (*count < 10) {
-        shuffle_array((uint *)arr, 5, rand);
-        table[*count] = calloc(sizeof(int), 5);
-        for (int i = 0; i < 5; i++) table[*count][i] = arr[i];
-        (*count)++;
+static void init(int *count, int **table, int rand, int arr_size) {
+    int *arr = malloc(sizeof(int) * arr_size);
+    for (int i = 1; i < arr_size + 1; i++) arr[i - 1] = i;
+	for (int three = 0; three < 3; three++) {
+        shuffle_array((uint *)arr, arr_size, rand);
+        table[*count] = calloc(sizeof(int), arr_size);
+        for (int i = 0; i < arr_size; i++) table[*count][i] = arr[i];
+    	(*count)++;
     }
     (*count)++;
     free(arr);

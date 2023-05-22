@@ -83,7 +83,7 @@ run:
 	@rm -f tmp*
 	@rm -rf log_files
 	@mkdir -p log_files
-	@./basic_test
+	@./memory_tests
 	@./exaustive_test100
 	./test5
 	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
@@ -107,7 +107,7 @@ clean:
 
 fclean: clean
 	@rm -rf ./log_files
-	@rm -f test* push_swap checker basic_test basic_bonus error_management identity_test exaustive*
+	@rm -f test* push_swap checker memory_tests basic_bonus error_management identity_test exaustive*
 	@make --no-print-directory -C srcs/lib fclean
 
 re: fclean all
