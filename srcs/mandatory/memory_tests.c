@@ -60,7 +60,6 @@ static void log_memtests_header(void) {
             "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
             "FLAG\n\n\n" DEF_COLOR);
     sleep(3);
-    dprintf(1, WHITE "BASIC TESTS\n" DEF_COLOR);
 }
 
 static void log_memtests_footer(void) {
