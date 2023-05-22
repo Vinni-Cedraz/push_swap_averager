@@ -1,7 +1,7 @@
 NAME = lib.a
 AR = ar
 ARFLAGS = -rcs
-CFLAGS = -w -O3
+CFLAGS = -w -g3
 INC = ../include/
 OBJS_DIR = objs/
 
