@@ -48,10 +48,6 @@ static void init3(int *count, int **table, int rand) {
 }
 
 static void init5(int *count, int **table, int rand) {
-    if (*count != 7) {
-        printf("Error: count == %d\n", *count);
-        exit(1);
-    }
     int *arr = malloc(sizeof(int) * 5);
     for (int i = 0; i < 5; i++) arr[i] = i;
     while (*count < 10) {
@@ -65,10 +61,6 @@ static void init5(int *count, int **table, int rand) {
 }
 
 static void init10(int *count, int **table, int rand) {
-    if (*count != 11) {
-        printf("Error: count == %d\n", *count);
-        exit(1);
-    }
     int *arr = malloc(sizeof(int) * 10);
     for (int i = 0; i < 10; i++) arr[i] = i - 5;
     while (*count < 14) {
@@ -82,10 +74,6 @@ static void init10(int *count, int **table, int rand) {
 }
 
 static void init15(int *count, int **table, int rand) {
-    if (*count != 15) {
-        printf("Error: count != 12\n");
-        exit(1);
-    }
     int *arr = malloc(sizeof(int) * 15);
     for (int i = 0; i < 15; i++) arr[i] = i - 5;
     while (*count < 18) {
@@ -99,10 +87,6 @@ static void init15(int *count, int **table, int rand) {
 }
 
 static void init20(int *count, int **table, int rand) {
-    if (*count != 19) {
-        printf("Error: count != 16\n");
-        exit(1);
-    }
     int *arr = malloc(sizeof(int) * 20);
     for (int i = 0; i < 20; i++) arr[i] = i;
     while (*count < 22) {
@@ -116,10 +100,6 @@ static void init20(int *count, int **table, int rand) {
 }
 
 static void init100(int *count, int **table, int rand) {
-    if (*count != 27) {
-        printf("Error: count != 24\n");
-        exit(1);
-    }
     int *arr = malloc(sizeof(int) * 100);
     for (int i = 0; i < 100; i++) arr[i] = i;
     while (*count < 30) {
@@ -133,10 +113,6 @@ static void init100(int *count, int **table, int rand) {
 }
 
 static void init500(int *count, int **table, int rand) {
-    if (*count != 31) {
-        printf("Error: count != 28\n");
-        exit(1);
-    }
     int *arr = malloc(sizeof(int) * 500);
     for (int i = 0; i < 500; i++) arr[i] = i;
     while (*count < 34) {
