@@ -11,21 +11,22 @@ int main(void) {
     char *cmd = calloc(sizeof(char), 8000);
     char *output = calloc(sizeof(char), 8000);
 	printf(HRED"\nrunning tests with valgrind -q\n"DEF_COLOR);
-    empty_string(cmd, fp, output);
-    no_args(cmd, fp, output);
-    duplicate_arg(cmd, fp, output);
-    duplicate_sorted(cmd, fp, output);
-    non_numeric(cmd, fp, output);
-	max_int_overf(cmd, fp, output);
-	printf(HRED"\nATTENTION:	in the following two tests I'll check if"
-			" your program outputs the string \"Error\\n\" as it's last output.\n\n");
-	sleep(3);
-	printf(
-			CYAN"I do this because that's what the official checker does.\n"
-			CYAN"However, during evaluation, the ruler can be more forgiving if you print \"Error\\n\" in a different order\n\n"DEF_COLOR);
-	sleep(3);
-	invalid_action(cmd, fp, output);
-	whitespaced_action(cmd, fp, output);
+	printf("empty -->");
+    empty_string(cmd, fp);
+	printf("no_args -->");
+    no_args(cmd, fp);
+	printf("duplicate_args -->");
+    duplicate_arg(cmd, fp);
+	printf("duplicate_sorted -->");
+    duplicate_sorted(cmd, fp);
+	printf("non_numeric -->");
+    non_numeric(cmd, fp);
+	printf("max_int_overf -->");
+	max_int_overf(cmd, fp);
+	printf("invalid_action -->");
+	invalid_action(cmd, fp);
+	printf("whitespaced_action -->");
+	whitespaced_action(cmd, fp);
     free(cmd);
     free(output);
     printf(WHITE "\n\nBONUS RIGHT TESTS" DEF_COLOR);

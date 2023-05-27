@@ -59,6 +59,7 @@ $(OBJSDIR)%.o: $(SRCSDIR)%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 bonus: lib $(BOBJS)
+	@make --no-print-directory -C ..
 	@make --no-print-directory -C .. bonus
 	@cp -f ../push_swap .
 	@cp -f ../checker .

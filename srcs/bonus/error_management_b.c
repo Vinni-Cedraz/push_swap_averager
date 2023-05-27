@@ -1,72 +1,86 @@
 #include "averager.h"
 
-static void get_test_output(char *cmd, FILE *fp, char *output, char *test) {
-    size_t bytes_read = fread(output, sizeof(char), 8000, fp);
-    if (!strncmp(test, "empty_string", 5) || !strncmp(test, "no_args", 5)) {
-        if (bytes_read)
-            printf(CYAN "%s----------- " HRED "Error\n" DEF_COLOR, test);
-        else
-            printf(CYAN "%s----------- " GREEN "OK\n" DEF_COLOR, test);
-    } else {
-        if (!strcmp(output, "Error\n"))
-            printf(CYAN "%s----------- " GREEN "OK\n" DEF_COLOR, test);
-        else
-            printf(CYAN "%s----------- " HRED "Error\n" DEF_COLOR, test);
+static void get_test_output(FILE *fp, char *cmd, bool empty_expected) {
+    fp = popen(cmd, "r");
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    if (empty_expected) {
+        char *out_str;
+        fread(out_str, 1, 100, fp);
+        if (NULL != out_str) {
+            printf("Your checker: ");
+            printf(HRED "KO\n" DEF_COLOR);
+            printf(RED
+                   "	Expected nothing either on stderr nor on stdout (fd "
+                   "1)\n" DEF_COLOR);
+        } else {
+            printf("Your checker: ");
+            printf(HGREEN "OK\n" DEF_COLOR);
+        }
+        pclose(fp);
+        return;
     }
-}
-
-void empty_string(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "(valgrind -q ./checker %s) 2>&1", "");
-    fp = popen(cmd, "r");
-    get_test_output(cmd, fp, output, "empty_string ------");
+    FILE *error_log = fopen("error.log", "r");
+    if ((read = getline(&line, &len, error_log)) != -1) {
+        if (strcmp(line, "Error\n") == 0) {
+            printf("Your checker: ");
+            printf(HGREEN "OK\n" DEF_COLOR);
+        } else if (!empty_expected) {
+            printf(HRED "KO\n" DEF_COLOR);
+            printf(RED
+                   "	Expected the string \"Error\\n\" on the stderr (fd "
+                   "2)\n" DEF_COLOR);
+        }
+    }
+    fclose(error_log);
     pclose(fp);
 }
 
-void no_args(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "(valgrind -q ./checker) 2>&1");
-    fp = popen(cmd, "r");
-    get_test_output(cmd, fp, output, "no_args -----------");
-    pclose(fp);
+void empty_string(char *cmd, FILE *fp) {
+    sprintf(cmd, "(valgrind -q ./checker %s) 2>error.log", "");
+    get_test_output(fp, cmd, 1);
 }
 
-void duplicate_arg(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "(valgrind -q ./checker %d %d %d) 2>&1", 1, 2, 1);
-    fp = popen(cmd, "r");
-    get_test_output(cmd, fp, output, "duplicate_arg -----");
-    pclose(fp);
+void no_args(char *cmd, FILE *fp) {
+    sprintf(cmd, "(valgrind -q ./checker) 2>error.log");
+    get_test_output(fp, cmd, 1);
 }
 
-void duplicate_sorted(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "(valgrind -q ./checker %d %d %d %d %d %d) 2>&1", 10, 11, 12, 13, 14, 14);
-    fp = popen(cmd, "r");
-    get_test_output(cmd, fp, output, "duplicate_sorted --");
-    pclose(fp);
+void duplicate_arg(char *cmd, FILE *fp) {
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d) 2>error.log", 1, 2, 1);
+    get_test_output(fp, cmd, 0);
 }
 
-void non_numeric(char *cmd, FILE *fp, char *output) {
-    sprintf(cmd, "(valgrind -q ./checker %d %d %d %s) 2>&1", 3, 2, 1, "9a");
-    fp = popen(cmd, "r");
-    get_test_output(cmd, fp, output, "non_numeric -------");
-    pclose(fp);
+void duplicate_sorted(char *cmd, FILE *fp) {
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d %d %d %d) 2>error.log", 10,
+            11, 12, 13, 14, 14);
+    get_test_output(fp, cmd, 0);
 }
 
-void max_int_overf(char *cmd, FILE *fp, char *output) {
-	sprintf(cmd, "(valgrind -q ./checker %d %d %d %lu) 2>&1", 35, 24, 21, 21474836498);
-	fp = popen(cmd, "r");
-	get_test_output(cmd, fp, output, "max_int_overflow --");
-    pclose(fp);
+void non_numeric(char *cmd, FILE *fp) {
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d %s) 2>error.log", 3, 2, 1,
+            "9a");
+    get_test_output(fp, cmd, 0);
 }
 
-void invalid_action(char *cmd, FILE *fp, char *output) {
-	sprintf(cmd, "(cat cmds | valgrind -q ./checker %d %d %d %d %d %d) 2>&1", 11, 10, 12, 13, 14, 15);
-	fp = popen(cmd, "r");
-	get_test_output(cmd, fp, output, "invalid_action ----");
-	pclose(fp);
+void max_int_overf(char *cmd, FILE *fp) {
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d %lu) 2>error.log", 35, 24, 21,
+            21474836498);
+    get_test_output(fp, cmd, 0);
 }
 
-void whitespaced_action(char *cmd, FILE *fp, char *output) {
-	sprintf(cmd, "(cat cmds2 | valgrind -q ./checker %d %d %d %d %d %d) 2>&1", 11, 10, 12, 13, 14, 15);
-	fp = popen(cmd, "r");
-	get_test_output(cmd, fp, output, "whitespaced_action ");
-	pclose(fp);
+void invalid_action(char *cmd, FILE *fp) {
+    sprintf(cmd,
+            "(cat cmds | valgrind -q ./checker %d %d %d %d %d %d) 2>error.log",
+            11, 10, 12, 13, 14, 15);
+    get_test_output(fp, cmd, 0);
+}
+
+void whitespaced_action(char *cmd, FILE *fp) {
+    sprintf(cmd,
+            "(cat cmds2 | valgrind -q ./checker %d %d %d %d %d %d) 2>error.log",
+            11, 10, 12, 13, 14, 15);
+    get_test_output(fp, cmd, 0);
 }
