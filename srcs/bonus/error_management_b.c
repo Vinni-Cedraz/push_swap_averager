@@ -12,8 +12,6 @@ static void get_test_output(char *cmd, FILE *fp, char *output, char *test) {
             printf(CYAN "%s----------- " GREEN "OK\n" DEF_COLOR, test);
         else
             printf(CYAN "%s----------- " HRED "Error\n" DEF_COLOR, test);
-        printf(HCYAN "Your program should've written \"Error\\n\" to the "
-                     "stderr(fd 2)\n" DEF_COLOR);
     }
 }
 
