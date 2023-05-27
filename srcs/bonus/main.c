@@ -17,12 +17,18 @@ int main(void) {
     duplicate_sorted(cmd, fp, output);
     non_numeric(cmd, fp, output);
 	max_int_overf(cmd, fp, output);
+	printf(HRED"\nATTENTION:	in the following two tests I'll check if"
+			" your program outputs the string \"Error\\n\" as it's last output.\n\n");
+	sleep(3);
+	printf(
+			CYAN"I do this because that's what the official checker does.\n"
+			CYAN"However, during evaluation, the ruler can be more forgiving if you print \"Error\\n\" in a different order\n\n"DEF_COLOR);
+	sleep(3);
 	invalid_action(cmd, fp, output);
 	whitespaced_action(cmd, fp, output);
     free(cmd);
     free(output);
-    printf(WHITE "\n       BONUS ERROR MANAGEMENT: " GREEN "OK\n" DEF_COLOR);
-    printf(WHITE "\n\n\n\n\nBONUS RIGHT TESTS" DEF_COLOR);
+    printf(WHITE "\n\nBONUS RIGHT TESTS" DEF_COLOR);
     printf(HRED"\n		with valgrind -q \n\n" DEF_COLOR);
     execute_bonus5(args);
     execute_bonus10(args);
