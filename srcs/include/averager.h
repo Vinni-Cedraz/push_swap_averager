@@ -9,6 +9,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <fcntl.h>
 // include for  booleans
 #include <stdbool.h>
 
@@ -77,14 +78,14 @@ void build_bonus1000_string(int i, int **table, char *command);
 void build_reference1000_string(int i, int **table, char *command);
 int **init_table(void);
 int **init_table2(void);
-void max_int_overf(char *cmd, FILE *fp, char *output);
-void non_numeric(char *cmd, FILE *fp, char *output);
-void duplicate_sorted(char *cmd, FILE *fp, char *output);
-void duplicate_arg(char *cmd, FILE *fp, char *output);
-void no_args(char *cmd, FILE *fp, char *output);
-void empty_string(char *cmd, FILE *fp, char *output);
-void invalid_action(char *cmd, FILE *fp, char *output);
-void whitespaced_action(char *cmd, FILE *fp, char *output);
+void max_int_overf(char *cmd, FILE *fp);
+void non_numeric(char *cmd, FILE *fp);
+void duplicate_sorted(char *cmd, FILE *fp);
+void duplicate_arg(char *cmd, FILE *fp);
+void no_args(char *cmd, FILE *fp);
+void empty_string(char *cmd, FILE *fp);
+void invalid_action(char *cmd, FILE *fp);
+void whitespaced_action(char *cmd, FILE *fp);
 void exaustive_test20(void *args_void);
 void exaustive_test100(void *args_void);
 void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
