@@ -141,16 +141,12 @@ void bonus_log_error(bool empty_expected, char *out_str) {
         printf( RED
                 "	Expected nothing either on stderr nor on stdout (fd "
                 "1 or 2)\n" DEF_COLOR);
-        printf(BLUE"				Got "DEF_COLOR
-				"%s\""
-				BLUE" instead\n"DEF_COLOR, out_str);
+        printf(BLUE"				Got"DEF_COLOR" \""DEF_COLOR" \%s\""BLUE" instead\n"DEF_COLOR, out_str);
     } else if (!empty_expected) {
         printf(HRED "KO\n" DEF_COLOR);
         printf(RED
                 "	Expected the string \"Error\\n\" on the stderr (fd "
                 "2)\n");
-        printf(BLUE"				Got"DEF_COLOR
-				" \"%s\""
-				BLUE" instead\n"DEF_COLOR, out_str);
+        printf(BLUE"				Got"DEF_COLOR" \""DEF_COLOR" \%s\""BLUE" instead\n"DEF_COLOR, out_str);
     }
 }

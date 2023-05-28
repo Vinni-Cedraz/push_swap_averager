@@ -1,5 +1,6 @@
-#include "averager.h"
 #include <errno.h>
+
+#include "averager.h"
 
 #define EMPTY_EXPECTED 1
 #define EMPTY_NOT_EXPECTED 0
@@ -7,10 +8,16 @@
 static void get_test_output(char *cmd, bool empty_expected) {
     size_t len = 0;
     ssize_t read;
-    char *line = NULL;
+    char *line = calloc(500, sizeof(char));
 
     if (empty_expected) {
         FILE *fp = popen(cmd, "r");
+
+        if (fp == NULL) {
+            perror("popen");
+            exit(errno);
+        }
+
         char *out_str = fgets(line, 100, fp);
         if (NULL == out_str) {
             printf("Your checker: ");
@@ -24,7 +31,7 @@ static void get_test_output(char *cmd, bool empty_expected) {
 
     if (!empty_expected) {
         FILE *fp = popen(cmd, "r");
-		pclose(fp);
+        pclose(fp);
         FILE *error_log = fopen("error.log", "r");
         if ((read = getline(&line, &len, error_log)) != -1) {
             if (strcmp(line, "Error\n") == 0) {
@@ -36,6 +43,7 @@ static void get_test_output(char *cmd, bool empty_expected) {
             bonus_log_error(EMPTY_NOT_EXPECTED, line);
         fclose(error_log);
     }
+    free(line);
 }
 
 void no_args(char *cmd) {
@@ -49,7 +57,8 @@ void empty_string(char *cmd) {
 }
 
 void non_numeric(char *cmd) {
-    sprintf(cmd, "(valgrind -q ./checker %d %d %d %s) 2>error.log", 3, 2, 1, "9a");
+    sprintf(cmd, "(valgrind -q ./checker %d %d %d %s) 2>error.log", 3, 2, 1,
+            "9a");
     get_test_output(cmd, 0);
 }
 

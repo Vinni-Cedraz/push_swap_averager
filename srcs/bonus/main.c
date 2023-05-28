@@ -6,7 +6,7 @@ int main(void) {
     dprintf(1, HRED
            "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
            "FLAG\n\n" DEF_COLOR);
-    // sleep(2);
+    sleep(2);
     char cmd[5000];
 	printf(HRED"\nrunning tests with valgrind -q\n"DEF_COLOR);
 	printf(CYAN"no_args			-->	"DEF_COLOR);
@@ -14,10 +14,8 @@ int main(void) {
 	printf(CYAN"empty string	 	-->	"DEF_COLOR);
     empty_string(cmd);
 	printf(CYAN"non_numeric		-->	"DEF_COLOR);
-
  	non_numeric(cmd);
 	printf(CYAN"max_int_overf		-->	"DEF_COLOR);
-
 	max_int_overf(cmd);
 	printf(CYAN"duplicate_sorted	-->	"DEF_COLOR);
     duplicate_sorted(cmd);
