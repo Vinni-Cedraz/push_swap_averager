@@ -64,6 +64,12 @@ static void get_test_output(char *cmd, bool empty_expected) {
         }
 
         char *out_str = fgets(line, 100, fp);
+        if (out_str) {
+            if (NULL != strstr("egmentation", out_str))
+                printf(RED "KO" DEF_COLOR "	<-	SEGFAULT on %s\n", cmd), exit(1);
+            else if (NULL != strstr("memcheck", out_str))
+                printf(RED "KO" DEF_COLOR "	<-	MEMORY LEAK on %s\n", cmd);
+        }
         if (NULL == out_str) {
             printf(GREEN "OK" DEF_COLOR "	<-	");
             printf("%s\n", cmd);
@@ -78,54 +84,71 @@ static void get_test_output(char *cmd, bool empty_expected) {
         FILE *fp = popen(cmd, "r");
         pclose(fp);
         FILE *error_log = fopen("error.log", "r");
-        if ((read = getline(&line, &len, error_log)) != -1) {
-            if (strcmp(line, "Error\n") == 0) {
+        if ((read = fread(line, sizeof(char), 500, error_log)) != -1) {
+            if (!strcmp(line, "Error\n")) {
                 printf(GREEN "OK" DEF_COLOR "	<-	");
                 printf("%s\n", cmd);
-            } else
-                log_error(EMPTY_NOT_EXPECTED, line, cmd);
+            } else if (NULL != strstr(line, "egmentation"))
+                printf(RED "KO" DEF_COLOR "	<-	SEGFAULT\n"), exit(1);
+            else if (NULL != strstr(line, "memcheck"))
+                printf(RED "KO" DEF_COLOR "	<-	MEMORY LEAK on %s\n", cmd);
         } else
             log_error(EMPTY_NOT_EXPECTED, line, cmd);
+
         fclose(error_log);
     }
     free(line);
 }
 
 static void no_args(char *cmd) {
-    sprintf(cmd, "valgrind -q ./push_swap 2>&1");
+    sprintf(cmd,
+            "valgrind --leak-check=full --show-leak-kinds=all "
+            "--track-origins=yes -q ./push_swap 2>&1");
     get_test_output(cmd, 1);
     system("rm -f error.log");
 }
 
 static void empty_string(char *cmd) {
-    sprintf(cmd, "valgrind -q ./push_swap %s 2>&1", "");
+    sprintf(cmd,
+            "valgrind --leak-check=full --show-leak-kinds=all "
+            "--track-origins=yes -q ./push_swap %s 2>&1",
+            "");
     get_test_output(cmd, 1);
     system("rm -f error.log");
 }
 
 static void non_numeric(char *cmd) {
-    sprintf(cmd, "valgrind -q ./push_swap %d %d %d %s 2>error.log", 3, 2, 1,
-            "9a");
+    sprintf(cmd,
+            "valgrind --leak-check=full --show-leak-kinds=all "
+            "--track-origins=yes -q ./push_swap %d %d %d %s 2>error.log",
+            3, 2, 1, "9a");
     get_test_output(cmd, 0);
     system("rm -f error.log");
 }
 
 static void max_int_overf(char *cmd) {
-    sprintf(cmd, "valgrind -q ./push_swap %d %d %d %lu 2>error.log", 35, 24, 21,
-            21474836498);
+    sprintf(cmd,
+            "valgrind --leak-check=full --show-leak-kinds=all "
+            "--track-origins=yes -q ./push_swap %d %d %d %lu 2>error.log",
+            35, 24, 21, 21474836498);
     get_test_output(cmd, 0);
     system("rm -f error.log");
 }
 
 static void duplicate_sorted(char *cmd) {
-    sprintf(cmd, "valgrind -q ./push_swap %d %d %d %d %d %d 2>error.log", 10,
-            11, 12, 13, 14, 14);
+    sprintf(cmd,
+            "valgrind --leak-check=full --show-leak-kinds=all "
+            "--track-origins=yes -q ./push_swap %d %d %d %d %d %d 2>error.log",
+            10, 11, 12, 13, 14, 14);
     get_test_output(cmd, 0);
     system("rm -f error.log");
 }
 
 static void duplicate_arg(char *cmd) {
-    sprintf(cmd, "valgrind -q ./push_swap %d %d %d 2>error.log", 1, 2, 1);
+    sprintf(cmd,
+            "valgrind --leak-check=full --show-leak-kinds=all "
+            "--track-origins=yes -q ./push_swap %d %d %d 2>error.log",
+            1, 2, 1);
     get_test_output(cmd, 0);
     system("rm -f error.log");
 }
