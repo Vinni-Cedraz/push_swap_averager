@@ -1,5 +1,3 @@
-#include <errno.h>
-
 #include "averager.h"
 
 #define EMPTY_EXPECTED 1
@@ -49,34 +47,40 @@ static void get_test_output(char *cmd, bool empty_expected) {
 void no_args(char *cmd) {
     sprintf(cmd, "(valgrind -q ./checker) 2>&1");
     get_test_output(cmd, 1);
+	system("rm -f error.log");
 }
 
 void empty_string(char *cmd) {
     sprintf(cmd, "(valgrind -q ./checker %s) 2>&1", "");
     get_test_output(cmd, 1);
+	system("rm -f error.log");
 }
 
 void non_numeric(char *cmd) {
     sprintf(cmd, "(valgrind -q ./checker %d %d %d %s) 2>error.log", 3, 2, 1,
             "9a");
     get_test_output(cmd, 0);
+	system("rm -f error.log");
 }
 
 void max_int_overf(char *cmd) {
     sprintf(cmd, "(valgrind -q ./checker %d %d %d %lu) 2>error.log", 35, 24, 21,
             21474836498);
     get_test_output(cmd, 0);
+	system("rm -f error.log");
 }
 
 void duplicate_sorted(char *cmd) {
     sprintf(cmd, "(valgrind -q ./checker %d %d %d %d %d %d) 2>error.log", 10,
             11, 12, 13, 14, 14);
     get_test_output(cmd, 0);
+	system("rm -f error.log");
 }
 
 void duplicate_arg(char *cmd) {
     sprintf(cmd, "(valgrind -q ./checker %d %d %d) 2>error.log", 1, 2, 1);
     get_test_output(cmd, 0);
+	system("rm -f error.log");
 }
 
 void invalid_action(char *cmd) {
@@ -84,6 +88,7 @@ void invalid_action(char *cmd) {
             "(cat cmds | valgrind -q ./checker %d %d %d %d %d %d) 2>error.log",
             11, 10, 12, 13, 14, 15);
     get_test_output(cmd, 0);
+	system("rm -f error.log");
 }
 
 void whitespaced_action(char *cmd) {
@@ -91,4 +96,5 @@ void whitespaced_action(char *cmd) {
             "(cat cmds2 | valgrind -q ./checker %d %d %d %d %d %d) 2>error.log",
             11, 10, 12, 13, 14, 15);
     get_test_output(cmd, 0);
+	system("rm -f error.log");
 }

@@ -29,7 +29,7 @@ static void execute_memtests(void *args_void) {
     char cmd[10000];
 
     dprintf(1, WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN
-                     "	with valgrind -q \n\n\n" DEF_COLOR);
+                     "	with valgrind on quiet mode (-q flag) \n\n\n" DEF_COLOR);
     execute_memtest(table, size(), 01, buffer, cmd, build_memtest3_string);
     execute_memtest(table, size(), 01, buffer, cmd, build_test3_string);
     execute_memtest(table, size(), 07, buffer, cmd, build_memtest5_string);
