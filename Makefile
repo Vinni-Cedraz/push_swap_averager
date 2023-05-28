@@ -108,7 +108,7 @@ clean:
 
 fclean: clean
 	@rm -rf ./log_files
-	@rm -f test* push_swap checker memory_tests basic_bonus error_management identity_test exaustive*
+	@rm -f test* push_swap checker memory_tests basic_bonus error_management identity_test exaustive* error.log
 	@make --no-print-directory -C srcs/lib fclean
 
 re: fclean all
