@@ -15,6 +15,7 @@ HGREEN = \033[1;32m
 RED = \033[0;31m
 HRED = \033[1;31m
 DEF_COLOR =	\033[0m
+CYAN = \033[0;36m
 
 # Define flags
 CFLAGS = -w -pthread -g3
@@ -35,6 +36,7 @@ OBJS = $(patsubst $(SRCSDIR)%.c, $(OBJSDIR)%.o, $(SRCS))
 BOBJS = $(patsubst $(BSRCSDIR)%.c, $(BOBJSDIR)%.o, $(BSRCS))
 
 all: lib $(OBJS)
+	@rm -f error.log
 	@make --no-print-directory execs
 	@make --no-print-directory -C ..
 	@cp -f ../push_swap .
@@ -78,8 +80,9 @@ $(BLIB): $(BOBJS)
 	ar rcs $(BLIB) $?
 
 run:
-	@printf "$(HRED)running tests with valgrind -q$(DEF_COLOR)\n";
+	@printf "$(CYAN)running tests with valgrind on quiet mode $(DEF_COLOR)\n\n";
 	./error_management
+	@printf "\n\n\n\n";
 	./identity_test
 	@rm -f tmp*
 	@rm -rf log_files
