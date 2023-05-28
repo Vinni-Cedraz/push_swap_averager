@@ -2,6 +2,7 @@
 #define AVERAGER_H
 
 // SYSTEM HEADERS
+#include <fcntl.h>
 #include <pthread.h>
 #include <signal.h>
 #include <stdio.h>
@@ -9,7 +10,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <fcntl.h>
 // include for  booleans
 #include <stdbool.h>
 
@@ -78,14 +78,14 @@ void build_bonus1000_string(int i, int **table, char *command);
 void build_reference1000_string(int i, int **table, char *command);
 int **init_table(void);
 int **init_table2(void);
-void max_int_overf(char *cmd, FILE *fp);
-void non_numeric(char *cmd, FILE *fp);
-void duplicate_sorted(char *cmd, FILE *fp);
-void duplicate_arg(char *cmd, FILE *fp);
-void no_args(char *cmd, FILE *fp);
-void empty_string(char *cmd, FILE *fp);
-void invalid_action(char *cmd, FILE *fp);
-void whitespaced_action(char *cmd, FILE *fp);
+void max_int_overf(char *cmd);
+void non_numeric(char *cmd);
+void duplicate_sorted(char *cmd);
+void duplicate_arg(char *cmd);
+void no_args(char *cmd);
+void empty_string(char *cmd);
+void invalid_action(char *cmd);
+void whitespaced_action(char *cmd);
 void exaustive_test20(void *args_void);
 void exaustive_test100(void *args_void);
 void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
@@ -104,7 +104,8 @@ void build_memtest100_string(char memtest[], int i, int **table);
 void build_memtest500_string(char memtest[], int i, int **table);
 void execute_memtest(int **table, int size, int i, char buffer[], char cmd[],
                      t_build_cmdstr build_cmdstr);
-void init_exaustive(int *count, int **table, int rand, int i_start,
-                           int i_end, int arr_size);
+void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
+                    int arr_size);
+void bonus_log_error(bool empty_expected, char *out_str);
 
 #endif
