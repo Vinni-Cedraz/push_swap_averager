@@ -66,12 +66,12 @@ static void get_test_output(char *cmd, bool empty_expected) {
         char *out_str = fgets(line, 100, fp);
         if (out_str) {
             if (NULL != strstr("egmentation", out_str))
-                printf(RED "KO" DEF_COLOR "	<-	SEGFAULT on %s\n", cmd), exit(1);
+                printf(RED "KO" DEF_COLOR "	<---- SEGFAULT on %s\n", cmd), exit(1);
             else if (NULL != strstr("memcheck", out_str))
-                printf(RED "KO" DEF_COLOR "	<-	MEMORY LEAK on %s\n", cmd);
+                printf(RED "KO" DEF_COLOR "	<---- MEMORY LEAK on %s\n", cmd);
         }
         if (NULL == out_str) {
-            printf(GREEN "OK" DEF_COLOR "	<-	");
+            printf(GREEN "OK" DEF_COLOR "	<---- ");
             printf("%s\n", cmd);
         } else
             log_error(EMPTY_EXPECTED, out_str, cmd);
@@ -86,12 +86,12 @@ static void get_test_output(char *cmd, bool empty_expected) {
         FILE *error_log = fopen("error.log", "r");
         if ((read = fread(line, sizeof(char), 500, error_log)) != -1) {
             if (!strcmp(line, "Error\n")) {
-                printf(GREEN "OK" DEF_COLOR "	<-	");
+                printf(GREEN "OK" DEF_COLOR "	<---- ");
                 printf("%s\n", cmd);
             } else if (NULL != strstr(line, "egmentation"))
-                printf(RED "KO" DEF_COLOR "	<-	SEGFAULT\n"), exit(1);
+                printf(RED "KO" DEF_COLOR "	<---- SEGFAULT\n"), exit(1);
             else if (NULL != strstr(line, "memcheck"))
-                printf(RED "KO" DEF_COLOR "	<-	MEMORY LEAK on %s\n", cmd);
+                printf(RED "KO" DEF_COLOR "	<---- MEMORY LEAK on %s\n", cmd);
         } else
             log_error(EMPTY_NOT_EXPECTED, line, cmd);
 
