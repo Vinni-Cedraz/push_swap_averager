@@ -98,6 +98,7 @@ void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
 int handle_err(int **table, int size, int i, char *buffer);
+void log_error(bool empty_expected, char *out_str, char *cmd);
 void log_cmd_and_output(int **table, int size, int i, char *buf);
 void log_cmd_and_output_3(int **table, int size, int i, char *buf);
 void build_test3_string(char memtest[], int i, int **table);

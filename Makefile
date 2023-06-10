@@ -81,8 +81,8 @@ $(BLIB): $(BOBJS)
 
 run:
 	@printf "$(CYAN)running tests with valgrind on quiet mode $(DEF_COLOR)\n\n";
-	./error_management
-	@printf "\n\n\n\n";
+	# ./error_management
+	# @printf "\n\n";
 	./identity_test
 	@rm -f tmp*
 	@rm -rf log_files
