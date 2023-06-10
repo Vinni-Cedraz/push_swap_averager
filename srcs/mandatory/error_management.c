@@ -116,7 +116,7 @@ static void get_test_output(char *cmd, bool empty_expected) {
     }
 }
 
-void analyse_cmd_output(char line[500], FILE *fp, char cmd[500]) {
+static void analyse_cmd_output(char line[500], FILE *fp, char cmd[500]) {
     char *out_str = fgets(line, 100, fp);
     if (out_str) {
         if (NULL != strstr("egmentation", out_str))
@@ -132,7 +132,7 @@ void analyse_cmd_output(char line[500], FILE *fp, char cmd[500]) {
     free(out_str);
 }
 
-void analyse_error_log_file(char line[500], char cmd[500]) {
+static void analyse_error_log_file(char line[500], char cmd[500]) {
     ssize_t read;
     FILE *error_log = fopen("error.log", "r");
     if ((read = fread(line, sizeof(char), 500, error_log)) != -1) {
