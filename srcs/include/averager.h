@@ -108,6 +108,7 @@ void execute_memtest(int **table, int size, int i, char buffer[], char cmd[],
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
+void open_process_and_exec_cmd_there(FILE *fp, char *cmd);
 void trim_linebreak(char* str);
 
 #endif

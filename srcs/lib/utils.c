@@ -161,3 +161,12 @@ void trim_linebreak(char *str) {
     if (str) len = strlen(str);
     if (len > 0 && str[len - 1] == '\n') str[len - 1] = '\0';
 }
+
+void open_process_and_exec_cmd_there(FILE *fp, char *cmd) {
+    fp = popen(cmd, "r");
+    if (fp == NULL) {
+        perror("popen");
+        exit(errno);
+    }
+    pclose(fp);
+}
