@@ -18,9 +18,10 @@ static void single_element(char *cmd, char *output) {
     sprintf(cmd,
             "valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d 2>&1",
             42);
-    FILE *fp = popen(cmd, "r");
+	FILE *fp;
+	open_process_and_exec_cmd_there(&fp, cmd, DONT_CLOSE_PROCESS_AFTER);
     get_test_process_output(fp, output, "<sorted> single_element -");
-    printf("	<--- %s\n", cmd);
+    printf(" <--- %s\n", cmd);
     pclose(fp);
 }
 
@@ -29,9 +30,10 @@ static void four_elements(char *cmd, char *output) {
             "valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d "
             "%d 2>&1",
             0, 1, 2, 3);
-    FILE *fp = popen(cmd, "r");
+	FILE *fp;
+	open_process_and_exec_cmd_there(&fp, cmd, DONT_CLOSE_PROCESS_AFTER);
     get_test_process_output(fp, output, "<sorted> four_elements  -");
-    printf("	<--- %s\n", cmd);
+    printf(" <--- %s\n", cmd);
     pclose(fp);
 }
 
@@ -40,9 +42,10 @@ static void nine_elements(char *cmd, char *output) {
             "valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d "
             "%d %d %d %d %d %d 2>&1",
             0, 1, 2, 3, 4, 5, 6, 7, 8);
-    FILE *fp = popen(cmd, "r");
+	FILE *fp;
+	open_process_and_exec_cmd_there(&fp, cmd, DONT_CLOSE_PROCESS_AFTER);
     get_test_process_output(fp, output, "<sorted> nine_elements  -");
-    printf("	<--- %s\n", cmd);
+    printf(" <--- %s\n", cmd);
     pclose(fp);
 }
 

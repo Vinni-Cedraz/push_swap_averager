@@ -30,6 +30,11 @@
 #define MT_LEN 624
 #define MT_IA 397
 
+#define EMPTY_EXPECTED 1
+#define EMPTY_NOT_EXPECTED 0
+#define CLOSE_PROCESS_AFTER 1
+#define DONT_CLOSE_PROCESS_AFTER 0
+
 // USER DEFINED TYPES
 typedef unsigned int uint;
 typedef void(t_build_cmdstr)(char[], int, int **);
@@ -108,7 +113,7 @@ void execute_memtest(int **table, int size, int i, char buffer[], char cmd[],
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
-void open_process_and_exec_cmd_there(FILE *fp, char *cmd);
+void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
 void trim_linebreak(char* str);
 
 #endif
