@@ -1,13 +1,13 @@
 #include "../include/averager.h"
 
 void build_test3_string(char memtest[], int i, int **table) {
-    sprintf(memtest, "(./push_swap %d %d %d | wc -l) 2>&1", table[i][0],
+    sprintf(memtest, "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d | wc -l) 2>&1", table[i][0],
             table[i][1], table[i][2]);
 }
 
 void build_memtest3_string(char memtest[], int i, int **table) {
     sprintf(memtest,
-            "(valgrind -q ./push_swap %d %d %d |"
+            "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d |"
             "./checker_linux %d %d %d) 2>&1",
             table[i][0], table[i][1], table[i][2], table[i][0], table[i][1],
             table[i][2]);
@@ -15,7 +15,7 @@ void build_memtest3_string(char memtest[], int i, int **table) {
 
 void build_memtest5_string(char memtest[], int i, int **table) {
     sprintf(memtest,
-            "(valgrind -q ./push_swap %d %d %d %d %d | "
+            "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d %d %d | "
             "./checker_linux %d %d %d %d %d) 2>&1",
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4]);
@@ -23,7 +23,7 @@ void build_memtest5_string(char memtest[], int i, int **table) {
 
 void build_memtest10_string(char memtest[], int i, int **table) {
     sprintf(memtest,
-            "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d | "
+            "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d %d %d %d %d %d %d %d | "
             "./checker_linux %d %d %d %d %d %d %d %d %d %d) 2>&1",
             table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
             table[i][5], table[i][6], table[i][7], table[i][8], table[i][9],
@@ -34,7 +34,7 @@ void build_memtest10_string(char memtest[], int i, int **table) {
 void build_memtest15_string(char memtest[], int i, int **table) {
     sprintf(
         memtest,
-        "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "|"
         " ./checker_linux %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d) 2>&1",
         table[i][0], table[i][1], table[i][2], table[i][3], table[i][4],
@@ -48,7 +48,7 @@ void build_memtest15_string(char memtest[], int i, int **table) {
 void build_memtest20_string(char memtest[], int i, int **table) {
     sprintf(
         memtest,
-        "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d |"
         "./checker_linux %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d) 2>&1",
@@ -65,7 +65,7 @@ void build_memtest20_string(char memtest[], int i, int **table) {
 void build_memtest100_string(char command[], int i, int **table) {
     sprintf(
         command,
-        "(valgrind -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
+        "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
