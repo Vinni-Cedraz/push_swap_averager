@@ -3,7 +3,7 @@
 void build_memtest500_string(char command[], int i, int **table) {
     sprintf(
         command,
-        "(valgrind -q ./push_swap "
+        "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
         "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
