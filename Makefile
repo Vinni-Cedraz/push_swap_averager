@@ -18,7 +18,7 @@ DEF_COLOR =	\033[0m
 CYAN = \033[0;36m
 
 # Define flags
-CFLAGS = -w -pthread -g
+CFLAGS = -w -pthread -O3
 INCLUDES = -Isrcs/include/
 BLIB = blib.a
 
@@ -81,12 +81,12 @@ $(BLIB): $(BOBJS)
 
 run:
 	@printf "$(CYAN)running tests with valgrind on quiet mode $(DEF_COLOR)\n\n";
-	# ./error_management
-	# @printf "\n\n";
-	# ./identity_test
-	# @rm -f tmp*
-	# @rm -rf log_files
-	# @mkdir -p log_files
+	./error_management
+	@printf "\n\n";
+	./identity_test
+	@rm -f tmp*
+	@rm -rf log_files
+	@mkdir -p log_files
 	@./memory_tests
 	@./exaustive_test100
 	./test5
