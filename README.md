@@ -8,12 +8,12 @@ This tester is called push_swap_averager because it is accurate and detailed in 
      $(CC) -O3 -Wall -Wex.... etc
 #### Clone the tester inside of your push_swap directory:
      git clone https://github.com/Vinni-Cedraz/push_swap_averager
-#### And this is how to use it from there:
+#### And this is how to use it from here:
      make -C push_swap_averager
 #### And 
      make -C push_swap_averager bonus
 
-###### You could also cd into the tester's directory and run just make from there (or make <specific rule here>)
+###### You could also cd into the tester's directory and run just ```make``` and ```make bonus``` from there 
      
 ## Table of Contents
 
