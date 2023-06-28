@@ -169,12 +169,6 @@ calculate the average of the size 100 with a margin of error of 4 operations.
 That is an improvement of 2400% in accuracy, without adding any extra time to the
 program execution.
 
-I know I could have done it all with a short `Bash` script, and it would make
-for a shorter code and a simpler program. I had done it before... But
-it was taking three and one and a half hours to test 10,000 combinations of size
-500. This is why this tester was written in `C`: a compiled language with
-low-level scope which is usually faster and supports a multithreaded approach.
-
 ## Trivia
 - The longest English word with all its letters in alphabetical order is
 "aegilops," which is a type of plant.
