@@ -1,21 +1,20 @@
 # push_swap_averager
 
-## TL;DR (too long, didn't read):
-
 This tester is called push_swap_averager because it is accurate and detailed in calculating the best case, worst case and the average case of your push_swap. However, it also tests sorting correctness, error handling and memory safety (with Valgrind) of both the mandatory and bonus projects.
+
+## Basic Usage TL;DR (too long didn't read)
+
 #### Make sure your push_swap makefiles are compiling with the O3 flag!
      $(CC) -O3 -Wall -Wex.... etc
 #### Clone the tester inside of your push_swap directory:
      git clone https://github.com/Vinni-Cedraz/push_swap_averager
 #### And this is how to use it from there:
      make -C push_swap_averager
-#### and/or 
+#### And 
      make -C push_swap_averager bonus
-###### you could also cd into the tester's directory and run
-     make
-###### and/or
-     make bonus
 
+###### You could also cd into the tester's directory and run just make from there (or make <specific rule here>)
+     
 ## Table of Contents
 
 - [The Why](#Why)
