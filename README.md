@@ -3,7 +3,7 @@
 ## TL;DR (too long, didn't read):
 
 This tester is called push_swap_averager because it is accurate and detailed in calculating the best case, worst case and the average case of your push_swap. However, it also tests sorting correctness, error handling and memory safety (with Valgrind) of both the mandatory and bonus projects.
-#### Clone it in your push_swap directory:
+#### Clone it inside of your push_swap directory:
      git clone https://github.com/Vinni-Cedraz/push_swap_averager
 #### And this is how to use it:
      make -C push_swap_averager
