@@ -11,9 +11,11 @@
 # **************************************************************************** #
 
 #Colors
-HGREEN = \033[1;32m
 RED = \033[0;31m
 HRED = \033[1;31m
+HGREEN = \033[1;32m
+HYELLOW = \033[1;33m
+HBLUE = \033[1;34m
 DEF_COLOR =	\033[0m
 CYAN = \033[0;36m
 
@@ -38,6 +40,13 @@ BOBJS = $(patsubst $(BSRCSDIR)%.c, $(BOBJSDIR)%.o, $(BSRCS))
 all: lib $(OBJS)
 	@rm -f error.log
 	@make --no-print-directory execs
+	@if [[ -f ../Makefile ]]; then \
+		make --no-print-directory -C ..; \
+	else \
+		printf "\n$(HRED)ERROR: RTFM: The push_swap_averager must be placed inside of your push_swap project root directory\n$(DEF_COLOR)\n"; \
+		printf "\n$(HBLUE)ERROR: RTFM: The push_swap_averager must be placed inside of your push_swap project root directory\n$(DEF_COLOR)\n"; \
+		printf "\n$(HYELLOW)ERROR: RTFM: The push_swap_averager must be placed inside of your push_swap project root directory\n$(DEF_COLOR)\n"; \
+	fi
 	@make --no-print-directory -C ..
 	@cp -f ../push_swap .
 	@make --no-print-directory run
