@@ -73,6 +73,12 @@ typedef struct s_uargs {
     uint **table;
 } t_uargs;
 
+typedef struct s_sizes_and_action {
+    int arr_size;
+    int table_index;
+    t_build_cmdstr *action;
+} t_sizes_and_action;
+
 // FUNCTION PROTOTYPES
 int is_repeated100(uint **table, uint *tmp_arr, int count);
 int is_repeated500(uint **table, uint *tmp_arr, int count);
@@ -130,8 +136,8 @@ void build_memtest15_string(char memtest[], int i, int **table);
 void build_memtest20_string(char memtest[], int i, int **table);
 void build_memtest100_string(char memtest[], int i, int **table);
 void build_memtest500_string(char memtest[], int i, int **table);
-void exec_memtest(int **table, int size, int table_index, char buffer[],
-                  char cmd[], t_build_cmdstr build_cmdstr);
+void exec_memtest(int **table, char buffer[], char cmd[],
+                  t_sizes_and_action sizes_and_action);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);

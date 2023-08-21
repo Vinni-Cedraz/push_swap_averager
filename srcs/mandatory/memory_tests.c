@@ -2,9 +2,7 @@
 
 static void execute_memtests(void *args_void);
 static void log_memtests_header(void);
-static int arr_size(void);
-static int table_index(void);
-static t_build_cmdstr *test_string(void);
+static t_sizes_and_action get_sizes_and_action(void);
 
 int main(void) {
     t_args *args;
@@ -25,36 +23,24 @@ static void execute_memtests(void *args_void) {
 
     log_memtests_header();
     for (int i = 0; i < 8; i++)
-        exec_memtest(table, arr_size(), table_index(), buf, cmd, test_string());
+        exec_memtest(table, buf, cmd, get_sizes_and_action());
     dprintf(1, MEMORY_TEST_FOOTER);
 }
 
-static int arr_size(void) {
-    const static int arr_sizes[9] = {-1, 3, 3, 5, 10, 15, 20, 100, 500};
+static t_sizes_and_action get_sizes_and_action(void) {
     static short call_counter;
-    return arr_sizes[++call_counter];
-}
-
-static int table_index(void) {
-    const static int arr_sizes[9] = {-1, 1, 1, 7, 11, 15, 19, 23, 27};
-    static short call_counter;
-    return arr_sizes[++call_counter];
-}
-
-static t_build_cmdstr *test_string(void) {
-    static short call_counter;
-    const static t_build_cmdstr *arr_sizes[9] = {
-        NULL,
-        &build_memtest3_string,
-        &build_test3_string,
-        &build_memtest5_string,
-        &build_memtest10_string,
-        &build_memtest15_string,
-        &build_memtest20_string,
-        &build_memtest100_string,
-        &build_memtest500_string,
+    const static t_sizes_and_action sizes_and_action[9] = {
+        {.arr_size =  -1, .table_index = -1, .action = NULL},
+        {.arr_size =   3, .table_index =  1, .action = &build_memtest3_string},
+        {.arr_size =   3, .table_index =  1, .action = &build_test3_string},
+        {.arr_size =   5, .table_index =  7, .action = &build_memtest5_string},
+        {.arr_size =  10, .table_index = 11, .action = &build_memtest10_string},
+        {.arr_size =  15, .table_index = 15, .action = &build_memtest15_string},
+        {.arr_size =  20, .table_index = 19, .action = &build_memtest20_string},
+        {.arr_size = 100, .table_index = 23, .action = &build_memtest100_string},
+        {.arr_size = 500, .table_index = 27, .action = &build_memtest500_string},
     };
-    return arr_sizes[++call_counter];
+	return (sizes_and_action[++call_counter]);
 }
 
 static void log_memtests_header(void) {
