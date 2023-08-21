@@ -227,6 +227,7 @@ static void *execute_exaustive_sort_t8(void *args_void) {
 }
 
 void exaustive_test20(void *args_void) {
+    dprintf(1, EXAUSTIVE_TEST20_HEADER);
     pthread_t pthread[8];
     pthread_create(&pthread[0], NULL, execute_exaustive_sort_t1, args_void);
     pthread_create(&pthread[1], NULL, execute_exaustive_sort_t2, args_void);
@@ -240,6 +241,7 @@ void exaustive_test20(void *args_void) {
     while (++count < 8)
         pthread_join(pthread[count], NULL);
     create_unified_log_file20();
+    dprintf(1, EXAUSTIVE_TEST20_FOOTER);
     if (1 == GLOBAL_20)
         dprintf(1,
                 RED "One or more sorting tests " HRED "FAILED!!!\n" YELLOW

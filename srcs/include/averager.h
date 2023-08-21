@@ -35,7 +35,26 @@
 #define CLOSE_PROCESS_AFTER 1
 #define DONT_CLOSE_PROCESS_AFTER 0
 
-#define MEMORY_TEST_MESSAGE  WHITE"\nMEMORY AND SORTING TESTS\n"DEF_COLOR CYAN"		with valgrind on quiet mode (-q flag) \n\n\n"DEF_COLOR
+#define MEMORY_TEST_HEADER                                                     \
+    HRED "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "                 \
+         "FLAG\n\n\n" DEF_COLOR
+
+#define MEMORY_TEST_MESSAGE                                                    \
+    WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN                        \
+          "		with valgrind on quiet mode (-q flag) \n\n\n" DEF_COLOR
+
+#define MEMORY_TEST_FOOTER                                                     \
+    CYAN "\n\n\nIf you didnt see any valgrind messages it means no memory "    \
+         "leaks were found in your program\n\n\n\n" DEF_COLOR
+
+#define EXAUSTIVE_TEST20_HEADER                                                \
+    HCYAN "Now, we will check sorting correctness with several different "     \
+          "permutations...\n" DEF_COLOR
+
+#define EXAUSTIVE_TEST20_FOOTER                                                \
+    GREEN "Sorting checks are done ->	" CYAN                                 \
+          "No (FAILED) messages in the next line will mean its "               \
+          "OK\n\n" DEF_COLOR
 
 // USER DEFINED TYPES
 typedef unsigned int uint;
