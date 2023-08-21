@@ -35,6 +35,8 @@
 #define CLOSE_PROCESS_AFTER 1
 #define DONT_CLOSE_PROCESS_AFTER 0
 
+#define MEMORY_TEST_MESSAGE  WHITE"\nMEMORY AND SORTING TESTS\n"DEF_COLOR CYAN"		with valgrind on quiet mode (-q flag) \n\n\n"DEF_COLOR
+
 // USER DEFINED TYPES
 typedef unsigned int uint;
 typedef void(t_build_cmdstr)(char[], int, int **);
@@ -109,8 +111,8 @@ void build_memtest15_string(char memtest[], int i, int **table);
 void build_memtest20_string(char memtest[], int i, int **table);
 void build_memtest100_string(char memtest[], int i, int **table);
 void build_memtest500_string(char memtest[], int i, int **table);
-void execute_memtest(int **table, int size, int table_index, char buffer[],
-                     char cmd[], t_build_cmdstr build_cmdstr);
+void exec_memtest(int **table, int size, int table_index, char buffer[],
+                  char cmd[], t_build_cmdstr build_cmdstr);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);

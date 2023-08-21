@@ -5,7 +5,9 @@ static void log_memtests_header(void);
 static void log_exaustive_test20_header(void);
 static void log_memtests_footer(void);
 static void log_exaustive_test20_footer(void);
-static int size(void);
+static int arr_size(void);
+static int table_index(void);
+static t_build_cmdstr *test_string(void);
 
 int main(void) {
     t_args *args;
@@ -25,44 +27,40 @@ int main(void) {
 static void execute_memtests(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char buffer[100];
+    char buf[100];
     char cmd[10000];
 
-    dprintf(1,
-            WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN
-                  "	with valgrind on quiet mode (-q flag) \n\n\n" DEF_COLOR);
-    execute_memtest(table, size(), 01, buffer, cmd, build_memtest3_string);
-    execute_memtest(table, size(), 01, buffer, cmd, build_test3_string);
-    execute_memtest(table, size(), 07, buffer, cmd, build_memtest5_string);
-    execute_memtest(table, size(), 11, buffer, cmd, build_memtest10_string);
-    execute_memtest(table, size(), 15, buffer, cmd, build_memtest15_string);
-    execute_memtest(table, size(), 19, buffer, cmd, build_memtest20_string);
-    execute_memtest(table, size(), 23, buffer, cmd, build_memtest100_string);
-    execute_memtest(table, size(), 27, buffer, cmd, build_memtest500_string);
+    dprintf(STDOUT_FILENO, MEMORY_TEST_MESSAGE);
+    for (int i = 0; i < 8; i++)
+        exec_memtest(table, arr_size(), table_index(), buf, cmd, test_string());
 }
 
-static int size(void) {
+static int arr_size(void) {
+    const static int arr_sizes[9] = {-1, 3, 3, 5, 10, 15, 20, 100, 500};
     static short call_counter;
-    call_counter++;
-    switch (call_counter) {
-    case 1:
-        return 3;
-    case 2:
-        return 3;
-    case 3:
-        return 5;
-    case 4:
-        return 10;
-    case 5:
-        return 15;
-    case 6:
-        return 20;
-    case 7:
-        return 100;
-    case 8:
-        return 500;
-    }
-    return -1;
+    return arr_sizes[++call_counter];
+}
+
+static int table_index(void) {
+    const static int arr_sizes[9] = {-1, 1, 1, 7, 11, 15, 19, 23, 27};
+    static short call_counter;
+    return arr_sizes[++call_counter];
+}
+
+static t_build_cmdstr *test_string(void) {
+    static short call_counter;
+    const static t_build_cmdstr *arr_sizes[9] = {
+        NULL,
+        &build_memtest3_string,
+        &build_test3_string,
+        &build_memtest5_string,
+        &build_memtest10_string,
+        &build_memtest15_string,
+        &build_memtest20_string,
+        &build_memtest100_string,
+        &build_memtest500_string,
+    };
+    return arr_sizes[++call_counter];
 }
 
 static void log_memtests_header(void) {

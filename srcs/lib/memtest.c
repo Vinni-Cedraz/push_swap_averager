@@ -1,6 +1,6 @@
 #include "../include/averager.h"
 
-void execute_memtest(int **table, int size, int table_index, char buffer[],
+void exec_memtest(int **table, int size, int table_index, char buffer[],
                      char cmd[], t_build_cmdstr build_cmdstr) {
     FILE *output;
 

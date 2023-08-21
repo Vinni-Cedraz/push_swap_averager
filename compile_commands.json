@@ -1,1 +1,181 @@
-[]
+[
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/test100.c",
+   "-o",
+   "objs/test100.o"
+  ],
+  "file": "srcs/mandatory/test100.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/exaustive_test100.c",
+   "-o",
+   "objs/exaustive_test100.o"
+  ],
+  "file": "srcs/mandatory/exaustive_test100.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/test5.c",
+   "-o",
+   "objs/test5.o"
+  ],
+  "file": "srcs/mandatory/test5.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/identity_test.c",
+   "-o",
+   "objs/identity_test.o"
+  ],
+  "file": "srcs/mandatory/identity_test.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/memory_tests.c",
+   "-o",
+   "objs/memory_tests.o"
+  ],
+  "file": "srcs/mandatory/memory_tests.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/test500.c",
+   "-o",
+   "objs/test500.o"
+  ],
+  "file": "srcs/mandatory/test500.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-v",
+   "-g3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/error_management.c",
+   "-o",
+   "objs/error_management.o"
+  ],
+  "file": "srcs/mandatory/error_management.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/bonus/error_management_b.c",
+   "-o",
+   "bobjs/error_management_b.o"
+  ],
+  "file": "srcs/bonus/error_management_b.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/bonus/build_bonus_command.c",
+   "-o",
+   "bobjs/build_bonus_command.o"
+  ],
+  "file": "srcs/bonus/build_bonus_command.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/bonus/main.c",
+   "-o",
+   "bobjs/main.o"
+  ],
+  "file": "srcs/bonus/main.c"
+ },
+ {
+  "directory": "/home/myuser/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/bonus/execute_bonus.c",
+   "-o",
+   "bobjs/execute_bonus.o"
+  ],
+  "file": "srcs/bonus/execute_bonus.c"
+ }
+]
