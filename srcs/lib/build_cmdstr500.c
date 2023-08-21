@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 void build_memtest500_string(char command[], int i, int **table) {
     sprintf(

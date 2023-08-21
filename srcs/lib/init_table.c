@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 static void init(int *index, int **table, int rand, int arr_size);
 

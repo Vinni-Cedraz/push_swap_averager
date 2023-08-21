@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 int **init_table2(void) {
     int **table = calloc(sizeof(int *), 1000);

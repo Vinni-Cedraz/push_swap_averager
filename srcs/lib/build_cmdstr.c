@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 void build_test3_string(char memtest[], int i, int **table) {
     sprintf(memtest, "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap %d %d %d | wc -l) 2>&1", table[i][0],

@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 bool GLOBAL_20 = 0;
 

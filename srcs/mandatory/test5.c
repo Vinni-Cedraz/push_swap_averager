@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 static int **init_permutation_table(void) {
 	int count = 0;

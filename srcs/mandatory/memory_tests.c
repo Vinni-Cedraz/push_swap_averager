@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 static void execute_memtests(void *args_void);
 static void log_memtests_header(void);

@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 void exec_memtest(int **table, int size, int table_index, char buffer[],
                      char cmd[], t_build_cmdstr build_cmdstr) {
