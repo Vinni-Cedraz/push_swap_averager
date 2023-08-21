@@ -2,8 +2,8 @@
 #define AVERAGER_H
 
 // SYSTEM HEADERS
-#include <fcntl.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <pthread.h>
 #include <signal.h>
 #include <stdio.h>
@@ -94,7 +94,7 @@ void invalid_action(char *cmd);
 void whitespaced_action(char *cmd);
 void exaustive_test20(void *args_void);
 void exaustive_test100(void *args_void);
-void fprintf_ok_ko(char *out_str, FILE *fp, short *GLOBAL);
+void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
 int handle_err(int **table, int size, int i, char *buffer);
@@ -109,12 +109,12 @@ void build_memtest15_string(char memtest[], int i, int **table);
 void build_memtest20_string(char memtest[], int i, int **table);
 void build_memtest100_string(char memtest[], int i, int **table);
 void build_memtest500_string(char memtest[], int i, int **table);
-void execute_memtest(int **table, int size, int i, char buffer[], char cmd[],
-                     t_build_cmdstr build_cmdstr);
+void execute_memtest(int **table, int size, int table_index, char buffer[],
+                     char cmd[], t_build_cmdstr build_cmdstr);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
-void trim_linebreak(char* str);
+void trim_linebreak(char *str);
 
 #endif
