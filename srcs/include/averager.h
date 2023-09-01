@@ -62,7 +62,7 @@
 
 // USER DEFINED TYPES
 typedef unsigned int uint;
-typedef void(t_build_cmdstr)(char[], int, int **);
+typedef void(t_build_cmdstr)(char[], int, int, int **);
 
 typedef struct MT {
     uint state[MT_LEN];
@@ -79,7 +79,7 @@ typedef struct s_uargs {
 
 typedef struct s_sizes_and_action {
     int arr_size;
-    int table_index;
+    int tab_idx;
     t_build_cmdstr *action;
 } t_sizes_and_action;
 
@@ -132,14 +132,10 @@ int handle_err(int **table, int size, int i, char *buffer);
 void log_error(bool empty_expected, char *out_str, char *cmd);
 void log_cmd_and_output(int **table, int size, int i, char *buf);
 void log_cmd_and_output_3(int **table, int size, int i, char *buf);
-void build_test3_string(char memtest[], int i, int **table);
-void build_memtest3_string(char memtest[], int i, int **table);
-void build_memtest5_string(char memtest[], int i, int **table);
-void build_memtest10_string(char memtest[], int i, int **table);
-void build_memtest15_string(char memtest[], int i, int **table);
-void build_memtest20_string(char memtest[], int i, int **table);
-void build_memtest100_string(char memtest[], int i, int **table);
-void build_memtest500_string(char memtest[], int i, int **table);
+
+void build_test_string(char memtest[], int i, int num_args, int **table);
+void build_memtest_string(char memtest[], int i, int num_args, int **table);
+
 void exec_memtest(int **table, t_sizes_and_action sizes_and_action);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
