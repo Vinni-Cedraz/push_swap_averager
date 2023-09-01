@@ -18,12 +18,11 @@ int main(void) {
 static void execute_memtests(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char buf[100];
-    char cmd[10000];
 
     log_memtests_header();
-    for (int i = 0; i < 8; i++)
-        exec_memtest(table, buf, cmd, get_sizes_and_action());
+
+	for (int exec_eight_times = 0; exec_eight_times < 8; exec_eight_times++)
+    	exec_memtest(table, get_sizes_and_action());
     dprintf(1, MEMORY_TEST_FOOTER);
 }
 

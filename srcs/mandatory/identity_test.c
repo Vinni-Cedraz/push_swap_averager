@@ -1,14 +1,14 @@
 #include "averager.h"
 
-static void analyse_cmd_output(char line[500], FILE *fp, char cmd[500]);
-static void analyse_error_log_file(char line[500], char cmd[500]);
+static void analyse_cmd_output(char line[CMD_LEN], FILE *fp, char cmd[CMD_LEN]);
+static void analyse_error_log_file(char line[CMD_LEN], char cmd[CMD_LEN]);
 static void nine_sorted_elements(char *cmd, char *output);
 static void four_sorted_elements(char *cmd, char *output);
 static void single_sorted_element(char *cmd, char *output);
 
 int main(void) {
-    char cmd[500];
-    char output[500];
+    char cmd[CMD_LEN];
+    char output[CMD_LEN];
 
     single_sorted_element(cmd, output);
     four_sorted_elements(cmd, output);
@@ -16,7 +16,7 @@ int main(void) {
 }
 
 static void exec_cmd_and_analyse_output(char *cmd) {
-    char line[500];
+    char line[CMD_LEN];
     FILE *fp;
     open_process_and_exec_cmd_there(&fp, cmd, DONT_CLOSE_PROCESS_AFTER);
     analyse_cmd_output(line, fp, cmd);
@@ -24,7 +24,7 @@ static void exec_cmd_and_analyse_output(char *cmd) {
     return;
 }
 
-static void analyse_cmd_output(char line[500], FILE *fp, char cmd[500]) {
+static void analyse_cmd_output(char line[CMD_LEN], FILE *fp, char cmd[CMD_LEN]) {
     char *out_str = fgets(line, 100, fp);
     if (out_str) {
         if (NULL != strstr("egmentation", out_str))

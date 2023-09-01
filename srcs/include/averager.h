@@ -6,13 +6,15 @@
 #include <fcntl.h>
 #include <pthread.h>
 #include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-// include for  booleans
-#include <stdbool.h>
+
+// non-system headers
+#include "command_strings.h"
 
 // COLORS
 #define GREEN "\033[0;32m"
@@ -27,6 +29,8 @@
 #define HBLUE "\033[1;34m"
 #define HRED "\033[1;31m"
 #define RED "\033[0;91m"
+
+// lENGTHS
 #define MT_LEN 624
 #define MT_IA 397
 
@@ -136,8 +140,7 @@ void build_memtest15_string(char memtest[], int i, int **table);
 void build_memtest20_string(char memtest[], int i, int **table);
 void build_memtest100_string(char memtest[], int i, int **table);
 void build_memtest500_string(char memtest[], int i, int **table);
-void exec_memtest(int **table, char buffer[], char cmd[],
-                  t_sizes_and_action sizes_and_action);
+void exec_memtest(int **table, t_sizes_and_action sizes_and_action);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);

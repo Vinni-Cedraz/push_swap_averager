@@ -2,7 +2,7 @@
 
 bool GLOBAL_100 = 0;
 
-static void build_cmd_string(int i, int **table, char command[]) {
+static void build_cmd_string(int i, int **table, char command[MEDIUM_CMD_LEN]) {
     sprintf(
         command,
         "(./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -62,7 +62,7 @@ static void build_cmd_string(int i, int **table, char command[]) {
 static void *execute_exaustive_sort_t1(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -87,7 +87,7 @@ static void *execute_exaustive_sort_t1(void *args_void) {
 static void *execute_exaustive_sort_t2(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -112,7 +112,7 @@ static void *execute_exaustive_sort_t2(void *args_void) {
 static void *execute_exaustive_sort_t3(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -137,7 +137,7 @@ static void *execute_exaustive_sort_t3(void *args_void) {
 static void *execute_exaustive_sort_t4(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -162,7 +162,7 @@ static void *execute_exaustive_sort_t4(void *args_void) {
 static void *execute_exaustive_sort_t5(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -187,7 +187,7 @@ static void *execute_exaustive_sort_t5(void *args_void) {
 static void *execute_exaustive_sort_t6(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -212,7 +212,7 @@ static void *execute_exaustive_sort_t6(void *args_void) {
 static void *execute_exaustive_sort_t7(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -237,7 +237,7 @@ static void *execute_exaustive_sort_t7(void *args_void) {
 static void *execute_exaustive_sort_t8(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[1500];
+    char command[MEDIUM_CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;

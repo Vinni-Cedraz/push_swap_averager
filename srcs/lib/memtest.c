@@ -1,40 +1,42 @@
-#include "averager.h"
+#include "../include/averager.h"
 
-void exec_memtest(int **table, char buffer[], char cmd[],
-                  t_sizes_and_action sizes_and_action) {
+void exec_memtest(int **table, t_sizes_and_action args) {
     FILE *output;
-    int arr_size = sizes_and_action.arr_size;
-    int table_index = sizes_and_action.table_index;
-    t_build_cmdstr *build_cmdstr = sizes_and_action.action;
+    char buffer[BUF_LEN];
+    char cmd[HUGE_CMD_LEN];
 
-    if (table_index != 1) {
+    switch (args.table_index) {
+    case 1:
+        if (args.action == build_memtest3_string) {
+            while (table[args.table_index]) {
+                args.action(cmd, args.table_index, table);
+                output = popen(cmd, "r");
+                fgets(buffer, 100, output);
+                log_cmd_and_output(table, 3, args.table_index, buffer);
+                fprintf_ok_ko(buffer, output, NULL);
+                pclose(output);
+                args.table_index++;
+            }
+        } else if (args.action == build_test3_string) {
+            while (table[args.table_index]) {
+                args.action(cmd, args.table_index, table);
+                output = popen(cmd, "r");
+                fgets(buffer, 100, output);
+                log_cmd_and_output_3(table, 3, args.table_index, buffer);
+                pclose(output);
+                args.table_index++;
+            }
+        }
+        break;
+    default:
         for (short three = 0; three < 3; three++) {
-            build_cmdstr(cmd, table_index, table);
+            args.action(cmd, args.table_index, table);
             output = popen(cmd, "r");
             fgets(buffer, 100, output);
-            log_cmd_and_output(table, arr_size, table_index, buffer);
+            log_cmd_and_output(table, args.arr_size, args.table_index, buffer);
             fprintf_ok_ko(buffer, output, NULL);
             pclose(output);
-            table_index++;
-        }
-    } else if (build_cmdstr == build_memtest3_string) {
-        while (table[table_index]) {
-            build_cmdstr(cmd, table_index, table);
-            output = popen(cmd, "r");
-            fgets(buffer, 100, output);
-            log_cmd_and_output(table, 3, table_index, buffer);
-            fprintf_ok_ko(buffer, output, NULL);
-            pclose(output);
-            table_index++;
-        }
-    } else if (build_cmdstr == build_test3_string) {
-        while (table[table_index]) {
-            build_cmdstr(cmd, table_index, table);
-            output = popen(cmd, "r");
-            fgets(buffer, 100, output);
-            log_cmd_and_output_3(table, 3, table_index, buffer);
-            pclose(output);
-            table_index++;
+            args.table_index++;
         }
     }
 }

@@ -1,8 +1,8 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 bool GLOBAL_20 = 0;
 
-static void build_command_string(int i, int **table, char command[]) {
+static void build_command_string(int i, int **table, char command[CMD_LEN]) {
     sprintf(command,
             "(./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
             "%d %d %d %d %d %d |"
@@ -22,7 +22,7 @@ static void build_command_string(int i, int **table, char command[]) {
 static void *execute_exaustive_sort_t1(void *args_void) {
     t_args *args = (t_args *)args_void;
     int **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;

@@ -29,7 +29,7 @@ static uint **init_permutation_table(void) {
     return table;
 }
 
-static void build_command_string(int i, uint **table, char command[]) {
+static void build_command_string(int i, uint **table, char command[CMD_LEN]) {
     sprintf(
         command,
         "(./push_swap %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d "
@@ -62,7 +62,7 @@ static void build_command_string(int i, uint **table, char command[]) {
 static void *execute_push_swap_t1(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     int i = 0;
     FILE *output;
@@ -91,7 +91,7 @@ static void *execute_push_swap_t1(void *args_void) {
 static void *execute_push_swap_t2(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -121,7 +121,7 @@ static void *execute_push_swap_t2(void *args_void) {
 static void *execute_push_swap_t3(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -150,7 +150,7 @@ static void *execute_push_swap_t3(void *args_void) {
 static void *execute_push_swap_t4(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -179,7 +179,7 @@ static void *execute_push_swap_t4(void *args_void) {
 static void *execute_push_swap_t5(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     int i = 0;
     FILE *output;
@@ -208,7 +208,7 @@ static void *execute_push_swap_t5(void *args_void) {
 static void *execute_push_swap_t6(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
@@ -237,7 +237,7 @@ static void *execute_push_swap_t6(void *args_void) {
 static void *execute_push_swap_t7(void *args_void) {
     t_uargs *args = (t_uargs *)args_void;
     uint **table = args->table;
-    char command[500];
+    char command[CMD_LEN];
     char buffer[10];
     FILE *output;
     FILE *fp;
