@@ -13,9 +13,6 @@
 #include <time.h>
 #include <unistd.h>
 
-// non-system headers
-#include "command_strings.h"
-
 // COLORS
 #define GREEN "\033[0;32m"
 #define HGREEN "\033[1;32m"
@@ -33,6 +30,12 @@
 // lENGTHS
 #define MT_LEN 624
 #define MT_IA 397
+#define BUF_LEN 100
+#define CMD_LEN 500
+#define MEDIUM_CMD_LEN 1500
+#define BIG_CMD_LEN 3000
+#define HUGE_CMD_LEN 10000
+
 
 #define EMPTY_EXPECTED 1
 #define EMPTY_NOT_EXPECTED 0
