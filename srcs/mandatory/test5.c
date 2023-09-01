@@ -19,11 +19,6 @@ static int **init_permutation_table(void) {
 	return table;
 }
 
-static inline void build_command_string(char command[BUF_LEN], int i, int **table) {
-	sprintf(command, "(./push_swap %d %d %d %d %d | wc -l) 2>&1 ", table[i][0],
-			table[i][1], table[i][2], table[i][3], table[i][4]);
-}
-
 static void *execute_push_swap_t1(void *args_void) {
 	t_args *args = (t_args *)args_void;
 	int **table = args->table;
@@ -36,7 +31,7 @@ static void *execute_push_swap_t1(void *args_void) {
 	fp = fopen("tmp1", "a");
 	while (table[i][0] != -1) i++;
 	while (table[i][0] == -1) {
-		build_command_string(command, i, table);
+		build_averager_test_cmd_string(command, 5, i, table);
 		output = popen(command, "r");
 		char *out_str = fgets(buffer, 10, output);
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -64,7 +59,7 @@ static void *execute_push_swap_t2(void *args_void) {
 	fp = fopen("tmp2", "a");
 	while (table[i][0] != 0) i++;
 	while (table[i][0] == 0) {
-		build_command_string(command, i, table);
+		build_averager_test_cmd_string(command, 5, i, table);
 		output = popen(command, "r");
 		char *out_str = fgets(buffer, 10, output);
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -92,7 +87,7 @@ static void *execute_push_swap_t3(void *args_void) {
 	fp = fopen("tmp3", "a");
 	while (table[i][0] != 1) i++;
 	while (table[i][0] == 1) {
-		build_command_string(command, i, table);
+		build_averager_test_cmd_string(command, 5, i, table);
 		output = popen(command, "r");
 		char *out_str = fgets(buffer, 10, output);
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -120,7 +115,7 @@ static void *execute_push_swap_t4(void *args_void) {
 	fp = fopen("tmp4", "a");
 	while (table[i][0] != 2) i++;
 	while (table[i][0] == 2) {
-		build_command_string(command, i, table);
+		build_averager_test_cmd_string(command, 5, i, table);
 		output = popen(command, "r");
 		char *out_str = fgets(buffer, 10, output);
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -148,7 +143,7 @@ static void *execute_push_swap_t5(void *args_void) {
 	fp = fopen("tmp5", "a");
 	while (table[i][0] != 3) i++;
 	while (table[i] != NULL) {
-		build_command_string(command, i, table);
+		build_averager_test_cmd_string(command, 5, i, table);
 		output = popen(command, "r");
 		char *out_str = fgets(buffer, 10, output);
 		fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);

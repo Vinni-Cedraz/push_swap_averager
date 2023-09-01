@@ -7,7 +7,7 @@ void exec_memtest(int **table, t_sizes_and_action args) {
 
     switch (args.tab_idx) {
     case 1: // case tabls_index is 1 means the array has 3 numbers
-        if (args.action == build_memtest_string) {
+        if (args.action == build_memtest_cmdstring) {
             while (table[args.tab_idx]) {
                 args.action(cmd, args.arr_size, args.tab_idx, table);
                 output = popen(cmd, "r");
@@ -17,7 +17,7 @@ void exec_memtest(int **table, t_sizes_and_action args) {
                 pclose(output);
                 args.tab_idx++;
             }
-        } else if (args.action == build_test_string) {
+        } else if (args.action == build_three_elements_memtest_cmdstring) {
             while (table[args.tab_idx]) {
                 args.action(cmd, args.arr_size, args.tab_idx, table);
                 output = popen(cmd, "r");

@@ -135,15 +135,15 @@ int handle_err(int **table, int size, int i, char *buffer);
 void log_error(bool empty_expected, char *out_str, char *cmd);
 void log_cmd_and_output(int **table, int size, int i, char *buf);
 void log_cmd_and_output_3(int **table, int size, int i, char *buf);
-
-void build_test_string(char memtest[], int i, int num_args, int **table);
-void build_memtest_string(char memtest[], int i, int num_args, int **table);
-
+void build_three_elements_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
+void build_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
 void exec_memtest(int **table, t_sizes_and_action sizes_and_action);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
+void build_exaustive_checker_test_cmd_string(int i, int num_args, int **table, char command[MEDIUM_CMD_LEN]);
+void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
 void trim_linebreak(char *str);
 
 #endif

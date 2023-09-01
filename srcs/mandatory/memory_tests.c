@@ -29,14 +29,14 @@ static t_sizes_and_action get_sizes_and_action(void) {
     static short call_counter;
     const static t_sizes_and_action sizes_and_action[9] = {
         {.arr_size =  -1, .tab_idx = -1, .action = NULL},
-        {.arr_size =   3, .tab_idx =  1, .action = &build_test_string},
-        {.arr_size =   3, .tab_idx =  1, .action = &build_memtest_string},
-		{.arr_size =   5, .tab_idx =  7, .action = &build_memtest_string},
-        {.arr_size =  10, .tab_idx = 11, .action = &build_memtest_string},
-        {.arr_size =  15, .tab_idx = 15, .action = &build_memtest_string},
-        {.arr_size =  20, .tab_idx = 19, .action = &build_memtest_string},
-        {.arr_size = 100, .tab_idx = 23, .action = &build_memtest_string},
-        {.arr_size = 500, .tab_idx = 27, .action = &build_memtest_string},
+        {.arr_size =   3, .tab_idx =  1, .action = &build_three_elements_memtest_cmdstring},
+        {.arr_size =   3, .tab_idx =  1, .action = &build_memtest_cmdstring},
+		{.arr_size =   5, .tab_idx =  7, .action = &build_memtest_cmdstring},
+        {.arr_size =  10, .tab_idx = 11, .action = &build_memtest_cmdstring},
+        {.arr_size =  15, .tab_idx = 15, .action = &build_memtest_cmdstring},
+        {.arr_size =  20, .tab_idx = 19, .action = &build_memtest_cmdstring},
+        {.arr_size = 100, .tab_idx = 23, .action = &build_memtest_cmdstring},
+        {.arr_size = 500, .tab_idx = 27, .action = &build_memtest_cmdstring},
     };
 	return (sizes_and_action[++call_counter]);
 }
