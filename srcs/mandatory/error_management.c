@@ -58,7 +58,7 @@ static void no_args(char *cmd) {
 static void empty_string(char *cmd) {
     sprintf(cmd,
             "valgrind --leak-check=full --show-leak-kinds=all "
-            " -q ./push_swap %s 2>&1",
+            " -q ./push_swap \"%s\" 2>&1",
             "");
     get_test_output(cmd, 1);
     system("rm -f error.log");
