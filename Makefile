@@ -10,7 +10,7 @@ DEF_COLOR =	\033[0m
 CYAN = \033[0;36m
 
 # Define flags
-CFLAGS = -w -pthread -O3
+CFLAGS = -w -pthread -g3
 INCLUDES = -Isrcs/include/
 BLIB = blib.a
 
@@ -134,6 +134,14 @@ test100: pre_all
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test100.log && rm tmp*
 	@./analyse_log.sh test100.log
 	@mv test100.log ./log_files
+
+test5: pre_all
+	@mkdir -p log_files
+	@printf "$(CYAN)running test5 with valgrind on quiet mode $(DEF_COLOR)\n\n";
+	./test5
+	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
+	@./analyse_log.sh test5.log
+	@mv test5.log ./log_files
 
 clean:
 	@rm -rf objs

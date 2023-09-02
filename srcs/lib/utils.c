@@ -43,9 +43,12 @@ uint *seq_except(int exclude) {
 
 int is_repeated100(uint **table, uint *tmp_arr, int count) {
     int i = -1;
-    while (++i <= count)
+    while (++i <= count) {
+        if (!table[i])
+            continue;
         if (!memcmp(table[i], tmp_arr, 70 * sizeof(uint)))
             return 1;
+	}
     return 0;
 }
 

@@ -73,10 +73,16 @@ typedef struct MT {
 
 typedef struct s_args {
     int **table;
+    char *tmp_file;
+	int	thread_idx;
+	int	size;
 } t_args;
 
 typedef struct s_uargs {
     uint **table;
+    char *tmp_file;
+	int	thread_idx;
+	int	size;
 } t_uargs;
 
 typedef struct s_sizes_and_action {
@@ -130,8 +136,10 @@ void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
-void build_exaustive_checker_test_cmd_string(char command[], int num_args, int idx, int **table);
-void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
+void build_exaustive_checker_test_cmd_string(char command[], int num_args,
+                                             int idx, int **table);
+void build_averager_test_cmd_string(char command[], int num_args, int idx,
+                                    int **table);
 void trim_linebreak(char *str);
 
 void non_numeric1(char *cmd);
@@ -142,4 +150,5 @@ void non_numeric5(char *cmd);
 void non_numeric6(char *cmd);
 void non_numeric7(char *cmd);
 
+void *execute_push_swap_thread(void *args_void);
 #endif
