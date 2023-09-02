@@ -12,7 +12,7 @@ static void *execute_exaustive_sort_t1(void *args_void) {
 
     fp = fopen("tmp1", "a");
     for (int i = 299; i < 319; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -38,7 +38,7 @@ static void *execute_exaustive_sort_t2(void *args_void) {
 
     fp = fopen("tmp2", "a");
     for (int i = 319; i < 339; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -64,7 +64,7 @@ static void *execute_exaustive_sort_t3(void *args_void) {
 
     fp = fopen("tmp3", "a");
     for (int i = 339; i < 359; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -90,7 +90,7 @@ static void *execute_exaustive_sort_t4(void *args_void) {
 
     fp = fopen("tmp4", "a");
     for (int i = 359; i < 379; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -116,7 +116,7 @@ static void *execute_exaustive_sort_t5(void *args_void) {
 
     fp = fopen("tmp5", "a");
     for (int i = 379; i < 399; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -142,7 +142,7 @@ static void *execute_exaustive_sort_t6(void *args_void) {
 
     fp = fopen("tmp6", "a");
     for (int i = 399; i < 419; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -168,7 +168,7 @@ static void *execute_exaustive_sort_t7(void *args_void) {
 
     fp = fopen("tmp7", "a");
     for (int i = 419; i < 439; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);
@@ -194,7 +194,7 @@ static void *execute_exaustive_sort_t8(void *args_void) {
 
     fp = fopen("tmp8", "a");
     for (int i = 439; i < 459; i++) {
-        build_exaustive_checker_test_cmd_string(i, 100, table, command);
+        build_exaustive_checker_test_cmd_string(command, 100, i, table);
         output = popen(command, "r");
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", i);

@@ -130,10 +130,8 @@ void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
-void build_exaustive_checker_test_cmd_string(int i, int num_args, int **table,
-                                             char command[MEDIUM_CMD_LEN]);
-void build_averager_test_cmd_string(char command[], int num_args, int idx,
-                                    int **table);
+void build_exaustive_checker_test_cmd_string(char command[], int num_args, int idx, int **table);
+void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
 void trim_linebreak(char *str);
 
 void non_numeric1(char *cmd);

@@ -42,25 +42,25 @@ int main(void) {
     char cmd[500];
     char output[500];
 
-    printf(CYAN "no_args        ------     " DEF_COLOR);
+    printf(CYAN "no_args        ------  " DEF_COLOR);
     no_args(cmd);
-    printf(CYAN "non_numeric  1 ------     " DEF_COLOR);
+    printf(CYAN "non_numeric  1 ------  " DEF_COLOR);
     non_numeric1(cmd);
-    printf(CYAN "non_numeric  2 ------     " DEF_COLOR);
+    printf(CYAN "non_numeric  2 ------  " DEF_COLOR);
     non_numeric2(cmd);
-    printf(CYAN "non_numeric  3 ------     " DEF_COLOR);
+    printf(CYAN "non_numeric  3 ------  " DEF_COLOR);
     non_numeric3(cmd);
-    printf(CYAN "non_numeric  4 ------     " DEF_COLOR);
+    printf(CYAN "non_numeric  4 ------  " DEF_COLOR);
     non_numeric4(cmd);
-    printf(CYAN "non_numeric  5 ------     " DEF_COLOR);
+    printf(CYAN "non_numeric  5 ------  " DEF_COLOR);
     non_numeric5(cmd);
-    printf(CYAN "non_numeric  6 ------     " DEF_COLOR);
+    printf(CYAN "non_numeric  6 ------  " DEF_COLOR);
     non_numeric6(cmd);
-    printf(CYAN "non_numeric  empty_string " DEF_COLOR);
+    printf(CYAN "empty_string   ------  " DEF_COLOR);
     non_numeric_empty_string(cmd);
-    printf(CYAN "max_int_overf  -------    " DEF_COLOR);
+    printf(CYAN "max_int_overf  ------  " DEF_COLOR);
     max_int_overf(cmd);
-    printf(CYAN "duplicate_sorted -----    " DEF_COLOR);
+    printf(CYAN "duplicate_sorted ----  " DEF_COLOR);
     duplicate_sorted(cmd);
 }
 
