@@ -150,19 +150,14 @@ void bonus_log_error(bool empty_expected, char *out_str) {
     trim_linebreak(out_str);
     if (empty_expected) {
         printf("Your checker: ");
-        printf(HRED "KO\n" DEF_COLOR);
-        printf(RED "	Expected nothing either on stderr nor on stdout (fd "
-                   "1 or 2)\n" DEF_COLOR);
-        printf(BLUE "				Got" DEF_COLOR " \"" DEF_COLOR " \%s\"" BLUE
-                    " instead\n" DEF_COLOR,
-               out_str);
+        printf(HRED "KO " DEF_COLOR);
+        printf("-> Expected nothing either on stderr nor on stdout (fd 1 or 2) " DEF_COLOR);
+        printf("But found \"%s\" instead\n", out_str);
     } else if (!empty_expected) {
-        printf(HRED "KO\n" DEF_COLOR);
-        printf(RED "	Expected the string \"Error\\n\" on the stderr (fd "
-                   "2)\n");
-        printf(BLUE "				Got" DEF_COLOR " \"" DEF_COLOR " \%s\"" BLUE
-                    " instead\n" DEF_COLOR,
-               out_str);
+        printf("Your checker: ");
+        printf(HRED "KO " DEF_COLOR);
+        printf("-> Expected the string \"Error\\n\" on the stderr (fd 2) ");
+        printf("But found \"%s\" instead\n" DEF_COLOR, out_str);
     }
 }
 
@@ -188,20 +183,14 @@ void log_error(bool empty_expected, char *out_str, char *cmd) {
     trim_linebreak(out_str);
     if (empty_expected) {
         printf(cmd);
-        printf(HRED " KO" DEF_COLOR);
-        printf(RED "	Expected nothing either on stderr nor on stdout (fd "
-                   "1 or 2)" DEF_COLOR);
-        printf(BLUE "	Got" DEF_COLOR " \"" DEF_COLOR " \%s\"" BLUE
-                    " instead\n" DEF_COLOR,
-               out_str);
+        printf(HRED "KO " DEF_COLOR);
+        printf("-> Expected nothing either on stderr nor on stdout (fd 1 or 2) " DEF_COLOR);
+        printf("But found \"%s\" instead\n" DEF_COLOR, out_str);
     } else if (!empty_expected) {
         printf(cmd);
-        printf(HRED " KO" DEF_COLOR);
-        printf(RED "	Expected the string \"Error\\n\" on the stderr (fd "
-                   "2)");
-        printf(BLUE "	Got" DEF_COLOR " \"" DEF_COLOR " \%s\"" BLUE
-                    " instead\n" DEF_COLOR,
-               out_str);
+        printf(HRED "KO " DEF_COLOR);
+        printf("-> Expected the string \"Error\\n\" on the stderr (fd " "2) ");
+        printf("But found "DEF_COLOR"\"%s\" instead\n" DEF_COLOR, out_str);
     }
 }
 

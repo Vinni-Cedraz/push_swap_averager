@@ -51,8 +51,8 @@ void no_args(char *cmd) {
 }
 
 void empty_string(char *cmd) {
-    sprintf(cmd, "(valgrind -q ./checker %s) 2>&1", "");
-    get_test_output(cmd, 1);
+    sprintf(cmd, "(valgrind -q ./checker \"%s\") 2>error.log", "");
+    get_test_output(cmd, 0);
 	system("rm -f error.log");
 }
 
