@@ -3,12 +3,13 @@
 static uint **init_permutation_table(void) {
     int count = 0;
     uint *tmp_arr = malloc(sizeof(uint *) * 500);
-    uint **table = calloc(sizeof(uint *), 241);
-    for (int i = 0; i < 500; i++) tmp_arr[i] = i;
+    uint **table = calloc(sizeof(uint *), 481);
+    for (int i = 0; i < 500; i++)
+        tmp_arr[i] = i;
     srand(time(NULL) ^ (getpid() << 16));
     shuffle_array(tmp_arr, 500, rand());
 
-    while (count < 240) {
+    while (count < 480) {
         if (count % 30 == 0)
             table[count] = NULL;
         else if (!is_repeated500(table, tmp_arr, count)) {
@@ -39,9 +40,10 @@ static void *execute_push_swap_t1(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -63,9 +65,11 @@ static void *execute_push_swap_t2(void *args_void) {
 
     fp = fopen("tmp2", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 1) break;
+        if (null_count == 1)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -73,9 +77,10 @@ static void *execute_push_swap_t2(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -97,9 +102,11 @@ static void *execute_push_swap_t3(void *args_void) {
 
     fp = fopen("tmp3", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 3) break;
+        if (null_count == 3)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -107,9 +114,10 @@ static void *execute_push_swap_t3(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -131,9 +139,11 @@ static void *execute_push_swap_t4(void *args_void) {
 
     fp = fopen("tmp4", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 4) break;
+        if (null_count == 4)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -141,9 +151,10 @@ static void *execute_push_swap_t4(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -165,9 +176,11 @@ static void *execute_push_swap_t5(void *args_void) {
 
     fp = fopen("tmp5", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 5) break;
+        if (null_count == 5)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -175,9 +188,10 @@ static void *execute_push_swap_t5(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -199,9 +213,11 @@ static void *execute_push_swap_t6(void *args_void) {
 
     fp = fopen("tmp6", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 6) break;
+        if (null_count == 6)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -209,9 +225,10 @@ static void *execute_push_swap_t6(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -233,9 +250,11 @@ static void *execute_push_swap_t7(void *args_void) {
 
     fp = fopen("tmp7", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 7) break;
+        if (null_count == 7)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -243,9 +262,10 @@ static void *execute_push_swap_t7(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -267,9 +287,11 @@ static void *execute_push_swap_t8(void *args_void) {
 
     fp = fopen("tmp8", "a");
     while (1) {
-        if (table[i] == NULL) null_count++;
+        if (table[i] == NULL)
+            null_count++;
         i++;
-        if (null_count == 8) break;
+        if (null_count == 8)
+            break;
     }
     while (table[i]) {
         build_averager_test_cmd_string(command, 500, i, table);
@@ -277,9 +299,10 @@ static void *execute_push_swap_t8(void *args_void) {
         char *out_str = fgets(buffer, 10, output);
         fprintf(fp, HBLUE "arr[%d]:" DEF_COLOR, i);
         fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < 500; j++) fprintf(fp, "%d ", table[i][j]);
+        for (int j = 0; j < 500; j++)
+            fprintf(fp, "%d ", table[i][j]);
         fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-		handle_err(table, 500, i, out_str);
+        handle_err(table, 500, i, out_str);
         pclose(output);
         i++;
     }
@@ -303,7 +326,8 @@ int main(void) {
     pthread_create(&pthread[6], NULL, execute_push_swap_t7, (void *)args);
     pthread_create(&pthread[7], NULL, execute_push_swap_t8, (void *)args);
     int count = -1;
-    while (++count < 8) pthread_join(pthread[count], NULL);
-    ft_free_arr_size((void **)args->table, 241);
+    while (++count < 8)
+        pthread_join(pthread[count], NULL);
+    ft_free_arr_size((void **)args->table, 481);
     free(args);
 }
