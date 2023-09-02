@@ -36,7 +36,6 @@
 #define BIG_CMD_LEN 3000
 #define HUGE_CMD_LEN 10000
 
-
 #define EMPTY_EXPECTED 1
 #define EMPTY_NOT_EXPECTED 0
 #define CLOSE_PROCESS_AFTER 1
@@ -102,20 +101,8 @@ void execute_bonus20(void *args_void);
 void execute_bonus100(void *args_void);
 void execute_bonus500(void *args_void);
 void execute_bonus1000(void *args_void);
-void build_bonus5_string(char memtest[], int i, int **table);
-void build_reference5_string(char command[5000], int i, int **table);
-void build_bonus10_string(char memtest[], int i, int **table);
-void build_reference10_string(char memtest[], int i, int **table);
-void build_bonus15_string(char memtest[], int i, int **table);
-void build_reference15_string(char memtest[], int i, int **table);
-void build_bonus20_string(char memtest[], int i, int **table);
-void build_reference20_string(char memtest[], int i, int **table);
-void build_bonus100_string(int i, int **table, char command[]);
-void build_reference100_string(int i, int **table, char command[]);
-void build_bonus500_string(int i, int **table, char command[]);
-void build_reference500_string(int i, int **table, char command[]);
-void build_bonus1000_string(int i, int **table, char *command);
-void build_reference1000_string(int i, int **table, char *command);
+void build_bonus_string(char memtest[], int n, int i, int **table);
+void build_bonus_reference_string(char command[], int n, int i, int **table);
 int **init_table(void);
 int **init_table2(void);
 void max_int_overf(char *cmd);
@@ -135,15 +122,26 @@ int handle_err(int **table, int size, int i, char *buffer);
 void log_error(bool empty_expected, char *out_str, char *cmd);
 void log_cmd_and_output(int **table, int size, int i, char *buf);
 void log_cmd_and_output_3(int **table, int size, int i, char *buf);
-void build_three_elements_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
+void build_three_elements_memtest_cmdstring(char memtest[], int i, int num_args,
+                                            int **table);
 void build_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
 void exec_memtest(int **table, t_sizes_and_action sizes_and_action);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
                     int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
-void build_exaustive_checker_test_cmd_string(int i, int num_args, int **table, char command[MEDIUM_CMD_LEN]);
-void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
+void build_exaustive_checker_test_cmd_string(int i, int num_args, int **table,
+                                             char command[MEDIUM_CMD_LEN]);
+void build_averager_test_cmd_string(char command[], int num_args, int idx,
+                                    int **table);
 void trim_linebreak(char *str);
+
+void non_numeric1(char *cmd);
+void non_numeric2(char *cmd);
+void non_numeric3(char *cmd);
+void non_numeric4(char *cmd);
+void non_numeric5(char *cmd);
+void non_numeric6(char *cmd);
+void non_numeric7(char *cmd);
 
 #endif
