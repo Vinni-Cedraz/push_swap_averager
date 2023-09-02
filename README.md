@@ -104,10 +104,6 @@ for example:
 
 - You can run parts of the test separately:
 
-`make -C push_swap_averager basic`
-
-`make -C push_swap_averager test5`
-
 `make -C push_swap_averager test100`
 
 `make -C push_swap_averager test500`

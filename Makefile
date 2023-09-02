@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: vcedraz- <vcedraz-@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/05 15:37:30 by vcedraz-          #+#    #+#              #
-#    Updated: 2023/05/08 14:22:55 by vcedraz-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 SHELL = /bin/bash
 
 #Colors
@@ -39,7 +27,11 @@ BSRCS = $(wildcard $(BSRCSDIR)*.c)
 OBJS = $(patsubst $(SRCSDIR)%.c, $(OBJSDIR)%.o, $(SRCS))
 BOBJS = $(patsubst $(BSRCSDIR)%.c, $(BOBJSDIR)%.o, $(BSRCS))
 
-all: lib $(OBJS)
+all: pre_all
+	@make --no-print-directory pre_all
+	@make --no-print-directory run
+
+pre_all: lib $(OBJS)
 	@rm -f error.log
 	@make --no-print-directory execs
 	@if [[ -f ../Makefile ]]; then \
@@ -51,7 +43,6 @@ all: lib $(OBJS)
 	fi
 	@make --no-print-directory -C ..
 	@cp -f ../push_swap .
-	@make --no-print-directory run
 
 lib:
 	@make --no-print-directory -C srcs/lib
@@ -71,7 +62,7 @@ $(OBJSDIR)%.o: $(SRCSDIR)%.c
 	mkdir -p $(OBJSDIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-bonus: lib $(BOBJS)
+bonus: $(BOBJS) lib 
 	@make --no-print-directory -C ..
 	@make --no-print-directory -C .. bonus
 	@cp -f ../push_swap .
@@ -112,6 +103,37 @@ run:
 	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test500.log && rm tmp*
 	@./analyse_log.sh test500.log
 	@mv test500.log ./log_files
+
+averager: pre_all
+	@mkdir -p log_files
+	./test5
+	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
+	@./analyse_log.sh test5.log
+	@mv test5.log ./log_files
+	./test100
+	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test100.log && rm tmp*
+	@./analyse_log.sh test100.log
+	@mv test100.log ./log_files
+	./test500
+	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test500.log && rm tmp*
+	@./analyse_log.sh test500.log
+	@mv test500.log ./log_files
+
+test500: pre_all
+	@mkdir -p log_files
+	@printf "$(CYAN)running test500 with valgrind on quiet mode $(DEF_COLOR)\n\n";
+	./test500
+	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test500.log && rm tmp*
+	@./analyse_log.sh test500.log
+	@mv test500.log ./log_files
+
+test100: pre_all
+	@mkdir -p log_files
+	@printf "$(CYAN)running test100 with valgrind on quiet mode $(DEF_COLOR)\n\n";
+	./test100
+	@cat tmp8 >> tmp7 && cat tmp7 >> tmp6 && cat tmp6 >> tmp5 && cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test100.log && rm tmp*
+	@./analyse_log.sh test100.log
+	@mv test100.log ./log_files
 
 clean:
 	@rm -rf objs
