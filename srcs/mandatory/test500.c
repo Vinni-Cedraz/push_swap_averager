@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static uint **init_permutation_table(void) {
     int count = 0;
@@ -34,6 +34,8 @@ static void init_this_task(t_uargs *this_task, int **table, int task_size) {
     this_task->size = task_size;
     this_task->tmp_file = tmp_files[call_counter];
     this_task->thread_idx = thread_idxs[call_counter];
+	this_task->build_cmd_string = build_averager_test_cmd_string;
+	this_task->fprintf_result_to_file = fprintf_nb_of_op;
 }
 
 int main(void) {

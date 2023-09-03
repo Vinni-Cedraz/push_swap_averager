@@ -1,24 +1,22 @@
 #include "../include/averager.h"
 
-static void init(int *index, int **table, int rand, int arr_size);
+static void init_memtest_table(int *index, int **table, int rand, int arr_size);
 
-int **init_table_memtests_exaustive20(void) {
+int **init_table_memtests_sizes(void) {
     int **table = calloc(sizeof(int *), 1000);
     srand(time(NULL) ^ (getpid() << 16));
     int index = 1;
-    init(&index, table, rand(), 3);
-    init(&index, table, rand(), 5);
-    init(&index, table, rand(), 10);
-    init(&index, table, rand(), 15);
-    init(&index, table, rand(), 20);
-    init(&index, table, rand(), 100);
-    init(&index, table, rand(), 500);
-
-    init_exaustive(&index, table, rand(), 99, 259, 20);
+    init_memtest_table(&index, table, rand(), 3);
+    init_memtest_table(&index, table, rand(), 5);
+    init_memtest_table(&index, table, rand(), 10);
+    init_memtest_table(&index, table, rand(), 15);
+    init_memtest_table(&index, table, rand(), 20);
+    init_memtest_table(&index, table, rand(), 100);
+    init_memtest_table(&index, table, rand(), 500);
     return (table);
 }
 
-static void init(int *index, int **table, int rand, int arr_size) {
+static void init_memtest_table(int *index, int **table, int rand, int arr_size) {
     int *arr = malloc(sizeof(int) * arr_size);
     for (int i = 1; i < arr_size + 1; i++)
         arr[i - 1] = i;

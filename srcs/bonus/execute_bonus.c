@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static void print_message(char *reference, char *buffer) {
     if (!strncmp(reference, "OK", 2))

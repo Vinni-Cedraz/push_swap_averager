@@ -27,7 +27,7 @@
 #define HRED "\033[1;31m"
 #define RED "\033[0;91m"
 
-// lENGTHS
+// LENGTHS
 #define MT_LEN 624
 #define MT_IA 397
 #define BUF_LEN 100
@@ -57,14 +57,10 @@
     HCYAN "Now, we will check sorting correctness with several different "     \
           "permutations...\n" DEF_COLOR
 
-#define EXAUSTIVE_TEST20_FOOTER                                                \
-    GREEN "Sorting checks are done ->	" CYAN                                 \
-          "No (FAILED) messages in the next line will mean its "               \
-          "OK\n\n" DEF_COLOR
-
 // USER DEFINED TYPES
 typedef unsigned int uint;
 typedef void(t_build_cmdstr)(char[], int, int, int **);
+typedef void(t_fprintf_result_to_file)(char[], FILE *, bool *);
 
 typedef struct MT {
     uint state[MT_LEN];
@@ -74,15 +70,21 @@ typedef struct MT {
 typedef struct s_args {
     int **table;
     char *tmp_file;
-	int	thread_idx;
-	int	size;
+    int thread_idx;
+    t_build_cmdstr *build_cmdstr;
+    t_fprintf_result_to_file *fprintf_result_to_file;
+    bool error;
+    int size;
 } t_args;
 
 typedef struct s_uargs {
     uint **table;
     char *tmp_file;
-	int	thread_idx;
-	int	size;
+    int thread_idx;
+    t_build_cmdstr *build_cmd_string;
+    t_fprintf_result_to_file *fprintf_result_to_file;
+    bool error;
+    int size;
 } t_uargs;
 
 typedef struct s_sizes_and_action {
@@ -92,6 +94,7 @@ typedef struct s_sizes_and_action {
 } t_sizes_and_action;
 
 // FUNCTION PROTOTYPES
+void fprintf_nb_of_op(char *out_str, FILE *fp, bool *error);
 int is_repeated100(uint **table, uint *tmp_arr, int count);
 int is_repeated500(uint **table, uint *tmp_arr, int count);
 int *next_permutation(int *arr, int last_index);
@@ -106,21 +109,16 @@ void execute_bonus15(void *args_void);
 void execute_bonus20(void *args_void);
 void execute_bonus100(void *args_void);
 void execute_bonus500(void *args_void);
-void execute_bonus1000(void *args_void);
 void build_bonus_string(char memtest[], int n, int i, int **table);
 void build_bonus_reference_string(char command[], int n, int i, int **table);
-int **init_table_memtests_exaustive20(void);
-int **init_table_exaustive100(void);
+int **init_table_memtests_sizes(void);
 void max_int_overf(char *cmd);
-void non_numeric(char *cmd);
 void duplicate_sorted(char *cmd);
 void duplicate_arg(char *cmd);
 void no_args(char *cmd);
 void empty_string(char *cmd);
 void invalid_action(char *cmd);
 void whitespaced_action(char *cmd);
-void exaustive_test20(void *args_void);
-void exaustive_test100(void *args_void);
 void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
@@ -128,20 +126,15 @@ int handle_err(int **table, int size, int i, char *buffer);
 void log_error(bool empty_expected, char *out_str, char *cmd);
 void log_cmd_and_output(int **table, int size, int i, char *buf);
 void log_cmd_and_output_3(int **table, int size, int i, char *buf);
-void build_three_elements_memtest_cmdstring(char memtest[], int i, int num_args,
-                                            int **table);
+void build_three_elements_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
 void build_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
 void exec_memtest(int **table, t_sizes_and_action sizes_and_action);
-void init_exaustive(int *count, int **table, int rand, int i_start, int i_end,
-                    int arr_size);
+void init_exaustive(int *count, int **table, int rand, int i_start, int i_end, int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
-void build_exaustive_checker_test_cmd_string(char command[], int num_args,
-                                             int idx, int **table);
-void build_averager_test_cmd_string(char command[], int num_args, int idx,
-                                    int **table);
+void build_exaustive_checker_test_cmd_string(char command[], int num_args, int idx, int **table);
+void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
 void trim_linebreak(char *str);
-
 void non_numeric1(char *cmd);
 void non_numeric2(char *cmd);
 void non_numeric3(char *cmd);
@@ -149,6 +142,9 @@ void non_numeric4(char *cmd);
 void non_numeric5(char *cmd);
 void non_numeric6(char *cmd);
 void non_numeric7(char *cmd);
-
+int **init_table_exaustive_tests(void);
 void *execute_push_swap_thread(void *args_void);
+void print_array_to_file(FILE *fp, int idx, int arr_size, uint **table);
+char *execute_cmd(char cmd[], char buffer[], FILE *output);
+
 #endif

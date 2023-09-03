@@ -1,28 +1,20 @@
 
-#include "averager.h"
+#include "../include/averager.h"
 
 void *execute_push_swap_thread(void *arg) {
-    char command[BIG_CMD_LEN];
+    t_uargs *this_task = (t_uargs *)arg;
+    char cmd[BIG_CMD_LEN];
     char buffer[10];
     FILE *output;
-    FILE *fp;
 
-    t_uargs *this_task = (t_uargs *)arg;
-	int arr_size = this_task->size;
-    uint **table = this_task->table;
     int idx = this_task->thread_idx;
-    fp = fopen(this_task->tmp_file, "a");
-    while (table[idx]) {
-        build_averager_test_cmd_string(command, arr_size, idx, table);
-        output = popen(command, "r");
-        char *out_str = fgets(buffer, 10, output);
-        fprintf(fp, BLUE "arr[%d]:" DEF_COLOR, idx);
-        fprintf(fp, " ./push_swap ");
-        for (int j = 0; j < arr_size; j++)
-            fprintf(fp, "%d ", table[idx][j]);
-        fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
-        handle_err(table, arr_size, idx, out_str);
-        pclose(output);
+    FILE *fp = fopen(this_task->tmp_file, "a");
+    while (this_task->table[idx]) {
+        this_task->build_cmd_string(cmd, this_task->size, idx, this_task->table);
+        char *out_str = execute_cmd(cmd, buffer, output);
+        print_array_to_file(fp, idx, this_task->size, this_task->table);
+        this_task->fprintf_result_to_file(out_str, fp, &this_task->error);
+        handle_err(this_task->table, this_task->size, idx, out_str);
         idx++;
     }
 

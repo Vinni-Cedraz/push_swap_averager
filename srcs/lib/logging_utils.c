@@ -1,67 +1,4 @@
-#include "averager.h"
-
-static int is_reverse_sorted(int *arr, int last_index) {
-    for (int i = 0; i < last_index; i++)
-        if (arr[i] < arr[i + 1])
-            return 0;
-    return 1;
-}
-
-int *next_permutation(int *arr, int last_index) {
-    if (is_reverse_sorted(arr, last_index))
-        return NULL;
-    int i = last_index;
-    while (arr[i - 1] >= arr[i])
-        i--;
-    int j = last_index;
-    while (arr[j] <= arr[i - 1])
-        j--;
-
-    int temp = arr[i - 1];
-    arr[i - 1] = arr[j];
-    arr[j] = temp;
-
-    j = last_index;
-    while (i < j) {
-        temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-        i++, j--;
-    }
-    return arr;
-}
-
-uint *seq_except(int exclude) {
-    int j = 0;
-    int i = 0;
-    uint *arr = malloc(99 * sizeof(uint));
-    for (; ++i != 101;)
-        if (i != exclude)
-            arr[j++] = i;
-    return arr;
-}
-
-int is_repeated100(uint **table, uint *tmp_arr, int count) {
-    int i = -1;
-    while (++i <= count) {
-        if (!table[i])
-            continue;
-        if (!memcmp(table[i], tmp_arr, 70 * sizeof(uint)))
-            return 1;
-	}
-    return 0;
-}
-
-int is_repeated500(uint **table, uint *tmp_arr, int count) {
-    int i = -1;
-    while (++i <= count) {
-        if (!table[i])
-            continue;
-        if (!memcmp(table[i], tmp_arr, 250 * sizeof(uint)))
-            return 1;
-    }
-    return 0;
-}
+#include "../include/averager.h"
 
 void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL) {
     if (!strncmp("OK", out_str, 2) && GLOBAL) {
@@ -74,6 +11,11 @@ void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL) {
     } else if (strncmp("OK", out_str, 2) && !GLOBAL) {
         dprintf(1, HRED " %s" DEF_COLOR, out_str);
     }
+}
+
+void fprintf_nb_of_op(char *out_str, FILE *fp, bool *error) {
+	(void)error;
+    fprintf(fp, CYAN "number of operations: %s" DEF_COLOR, out_str);
 }
 
 void create_unified_log_file20(void) {
@@ -154,7 +96,8 @@ void bonus_log_error(bool empty_expected, char *out_str) {
     if (empty_expected) {
         printf("Your checker: ");
         printf(HRED "KO " DEF_COLOR);
-        printf("-> Expected nothing either on stderr nor on stdout (fd 1 or 2) " DEF_COLOR);
+        printf("-> Expected nothing either on stderr nor on stdout (fd 1 or "
+               "2) " DEF_COLOR);
         printf("But found \"%s\" instead\n", out_str);
     } else if (!empty_expected) {
         printf("Your checker: ");
@@ -187,14 +130,27 @@ void log_error(bool empty_expected, char *out_str, char *cmd) {
     if (empty_expected) {
         printf(cmd);
         printf(HRED "KO " DEF_COLOR);
-        printf("-> Expected nothing either on stderr nor on stdout (fd 1 or 2) " DEF_COLOR);
+        printf("-> Expected nothing either on stderr nor on stdout (fd 1 or "
+               "2) " DEF_COLOR);
         printf("But found \"%s\" instead\n" DEF_COLOR, out_str);
     } else if (!empty_expected) {
         printf(cmd);
         printf(HRED "KO " DEF_COLOR);
-        printf("-> Expected the string \"Error\\n\" on the stderr (fd " "2) ");
-        printf("But found "DEF_COLOR"\"%s\" instead\n" DEF_COLOR, out_str);
+        printf("-> Expected the string \"Error\\n\" on the stderr (fd "
+               "2) ");
+        printf("But found " DEF_COLOR "\"%s\" instead\n" DEF_COLOR, out_str);
     }
 }
 
+void print_array_to_file(FILE *fp, int idx, int arr_size, uint **table) {
+    fprintf(fp, HBLUE "arr[%d]: " DEF_COLOR " ./push_swap ", idx);
+    for (int j = 0; j < arr_size; j++)
+        fprintf(fp, "%d ", table[idx][j]);
+}
 
+char *execute_cmd(char cmd[], char buffer[], FILE *output) {
+    output = popen(cmd, "r");
+    char *out_str = fgets(buffer, 10, output);
+    pclose(output);
+    return out_str;
+}

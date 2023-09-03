@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static void execute_memtests(void *args_void);
 static void log_memtests_header(void);
@@ -8,9 +8,8 @@ int main(void) {
     t_args *args;
 
     args = malloc(sizeof(t_args));
-    args->table = init_table_memtests_exaustive20();
+    args->table = init_table_memtests_sizes();
     execute_memtests(args);
-    exaustive_test20(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
 }

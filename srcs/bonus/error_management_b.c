@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 #define EMPTY_EXPECTED 1
 #define EMPTY_NOT_EXPECTED 0

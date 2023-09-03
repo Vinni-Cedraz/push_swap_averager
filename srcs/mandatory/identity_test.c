@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static void analyse_cmd_output(char line[CMD_LEN], FILE *fp, char cmd[CMD_LEN]);
 static void analyse_error_log_file(char line[CMD_LEN], char cmd[CMD_LEN]);

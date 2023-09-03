@@ -12,8 +12,7 @@ void build_averager_test_cmd_string(char command[], int num_args, int idx,
     strcat(command, " | wc -l) 2>&1");
 }
 
-void build_exaustive_checker_test_cmd_string(char *command, int num_args, int i,
-                                             int **table) {
+void build_exaustive_checker_test_cmd_string(char *command, int num_args, int i, int **table) {
     int j;
     char buffer[5];
     strcpy(command, "(./push_swap");

@@ -1,8 +1,8 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
-    args->table = init_table_memtests_exaustive20();
+    args->table = init_table_memtests_sizes();
     dprintf(1, HRED
            "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "
            "FLAG\n\n" DEF_COLOR);

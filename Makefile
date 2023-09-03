@@ -90,7 +90,7 @@ run:
 	@rm -rf log_files
 	@mkdir -p log_files
 	@./memory_tests
-	@./exaustive_test100
+	@./exaustive_test
 	./test5
 	@cat tmp5 >> tmp4 && cat tmp4 >> tmp3 && cat tmp3 >> tmp2 && cat tmp2 >> tmp1 && cat tmp1 > test5.log && rm tmp*
 	@./analyse_log.sh test5.log

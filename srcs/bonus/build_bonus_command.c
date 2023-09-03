@@ -1,5 +1,5 @@
 
-#include "averager.h"
+#include "../include/averager.h"
 
 void build_bonus_string(char cmd[], int num_args, int idx, int **table) {
     int j;
