@@ -8,7 +8,7 @@ int main(void) {
     t_args *args;
 
     args = malloc(sizeof(t_args));
-    args->table = init_table();
+    args->table = init_table_memtests_exaustive20();
     execute_memtests(args);
     exaustive_test20(args);
     ft_free_arr_size((void **)args->table, 1000);

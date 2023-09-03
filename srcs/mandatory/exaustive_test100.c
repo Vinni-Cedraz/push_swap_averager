@@ -229,7 +229,7 @@ void exaustive_test100(void *args_void) {
 
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
-    args->table = init_table2();
+    args->table = init_table_exaustive100();
     exaustive_test100(args);
     ft_free_arr_size((void **)args->table, 1000);
     free(args);
