@@ -32,23 +32,29 @@ static void print_averager_header(void) {
     printf(WHITE "TESTS FOR SIZE 5\n" DEF_COLOR);
 }
 
-int main(void) {
-    pthread_t pthread[5];
-    t_args *this_task = malloc(sizeof(t_args) * 5);
+static void init_this_task(t_uargs *this_task, int **table, int task_size) {
+    static int call_counter = -1;
     const char *tmp_files[5] = {"tmp1", "tmp2", "tmp3", "tmp4", "tmp5"};
     const int thread_idxs[5] = {0, 25, 49, 73, 97};
+
+    call_counter++;
+    this_task->table = table;
+    this_task->size = task_size;
+    this_task->tmp_file = tmp_files[call_counter];
+    this_task->thread_idx = thread_idxs[call_counter];
+}
+
+
+int main(void) {
+    pthread_t pthread[5];
+    static t_args this_task[5];
     int **table = init_permutation_table();
     for (int i = 0; i < 5; i++) {
-        this_task[i].table = table;
-        this_task[i].tmp_file = tmp_files[i];
-        this_task[i].thread_idx = thread_idxs[i];
-        this_task[i].size = 5;
-        pthread_create(&pthread[i], NULL, execute_push_swap_thread,
-                       &this_task[i]);
+		init_this_task(&this_task[i], table, 5);
+        pthread_create(&pthread[i], NULL, execute_push_swap_thread, &this_task[i]);
     }
 
     for (int i = 0; i < 5; i++)
         pthread_join(pthread[i], NULL);
     ft_free_arr((char **)this_task->table, (void **)this_task->table);
-    free(this_task);
 }

@@ -24,25 +24,30 @@ static uint **init_permutation_table(void) {
     return table;
 }
 
+static void init_this_task(t_uargs *this_task, int **table, int task_size) {
+    static int call_counter = -1;
+    static const int thread_idxs[] = {0, 61, 121, 181, 241, 301, 361, 421};
+    static const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4",
+                                      "tmp5", "tmp6", "tmp7", "tmp8"};
+    call_counter++;
+    this_task->table = table;
+    this_task->size = task_size;
+    this_task->tmp_file = tmp_files[call_counter];
+    this_task->thread_idx = thread_idxs[call_counter];
+}
+
 int main(void) {
-    t_uargs *this_task = malloc(sizeof(t_uargs) * 8);
+    static t_uargs this_task[8];
     pthread_t pthread[8];
-    const int thread_idxs[] = {0, 61, 121, 181, 241, 301, 361, 421};
-    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4",
-                               "tmp5", "tmp6", "tmp7", "tmp8"};
-	int **table = init_permutation_table();
+    int **table = init_permutation_table();
 
     printf(WHITE "\nTESTS FOR SIZE 500\n" DEF_COLOR);
     for (int i = 0; i < 8; i++) {
-        this_task[i].table = table;
-        this_task[i].tmp_file = tmp_files[i];
-        this_task[i].thread_idx = thread_idxs[i];
-		this_task[i].size = 500;
+        init_this_task(&this_task[i], table, 500);
         pthread_create(&pthread[i], NULL, execute_push_swap_thread, &this_task[i]);
     }
 
     for (int i = 0; i < 8; i++)
         pthread_join(pthread[i], NULL);
     ft_free_arr_size((void **)this_task->table, 481);
-    free(this_task);
 }
