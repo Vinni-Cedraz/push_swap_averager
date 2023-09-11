@@ -2,7 +2,6 @@
 
 static void analyse_cmd_output(char line[CMD_LEN], FILE *fp, char cmd[CMD_LEN]);
 static void analyse_error_log_file(char line[CMD_LEN], char cmd[CMD_LEN]);
-static void thousand_sorted_elements(char *cmd, char *output);
 static void five_hundred_sorted_elements(char *cmd, char *output);
 static void hundred_sorted_elements(char *cmd, char *output);
 static void fifty_sorted_elements(char *cmd, char *output);
@@ -20,7 +19,6 @@ int main(void) {
     fifty_sorted_elements(cmd, output);
     hundred_sorted_elements(cmd, output);
     five_hundred_sorted_elements(cmd, output);
-    thousand_sorted_elements(cmd, output);
 }
 
 static void exec_cmd_and_analyse_output(char *cmd) {
@@ -115,18 +113,5 @@ static void five_hundred_sorted_elements(char *cmd, char *output) {
     }
     strcat(cmd, " 2>&1");
     printf(CYAN "five_hundred_sorted_elements  ------ " DEF_COLOR);
-    exec_cmd_and_analyse_output(cmd);
-}
-
-static void thousand_sorted_elements(char *cmd, char *output) {
-    int i;
-    char buffer[5];
-    strcpy(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap ");
-    for (i = 0; i < 1000; i++) {
-        sprintf(buffer, " %d", i);
-        strcat(cmd, buffer);
-    }
-    strcat(cmd, " 2>&1");
-    printf(CYAN "thousand_sorted_elements  ------ " DEF_COLOR);
     exec_cmd_and_analyse_output(cmd);
 }

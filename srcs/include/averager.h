@@ -40,6 +40,8 @@
 #define EMPTY_NOT_EXPECTED 0
 #define CLOSE_PROCESS_AFTER 1
 #define DONT_CLOSE_PROCESS_AFTER 0
+#define TRUE 1
+#define FALSE 0
 
 #define MEMORY_TEST_HEADER                                                     \
     HRED "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "                 \
