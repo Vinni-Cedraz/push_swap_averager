@@ -90,7 +90,7 @@ typedef struct s_uargs {
 typedef struct s_sizes_and_action {
     int arr_size;
     int tab_idx;
-    t_build_cmdstr *action;
+    t_build_cmdstr *build_cmd;
 } t_sizes_and_action;
 
 // FUNCTION PROTOTYPES

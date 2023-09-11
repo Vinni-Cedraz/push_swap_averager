@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/myuser/push_swap_averager",
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
   "arguments": [
    "cc",
    "-w",
@@ -8,74 +8,14 @@
    "-O3",
    "-Isrcs/include/",
    "-c",
-   "srcs/mandatory/test100.c",
+   "srcs/mandatory/error_management.c",
    "-o",
-   "objs/test100.o"
+   "objs/error_management.o"
   ],
-  "file": "srcs/mandatory/test100.c"
+  "file": "srcs/mandatory/error_management.c"
  },
  {
-  "directory": "/home/myuser/push_swap_averager",
-  "arguments": [
-   "cc",
-   "-w",
-   "-pthread",
-   "-O3",
-   "-Isrcs/include/",
-   "-c",
-   "srcs/mandatory/test5.c",
-   "-o",
-   "objs/test5.o"
-  ],
-  "file": "srcs/mandatory/test5.c"
- },
- {
-  "directory": "/home/myuser/push_swap_averager",
-  "arguments": [
-   "cc",
-   "-w",
-   "-pthread",
-   "-O3",
-   "-Isrcs/include/",
-   "-c",
-   "srcs/mandatory/identity_test.c",
-   "-o",
-   "objs/identity_test.o"
-  ],
-  "file": "srcs/mandatory/identity_test.c"
- },
- {
-  "directory": "/home/myuser/push_swap_averager",
-  "arguments": [
-   "cc",
-   "-w",
-   "-pthread",
-   "-O3",
-   "-Isrcs/include/",
-   "-c",
-   "srcs/mandatory/memory_tests.c",
-   "-o",
-   "objs/memory_tests.o"
-  ],
-  "file": "srcs/mandatory/memory_tests.c"
- },
- {
-  "directory": "/home/myuser/push_swap_averager",
-  "arguments": [
-   "cc",
-   "-w",
-   "-pthread",
-   "-O3",
-   "-Isrcs/include/",
-   "-c",
-   "srcs/mandatory/test500.c",
-   "-o",
-   "objs/test500.o"
-  ],
-  "file": "srcs/mandatory/test500.c"
- },
- {
-  "directory": "/home/myuser/push_swap_averager",
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
   "arguments": [
    "cc",
    "-w",
@@ -90,7 +30,7 @@
   "file": "srcs/mandatory/exaustive_test.c"
  },
  {
-  "directory": "/home/myuser/push_swap_averager",
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
   "arguments": [
    "cc",
    "-w",
@@ -98,10 +38,70 @@
    "-O3",
    "-Isrcs/include/",
    "-c",
-   "srcs/mandatory/error_management.c",
+   "srcs/mandatory/identity_test.c",
    "-o",
-   "objs/error_management.o"
+   "objs/identity_test.o"
   ],
-  "file": "srcs/mandatory/error_management.c"
+  "file": "srcs/mandatory/identity_test.c"
+ },
+ {
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/memory_tests.c",
+   "-o",
+   "objs/memory_tests.o"
+  ],
+  "file": "srcs/mandatory/memory_tests.c"
+ },
+ {
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/test100.c",
+   "-o",
+   "objs/test100.o"
+  ],
+  "file": "srcs/mandatory/test100.c"
+ },
+ {
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/test500.c",
+   "-o",
+   "objs/test500.o"
+  ],
+  "file": "srcs/mandatory/test500.c"
+ },
+ {
+  "directory": "/home/vcedraz-/push_swap/push_swap_averager",
+  "arguments": [
+   "cc",
+   "-w",
+   "-pthread",
+   "-O3",
+   "-Isrcs/include/",
+   "-c",
+   "srcs/mandatory/test5.c",
+   "-o",
+   "objs/test5.o"
+  ],
+  "file": "srcs/mandatory/test5.c"
  }
 ]
