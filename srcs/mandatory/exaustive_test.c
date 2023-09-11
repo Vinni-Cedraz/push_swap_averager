@@ -10,7 +10,6 @@ static void init_this_task100(t_args *this_task, int **table, int task_size);
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     args->table = init_table_exaustive_tests();
-
     dprintf(1, EXAUSTIVE_TEST20_HEADER);
     exaustive_test20(args);
     exaustive_test100(args);

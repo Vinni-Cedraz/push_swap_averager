@@ -1,7 +1,6 @@
-#include "../include/averager.h"
+#include "averager.h"
 
-void build_averager_test_cmd_string(char command[], int num_args, int idx,
-                                    int **table) {
+void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table) {
     int j;
     char buffer[5];
     strcpy(command, "(./push_swap");
@@ -28,12 +27,10 @@ void build_exaustive_checker_test_cmd_string(char *command, int num_args, int i,
     strcat(command, ") 2>&1");
 }
 
-void build_three_elements_memtest_cmdstring(char memtest[], int num_args,
-                                            int idx, int **table) {
+void build_size3_sorting_cmdstr(char memtest[], int num_args, int idx, int **table) {
     int j;
     char buffer[5];
-    strcpy(memtest,
-           "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap");
+    strcpy(memtest, "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap");
     for (j = 0; j < num_args; j++) {
         sprintf(buffer, " %d", table[idx][j]);
         strcat(memtest, buffer);
@@ -41,12 +38,10 @@ void build_three_elements_memtest_cmdstring(char memtest[], int num_args,
     strcat(memtest, " | wc -l) 2>&1");
 }
 
-void build_memtest_cmdstring(char memtest[], int num_args, int idx,
-                             int **table) {
+void build_memtest_cmdstring(char memtest[], int num_args, int idx, int **table) {
     int j;
     char buffer[5];
-    strcpy(memtest,
-           "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap");
+    strcpy(memtest, "(valgrind --leak-check=full --show-leak-kinds=all -q ./push_swap");
     for (j = 0; j < num_args; j++) {
         sprintf(buffer, " %d", table[idx][j]);
         strcat(memtest, buffer);

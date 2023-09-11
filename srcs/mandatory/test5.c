@@ -55,7 +55,6 @@ int main(void) {
 		init_this_task(&this_task[i], table, 5);
         pthread_create(&pthread[i], NULL, execute_push_swap_thread, &this_task[i]);
     }
-
     for (int i = 0; i < 5; i++)
         pthread_join(pthread[i], NULL);
     ft_free_arr((char **)this_task->table, (void **)this_task->table);

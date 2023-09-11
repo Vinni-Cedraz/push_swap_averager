@@ -42,13 +42,11 @@ int main(void) {
     static t_uargs this_task[8];
     pthread_t pthread[8];
     int **table = init_permutation_table();
-
     printf(WHITE "\nTESTS FOR SIZE 500\n" DEF_COLOR);
     for (int i = 0; i < 8; i++) {
         init_this_task(&this_task[i], table, 500);
         pthread_create(&pthread[i], NULL, execute_push_swap_thread, &this_task[i]);
     }
-
     for (int i = 0; i < 8; i++)
         pthread_join(pthread[i], NULL);
     ft_free_arr_size((void **)this_task->table, 481);

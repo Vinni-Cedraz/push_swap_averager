@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../include/averager.h"
+#include "averager.h"
 
 static void mt_init(struct MT *m, uint seed) {
     int i;

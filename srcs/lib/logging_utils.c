@@ -1,4 +1,4 @@
-#include "../include/averager.h"
+#include "averager.h"
 
 void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL) {
     if (!strncmp("OK", out_str, 2) && GLOBAL) {

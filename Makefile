@@ -1,5 +1,3 @@
-SHELL = /bin/bash
-
 #Colors
 RED = \033[0;31m
 HRED = \033[1;31m
@@ -17,14 +15,14 @@ BLIB = blib.a
 # Define the source and object file directories
 SRCSDIR = srcs/mandatory/
 BSRCSDIR = srcs/bonus/
-OBJSDIR = objs/
+ODIR = objs/
 BOBJSDIR = bobjs/
 LIB = srcs/lib/lib.a
 
 # Define the source and object files
 SRCS = $(wildcard $(SRCSDIR)*.c)
 BSRCS = $(wildcard $(BSRCSDIR)*.c)
-OBJS = $(patsubst $(SRCSDIR)%.c, $(OBJSDIR)%.o, $(SRCS))
+OBJS = $(patsubst $(SRCSDIR)%.c, $(ODIR)%.o, $(SRCS))
 BOBJS = $(patsubst $(BSRCSDIR)%.c, $(BOBJSDIR)%.o, $(BSRCS))
 
 all: pre_all
@@ -49,17 +47,15 @@ lib:
 
 execs: $(OBJS)
 	@$(foreach file,$(OBJS), \
-		if [ $(file) -nt $(patsubst $(OBJSDIR)%.o,%,$(file)) ] || \
-		   [ ! -f $(patsubst $(OBJSDIR)%.o,%,$(file)) ] || \
-		   [ $(LIB) -nt $(file) ]; then \
-			printf "Compiling $(file) -> "; \
-			printf "$(HGREEN)$(patsubst $(OBJSDIR)%.o,%,$(file))\n$(DEF_COLOR)"; \
-			$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(patsubst $(OBJSDIR)%.o,%,$(file)); \
+		if [ $(file) -nt $(patsubst $(ODIR)%.o,%,$(file)) ] || [ ! -f $(patsubst $(ODIR)%.o,%,$(file)) ] || [ $(LIB) -nt $(file) ]; \
+		then \
+			printf "Compiling $(file) -> $(HGREEN)$(patsubst $(ODIR)%.o,%,$(file))\n$(DEF_COLOR)"; \
+			$(CC) $(CFLAGS) $(INCLUDES) $(file) $(LIB) -o $(patsubst $(ODIR)%.o,%,$(file)); \
 		fi; \
 	)
 
-$(OBJSDIR)%.o: $(SRCSDIR)%.c
-	mkdir -p $(OBJSDIR)
+$(ODIR)%.o: $(SRCSDIR)%.c
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 bonus: $(BOBJS) lib 

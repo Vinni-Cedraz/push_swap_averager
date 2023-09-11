@@ -1,5 +1,4 @@
-
-#include "../include/averager.h"
+#include "averager.h"
 
 void *execute_push_swap_thread(void *arg) {
     t_uargs *this_task = (t_uargs *)arg;

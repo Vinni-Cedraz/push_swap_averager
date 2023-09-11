@@ -43,20 +43,20 @@
 #define TRUE 1
 #define FALSE 0
 
-#define MEMORY_TEST_HEADER                                                     \
-    HRED "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "                 \
+#define MEMORY_TEST_HEADER                                                                                             \
+    HRED "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "                                                         \
          "FLAG\n\n\n" DEF_COLOR
 
-#define MEMORY_TEST_MESSAGE                                                    \
-    WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN                        \
-          "		with valgrind on quiet mode (-q flag) \n\n\n" DEF_COLOR
+#define MEMORY_TEST_MESSAGE                                                                                            \
+    WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN "		with valgrind on quiet mode (-q flag) "                     \
+                                                        "\n\n\n" DEF_COLOR
 
-#define MEMORY_TEST_FOOTER                                                     \
-    CYAN "\n\n\nIf you didnt see any valgrind messages it means no memory "    \
+#define MEMORY_TEST_FOOTER                                                                                             \
+    CYAN "\n\n\nIf you didnt see any valgrind messages it means no memory "                                            \
          "leaks were found in your program\n\n\n\n" DEF_COLOR
 
-#define EXAUSTIVE_TEST20_HEADER                                                \
-    HCYAN "Now, we will check sorting correctness with several different "     \
+#define EXAUSTIVE_TEST20_HEADER                                                                                        \
+    HCYAN "Now, we will check sorting correctness with several different "                                             \
           "permutations...\n" DEF_COLOR
 
 // USER DEFINED TYPES
@@ -89,11 +89,12 @@ typedef struct s_uargs {
     int size;
 } t_uargs;
 
-typedef struct s_sizes_and_action {
+typedef struct s_action {
     int arr_size;
     int tab_idx;
+	bool is_sorting_test;
     t_build_cmdstr *build_cmd;
-} t_sizes_and_action;
+} t_action;
 
 // FUNCTION PROTOTYPES
 void fprintf_nb_of_op(char *out_str, FILE *fp, bool *error);
@@ -128,9 +129,9 @@ int handle_err(int **table, int size, int i, char *buffer);
 void log_error(bool empty_expected, char *out_str, char *cmd);
 void log_cmd_and_output(int **table, int size, int i, char *buf);
 void log_cmd_and_output_3(int **table, int size, int i, char *buf);
-void build_three_elements_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
 void build_memtest_cmdstring(char memtest[], int i, int num_args, int **table);
-void exec_memtest(int **table, t_sizes_and_action sizes_and_action);
+void build_size3_sorting_cmdstr(char memtest[], int num_args, int idx, int **table);
+void exec_memtest(int **table, t_action sizes_and_action);
 void init_exaustive(int *count, int **table, int rand, int i_start, int i_end, int arr_size);
 void bonus_log_error(bool empty_expected, char *out_str);
 void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
