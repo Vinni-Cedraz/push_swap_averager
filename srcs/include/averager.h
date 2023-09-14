@@ -50,7 +50,7 @@
 
 #define MEMORY_TEST_MESSAGE                                                                                            \
     WHITE "\nMEMORY AND SORTING TESTS\n" DEF_COLOR CYAN "		with valgrind on quiet mode (-q flag) "                     \
-                                                        "\n\n\n" DEF_COLOR
+          "\n\n\n" DEF_COLOR
 
 #define MEMORY_TEST_FOOTER                                                                                             \
     CYAN "\n\n\nIf you didnt see any valgrind messages it means no memory "                                            \
@@ -93,7 +93,7 @@ typedef struct s_uargs {
 typedef struct s_action {
     int arr_size;
     int tab_idx;
-	bool is_sorting_test;
+    bool is_sorting_test;
     t_build_cmdstr *build_cmd;
 } t_action;
 
@@ -116,13 +116,6 @@ void execute_bonus500(void *args_void);
 void build_bonus_string(char memtest[], int n, int i, int **table);
 void build_bonus_reference_string(char command[], int n, int i, int **table);
 int **init_table_memtests_sizes(void);
-void b_max_int_overf(char *cmd);
-void b_duplicate_sorted(char *cmd);
-void b_duplicate_arg(char *cmd);
-void b_no_args(char *cmd);
-void b_empty_string(char *cmd);
-void b_invalid_action(char *cmd);
-void b_whitespaced_action(char *cmd);
 void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
@@ -139,18 +132,26 @@ void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
 void build_exaustive_checker_test_cmd_string(char command[], int num_args, int idx, int **table);
 void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
 void trim_linebreak(char *str);
-void b_non_numeric1(char *cmd);
-void b_non_numeric2(char *cmd);
-void b_non_numeric3(char *cmd);
-void b_non_numeric4(char *cmd);
-void b_non_numeric5(char *cmd);
-void b_non_numeric6(char *cmd);
-void non_numeric7(char *cmd);
+void b_max_int_overf(void);
+void b_duplicate_sorted(void);
+void b_duplicate_arg(void);
+void b_no_args(void);
+void b_empty_string(void);
+void b_invalid_action(void);
+void b_whitespaced_action(void);
+void b_non_numeric1(void);
+void b_non_numeric2(void);
+void b_non_numeric3(void);
+void b_non_numeric4(void);
+void b_non_numeric5(void);
+void b_non_numeric6(void);
+void non_numeric7(void);
 int **init_table_exaustive_tests(void);
 void *execute_push_swap_thread(void *args_void);
 void print_array_to_file(FILE *fp, int idx, int arr_size, uint **table);
 char *execute_cmd(char cmd[], char buffer[], FILE *output);
-void exec_each_function_in(void (*array_of_function_ptrs[])(char *));
+void exec_each_void_param_function_in(void (*array_of_function_ptrs[])(void));
+void exec_each_t_args_param_function_in(void (*array_of_function_ptrs[])(t_args *), t_args *);
 void analyse_cmd_output(char line[500], FILE *fp, char cmd[500], bool bonus);
 void exec_test_and_analyse_output(char *cmd, bool empty_expected, bool bonus);
 

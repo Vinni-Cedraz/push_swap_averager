@@ -1,9 +1,13 @@
 #include "../include/averager.h"
 
-void exec_each_function_in(void (*array_of_function_ptrs[])(char *)) {
-    char cmd[BIG_CMD_LEN] = {0};
+void exec_each_void_param_function_in(void (*array_of_function_ptrs[])(void)) {
     while (*array_of_function_ptrs)
-        (*array_of_function_ptrs++)(cmd);
+        (*array_of_function_ptrs++)();
+}
+
+void exec_each_t_args_param_function_in(void (*array_of_function_ptrs[])(t_args *args), t_args *args) {
+    while (*array_of_function_ptrs)
+        (*array_of_function_ptrs++)(args);
 }
 
 char *execute_cmd(char cmd[], char buffer[], FILE *output) {

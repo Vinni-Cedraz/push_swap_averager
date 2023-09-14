@@ -1,15 +1,6 @@
 #include "../include/averager.h"
 
-static void print_message(char *reference, char *buffer) {
-    if (!strncmp(reference, "OK", 2))
-        printf(CYAN "official checker: " GREEN "OK\n" DEF_COLOR);
-    else if (strncmp(reference, "KO", 2))
-        printf(CYAN "official checker: " RED "KO\n" DEF_COLOR);
-    if (!strncmp(buffer, "OK", 2))
-        printf(HCYAN "    your checker: " HGREEN "OK\n" DEF_COLOR);
-    else if (!strncmp(buffer, "KO", 2))
-        printf(HCYAN "    your checker: " HRED "KO\n" DEF_COLOR);
-}
+static void print_message(char *reference, char *buffer);
 
 void execute_bonus5(void *args_void) {
     t_args *args = (t_args *)args_void;
@@ -23,6 +14,8 @@ void execute_bonus5(void *args_void) {
     int i = 7;
     int n = 5;
 
+    printf(WHITE "\n\nBONUS RIGHT TESTS" DEF_COLOR);
+    printf(HRED"\n		with valgrind -q \n\n" DEF_COLOR);
     while (table[i]) {
         build_bonus_string(command, 5, i, table);
         build_bonus_reference_string(reference_cmd, 5, i, table);
@@ -214,3 +207,15 @@ void execute_bonus500(void *args_void) {
         i++;
     }
 }
+
+static void print_message(char *reference, char *buffer) {
+    if (!strncmp(reference, "OK", 2))
+        printf(CYAN "official checker: " GREEN "OK\n" DEF_COLOR);
+    else if (strncmp(reference, "KO", 2))
+        printf(CYAN "official checker: " RED "KO\n" DEF_COLOR);
+    if (!strncmp(buffer, "OK", 2))
+        printf(HCYAN "    your checker: " HGREEN "OK\n" DEF_COLOR);
+    else if (!strncmp(buffer, "KO", 2))
+        printf(HCYAN "    your checker: " HRED "KO\n" DEF_COLOR);
+}
+
