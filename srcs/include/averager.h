@@ -36,12 +36,13 @@
 #define BIG_CMD_LEN 3000
 #define HUGE_CMD_LEN 10000
 
-#define EMPTY_EXPECTED 1
-#define EMPTY_NOT_EXPECTED 0
+#define CMD_OUTPUT 1
+#define LOG_FILE 0
 #define CLOSE_PROCESS_AFTER 1
 #define DONT_CLOSE_PROCESS_AFTER 0
 #define TRUE 1
 #define FALSE 0
+#define BONUS 1
 
 #define MEMORY_TEST_HEADER                                                                                             \
     HRED "\n\nMAKE SURE YOU COMPILED EVERYTHING WITH THE -O3 "                                                         \
@@ -115,13 +116,13 @@ void execute_bonus500(void *args_void);
 void build_bonus_string(char memtest[], int n, int i, int **table);
 void build_bonus_reference_string(char command[], int n, int i, int **table);
 int **init_table_memtests_sizes(void);
-void max_int_overf(char *cmd);
-void duplicate_sorted(char *cmd);
-void duplicate_arg(char *cmd);
-void no_args(char *cmd);
-void empty_string(char *cmd);
-void invalid_action(char *cmd);
-void whitespaced_action(char *cmd);
+void b_max_int_overf(char *cmd);
+void b_duplicate_sorted(char *cmd);
+void b_duplicate_arg(char *cmd);
+void b_no_args(char *cmd);
+void b_empty_string(char *cmd);
+void b_invalid_action(char *cmd);
+void b_whitespaced_action(char *cmd);
 void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL);
 void create_unified_log_file20(void);
 void create_unified_log_file100(void);
@@ -138,16 +139,19 @@ void open_process_and_exec_cmd_there(FILE **fp, char *cmd, bool close);
 void build_exaustive_checker_test_cmd_string(char command[], int num_args, int idx, int **table);
 void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table);
 void trim_linebreak(char *str);
-void non_numeric1(char *cmd);
-void non_numeric2(char *cmd);
-void non_numeric3(char *cmd);
-void non_numeric4(char *cmd);
-void non_numeric5(char *cmd);
-void non_numeric6(char *cmd);
+void b_non_numeric1(char *cmd);
+void b_non_numeric2(char *cmd);
+void b_non_numeric3(char *cmd);
+void b_non_numeric4(char *cmd);
+void b_non_numeric5(char *cmd);
+void b_non_numeric6(char *cmd);
 void non_numeric7(char *cmd);
 int **init_table_exaustive_tests(void);
 void *execute_push_swap_thread(void *args_void);
 void print_array_to_file(FILE *fp, int idx, int arr_size, uint **table);
 char *execute_cmd(char cmd[], char buffer[], FILE *output);
+void exec_each_function_in(void (*array_of_function_ptrs[])(char *));
+void analyse_cmd_output(char line[500], FILE *fp, char cmd[500], bool bonus);
+void exec_test_and_analyse_output(char *cmd, bool empty_expected, bool bonus);
 
 #endif

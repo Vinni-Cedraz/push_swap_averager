@@ -8,7 +8,7 @@ DEF_COLOR =	\033[0m
 CYAN = \033[0;36m
 
 # Define flags
-CFLAGS = -w -pthread -O3
+CFLAGS = -w -pthread -g3
 INCLUDES = -Isrcs/include/
 BLIB = blib.a
 

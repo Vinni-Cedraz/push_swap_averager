@@ -1,159 +1,84 @@
 #include "../include/averager.h"
 
-#define EMPTY_EXPECTED 1
-#define EMPTY_NOT_EXPECTED 0
-
-static void get_test_output(char *cmd, bool empty_expected) {
-    size_t len = 0;
-    ssize_t read;
-    char *line = calloc(500, sizeof(char));
-
-    if (empty_expected) {
-        FILE *fp = popen(cmd, "r");
-
-        if (fp == NULL) {
-            perror("popen");
-            exit(errno);
-        }
-
-        char *out_str = fgets(line, 100, fp);
-        if (NULL == out_str) {
-            printf(HGREEN "OK\n" DEF_COLOR);
-        } else
-            bonus_log_error(EMPTY_EXPECTED, out_str);
-        free(out_str);
-        pclose(fp);
-        return;
-    }
-
-    if (!empty_expected) {
-        FILE *fp = popen(cmd, "r");
-        pclose(fp);
-        FILE *error_log = fopen("error.log", "r");
-        if ((read = getline(&line, &len, error_log)) != -1) {
-            if (strcmp(line, "Error\n") == 0) {
-                printf(HGREEN "OK\n" DEF_COLOR);
-            } else
-                bonus_log_error(EMPTY_NOT_EXPECTED, line);
-        } else
-            bonus_log_error(EMPTY_NOT_EXPECTED, line);
-        fclose(error_log);
-    }
-    free(line);
-}
-
-void no_args(char *cmd) {
-    sprintf(
-        cmd,
-        "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker) 2>&1");
-    get_test_output(cmd, 1);
+void b_no_args(char *cmd) {
+    sprintf(cmd, "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker) 2>&1");
+    exec_test_and_analyse_output(cmd, CMD_OUTPUT, BONUS);
     system("rm -f error.log");
 }
 
-void empty_string(char *cmd) {
-    sprintf(cmd,
-            "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker "
-            "\"%s\") 2>error.log",
-            "");
-    get_test_output(cmd, 0);
+void b_empty_string(char *cmd) {
+    sprintf(cmd, "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker \"%s\") 2>error.log", "");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void non_numeric1(char *cmd) {
-    sprintf(cmd,
-            "valgrind --leak-check=full --show-leak-kinds=all"
-            " -q ./checker %d %d %d %s 2>error.log",
-            3, 2, 1, "9a");
-    get_test_output(cmd, EMPTY_NOT_EXPECTED);
+void b_non_numeric1(char *cmd) {
+    sprintf(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %s 2>error.log", 3, 2, 1, "9a");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void non_numeric2(char *cmd) {
-    sprintf(cmd,
-            "valgrind --leak-check=full --show-leak-kinds=all"
-            " -q ./checker %d %d %d %s 2>error.log",
-            3, 2, 1, "a");
-    get_test_output(cmd, EMPTY_NOT_EXPECTED);
+void b_non_numeric2(char *cmd) {
+    sprintf(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %s 2>error.log", 3, 2, 1, "a");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void non_numeric3(char *cmd) {
-    sprintf(cmd,
-            "valgrind --leak-check=full --show-leak-kinds=all"
-            " -q ./checker %d %d %d %s 2>error.log",
-            3, 2, 1, "12 a 2");
-    get_test_output(cmd, EMPTY_NOT_EXPECTED);
+void b_non_numeric3(char *cmd) {
+    sprintf(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %s 2>error.log", 3, 2, 1, "12 a 2");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void non_numeric4(char *cmd) {
-    sprintf(cmd,
-            "valgrind --leak-check=full --show-leak-kinds=all"
-            " -q ./checker %d %d %d %s 2>error.log",
-            3, 2, 1, "12 - 2");
-    get_test_output(cmd, EMPTY_NOT_EXPECTED);
+void b_non_numeric4(char *cmd) {
+    sprintf(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %s 2>error.log", 3, 2, 1, "12 - 2");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void non_numeric5(char *cmd) {
-    sprintf(cmd,
-            "valgrind --leak-check=full --show-leak-kinds=all"
-            " -q ./checker %d %d %d %s 2>error.log",
-            3, 2, 1, "12 --2");
-    get_test_output(cmd, EMPTY_NOT_EXPECTED);
+void b_non_numeric5(char *cmd) {
+    sprintf(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %s 2>error.log", 3, 2, 1, "12 --2");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void non_numeric6(char *cmd) {
-    sprintf(cmd,
-            "valgrind --leak-check=full --show-leak-kinds=all"
-            " -q ./checker %d %d %d %s 2>error.log",
-            3, 2, 1, "12 ++2");
-    get_test_output(cmd, EMPTY_NOT_EXPECTED);
+void b_non_numeric6(char *cmd) {
+    sprintf(cmd, "valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %s 2>error.log", 3, 2, 1, "12 ++2");
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void max_int_overf(char *cmd) {
-    sprintf(cmd,
-            "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d "
-            "%d %d %lu) 2>error.log",
-            35, 24, 21, 21474836498);
-    get_test_output(cmd, 0);
+void b_max_int_overf(char *cmd) {
+    sprintf(cmd, "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %lu) 2>error.log",
+			35, 24, 21, 21474836498);
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void duplicate_sorted(char *cmd) {
-    sprintf(cmd,
-            "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d "
-            "%d %d %d %d %d) 2>error.log",
+void b_duplicate_sorted(char *cmd) {
+    sprintf(cmd, "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %d %d %d) 2>error.log",
             10, 11, 12, 13, 14, 14);
-    get_test_output(cmd, 0);
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void invalid_action(char *cmd) {
-    sprintf(cmd,
-            "(cat cmds | valgrind --leak-check=full --show-leak-kinds=all -q "
-            "./checker %d %d %d %d %d %d) 2>error.log",
+void b_invalid_action(char *cmd) {
+    sprintf(cmd, "(cat cmds | valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %d %d %d) 2>error.log",
             11, 10, 12, 13, 14, 15);
-    get_test_output(cmd, 0);
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void duplicate_arg(char *cmd) {
-    sprintf(cmd,
-            "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d "
-            "%d %d) 2>error.log",
+void b_duplicate_arg(char *cmd) {
+    sprintf(cmd, "(valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d) 2>error.log",
             1, 2, 1);
-    get_test_output(cmd, 0);
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
 
-void whitespaced_action(char *cmd) {
-    sprintf(cmd,
-            "(cat cmds2 | valgrind --leak-check=full --show-leak-kinds=all -q "
-            "./checker %d %d %d %d %d %d) 2>error.log",
+void b_whitespaced_action(char *cmd) {
+    sprintf(cmd, "(cat cmds2 | valgrind --leak-check=full --show-leak-kinds=all -q ./checker %d %d %d %d %d %d) 2>error.log",
             11, 10, 12, 13, 14, 15);
-    get_test_output(cmd, 0);
+    exec_test_and_analyse_output(cmd, LOG_FILE, BONUS);
     system("rm -f error.log");
 }
