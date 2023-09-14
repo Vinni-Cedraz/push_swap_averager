@@ -13,16 +13,16 @@ INCLUDES = -Isrcs/include/
 BLIB = blib.a
 
 # Define the source and object file directories
-SRCSDIR = srcs/mandatory/
+VPATH = srcs/mandatory/
 BSRCSDIR = srcs/bonus/
 ODIR = objs/
 BOBJSDIR = bobjs/
 LIB = srcs/lib/lib.a
 
 # Define the source and object files
-SRCS = $(wildcard $(SRCSDIR)*.c)
+SRCS = $(wildcard $(VPATH)*.c)
 BSRCS = $(wildcard $(BSRCSDIR)*.c)
-OBJS = $(patsubst $(SRCSDIR)%.c, $(ODIR)%.o, $(SRCS))
+OBJS = $(patsubst $(VPATH)%.c, $(ODIR)%.o, $(SRCS))
 BOBJS = $(patsubst $(BSRCSDIR)%.c, $(BOBJSDIR)%.o, $(BSRCS))
 
 all: pre_all
@@ -54,7 +54,7 @@ execs: $(OBJS)
 		fi; \
 	)
 
-$(ODIR)%.o: $(SRCSDIR)%.c
+$(ODIR)%.o: %.c
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
