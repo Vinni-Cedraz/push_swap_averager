@@ -1,11 +1,11 @@
 #include "../include/averager.h"
 
-void exec_each_void_param_function_in(void (*array_of_function_ptrs[])(void)) {
+void exec_each_function_in(void (*array_of_function_ptrs[])(char *str), char *str) {
     while (*array_of_function_ptrs)
-        (*array_of_function_ptrs++)();
+        (*array_of_function_ptrs++)(str);
 }
 
-void exec_each_t_args_param_function_in(void (*array_of_function_ptrs[])(t_args *args), t_args *args) {
+void bonus_exec_each_function_in(void (*array_of_function_ptrs[])(t_args *args), t_args *args) {
     while (*array_of_function_ptrs)
         (*array_of_function_ptrs++)(args);
 }

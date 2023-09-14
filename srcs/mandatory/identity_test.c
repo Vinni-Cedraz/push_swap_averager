@@ -15,7 +15,7 @@ int main(void) {
         single_sorted_element, four_sorted_elements, nine_sorted_elements,
 		fifty_sorted_elements, hundred_sorted_elements, five_hundred_sorted_elements, NULL
 	};
-	exec_each_void_param_function_in(tests);
+	exec_each_str_param_function_in(tests, "./push_swap");
 }
 
 static void single_sorted_element() {
