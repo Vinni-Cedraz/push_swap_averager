@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 void ft_free_arr(char **arr, void **aux) {
     while (arr && *arr) free(*arr++);

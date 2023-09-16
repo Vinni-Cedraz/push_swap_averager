@@ -1,33 +1,31 @@
 
 #include "../include/averager.h"
 
-void build_bonus_string(char cmd[], int num_args, int idx, int **table) {
-    int j;
+void build_bonus_string(char cmd[], t_action size_and_idx, int **table) {
     char buffer[5];
     strcpy(cmd, "(valgrind -q ./push_swap");
-    for (j = 0; j < num_args; j++) {
-        sprintf(buffer, " %d", table[idx][j]);
+    for (int j = 0; j < size_and_idx.arr_size; j++) {
+        sprintf(buffer, " %d", table[size_and_idx.tab_idx][j]);
         strcat(cmd, buffer);
     }
     strcat(cmd, " | ./checker_linux");
-    for (j = 0; j < num_args; j++) {
-        sprintf(buffer, " %d", table[idx][j]);
+    for (int j = 0; j < size_and_idx.arr_size; j++) {
+        sprintf(buffer, " %d", table[size_and_idx.tab_idx][j]);
         strcat(cmd, buffer);
     }
     strcat(cmd, ") 2>&1");
 }
 
-void build_bonus_reference_string(char cmd[], int n, int i, int **table) {
-    int j;
+void build_bonus_reference_string(char cmd[], t_action size_and_idx, int **table) {
     char buffer[5];
     strcpy(cmd, "./push_swap");
-    for (j = 0; j < n; j++) {
-        sprintf(buffer, " %d", table[i][j]);
+    for (int j = 0; j < size_and_idx.arr_size; j++) {
+        sprintf(buffer, " %d", table[size_and_idx.tab_idx][j]);
         strcat(cmd, buffer);
     }
     strcat(cmd, " | ./checker_linux");
-    for (j = 0; j < n; j++) {
-        sprintf(buffer, " %d", table[i][j]);
+    for (int j = 0; j < size_and_idx.arr_size; j++) {
+        sprintf(buffer, " %d", table[size_and_idx.tab_idx][j]);
         strcat(cmd, buffer);
     }
 }

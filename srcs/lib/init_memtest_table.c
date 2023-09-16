@@ -1,6 +1,20 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static void init_memtest_table(int *index, int **table, int rand, int arr_size);
+
+static void print_table(int **table, int numRows, int arr_size) {
+    for (int i = 0; i < numRows; i++) {
+        if (table[i] != NULL) {
+            printf(BLUE "Table[%d]: " DEF_COLOR, i);
+            for (int j = 0; j < arr_size; j++) {
+                printf("%d ", table[i][j]);
+            }
+            printf("\n");
+        } else {
+            printf(RED "Table[%d]: NULL\n" DEF_COLOR, i);
+        }
+    }
+}
 
 int **init_table_memtests_sizes(void) {
     int **table = calloc(sizeof(int *), 1000);

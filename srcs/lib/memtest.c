@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static void process_operations_test_output(FILE *output, int **table, t_action action, char *buffer);
 static void process_sorting_test_output(FILE *output, int **table, t_action action, char *buffer);

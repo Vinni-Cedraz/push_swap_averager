@@ -70,16 +70,6 @@ typedef struct MT {
     int next;
 } t_MT;
 
-typedef struct s_args {
-    int **table;
-    char *tmp_file;
-    int thread_idx;
-    t_build_cmdstr *build_cmdstr;
-    t_fprintf_result_to_file *fprintf_result_to_file;
-    bool error;
-    int size;
-} t_args;
-
 typedef struct s_uargs {
     uint **table;
     char *tmp_file;
@@ -97,6 +87,17 @@ typedef struct s_action {
     t_build_cmdstr *build_cmd;
 } t_action;
 
+typedef struct s_args {
+    int **table;
+    char *tmp_file;
+    int thread_idx;
+    t_build_cmdstr *build_cmdstr;
+    t_fprintf_result_to_file *fprintf_result_to_file;
+    bool error;
+    int size;
+    t_action sizes_and_idx;
+} t_args;
+
 // FUNCTION PROTOTYPES
 void fprintf_nb_of_op(char *out_str, FILE *fp, bool *error);
 int is_repeated100(uint **table, uint *tmp_arr, int count);
@@ -107,14 +108,8 @@ int *next_permutation(int *arr, int last_index);
 void ft_free_arr(char **arr, void **aux);
 void ft_free_arr_size(void **arr, uint size);
 void shuffle_array(uint *arr, int len, uint seed);
-void execute_bonus5(void *args_void);
-void execute_bonus10(void *args_void);
-void execute_bonus15(void *args_void);
-void execute_bonus20(void *args_void);
-void execute_bonus100(void *args_void);
-void execute_bonus500(void *args_void);
-void build_bonus_string(char memtest[], int n, int i, int **table);
-void build_bonus_reference_string(char command[], int n, int i, int **table);
+void build_bonus_string(char cmd[], t_action size_and_idx, int **table);
+void build_bonus_reference_string(char cmd[], t_action size_and_idx, int **table);
 int **init_table_memtests_sizes(void);
 void fprintf_ok_ko(char *out_str, FILE *fp, bool *GLOBAL);
 void create_unified_log_file20(void);
@@ -152,8 +147,8 @@ void *execute_push_swap_thread(void *args_void);
 void print_array_to_file(FILE *fp, int idx, int arr_size, uint **table);
 char *execute_cmd(char cmd[], char buffer[], FILE *output);
 void exec_each_function_in(void (*array_of_function_ptrs[])(char *str), char *str);
-void bonus_exec_each_function_in(void (*array_of_function_ptrs[])(t_args *), t_args *);
 void analyse_cmd_output(char line[500], FILE *fp, char cmd[500], bool bonus);
 void exec_test_and_analyse_output(char *cmd, bool empty_expected, bool bonus);
+void execute_bonus(void *args_void);
 
 #endif

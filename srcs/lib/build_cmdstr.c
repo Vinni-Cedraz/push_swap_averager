@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 void build_averager_test_cmd_string(char command[], int num_args, int idx, int **table) {
     int j;

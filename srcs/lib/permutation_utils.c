@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 static int is_reverse_sorted(int *arr, int last_index) {
     for (int i = 0; i < last_index; i++)

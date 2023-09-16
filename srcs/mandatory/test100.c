@@ -41,12 +41,10 @@ static uint **init_permutation_table(void) {
 static void init_this_task(t_uargs *this_task, int **table, int task_size) {
     static int call_counter = -1;
     const int thread_idxs[8] = {0, 144, 288, 432, 576, 732, 888, 1044};
-    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4",
-                               "tmp5", "tmp6", "tmp7", "tmp8"};
-    call_counter++;
+    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4", "tmp5", "tmp6", "tmp7", "tmp8"};
     this_task->table = table;
     this_task->size = task_size;
-    this_task->tmp_file = tmp_files[call_counter];
+    this_task->tmp_file = tmp_files[++call_counter];
     this_task->thread_idx = thread_idxs[call_counter];
 	this_task->build_cmd_string = build_averager_test_cmd_string;
 	this_task->fprintf_result_to_file = fprintf_nb_of_op;

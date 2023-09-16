@@ -10,6 +10,7 @@ static void init_this_task100(t_args *this_task, int **table, int task_size);
 int main(void) {
     t_args *args = malloc(sizeof(t_args));
     args->table = init_table_exaustive_tests();
+
     dprintf(1, EXAUSTIVE_TEST20_HEADER);
     exaustive_test20(args);
     exaustive_test100(args);
@@ -33,13 +34,11 @@ static void exaustive_test20(t_args *args_void) {
 static void init_this_task20(t_args *this_task, int **table, int task_size) {
     static int call_counter = -1;
     const int thread_idxs[8] = {0, 21, 41, 61, 81, 101, 121, 141};
-    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4",
-                               "tmp5", "tmp6", "tmp7", "tmp8"};
-    call_counter++;
+    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4", "tmp5", "tmp6", "tmp7", "tmp8"};
     this_task->error = 0;
     this_task->table = table;
     this_task->size = task_size;
-    this_task->tmp_file = tmp_files[call_counter];
+    this_task->tmp_file = tmp_files[++call_counter];
     this_task->thread_idx = thread_idxs[call_counter];
     this_task->build_cmdstr = build_exaustive_checker_test_cmd_string;
     this_task->fprintf_result_to_file = fprintf_ok_ko;
@@ -79,13 +78,11 @@ static void exaustive_test100(t_args *args_void) {
 static void init_this_task100(t_args *this_task, int **table, int task_size) {
     static int call_counter = -1;
     const int thread_idxs[8] = {161, 181, 201, 221, 241, 261, 281, 301};
-    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4",
-                               "tmp5", "tmp6", "tmp7", "tmp8"};
-    call_counter++;
+    const char *tmp_files[] = {"tmp1", "tmp2", "tmp3", "tmp4", "tmp5", "tmp6", "tmp7", "tmp8"};
     this_task->error = 0;
     this_task->table = table;
     this_task->size = task_size;
-    this_task->tmp_file = tmp_files[call_counter];
+    this_task->tmp_file = tmp_files[++call_counter];
     this_task->thread_idx = thread_idxs[call_counter];
     this_task->build_cmdstr = build_exaustive_checker_test_cmd_string;
     this_task->fprintf_result_to_file = fprintf_ok_ko;

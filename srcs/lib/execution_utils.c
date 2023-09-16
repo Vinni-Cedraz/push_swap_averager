@@ -5,14 +5,9 @@ void exec_each_function_in(void (*array_of_function_ptrs[])(char *str), char *st
         (*array_of_function_ptrs++)(str);
 }
 
-void bonus_exec_each_function_in(void (*array_of_function_ptrs[])(t_args *args), t_args *args) {
-    while (*array_of_function_ptrs)
-        (*array_of_function_ptrs++)(args);
-}
-
 char *execute_cmd(char cmd[], char buffer[], FILE *output) {
     output = popen(cmd, "r");
-    char *out_str = fgets(buffer, 10, output);
+    char *out_str = fgets(buffer, BUF_LEN, output);
     pclose(output);
     return out_str;
 }

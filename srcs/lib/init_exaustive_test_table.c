@@ -1,4 +1,4 @@
-#include "averager.h"
+#include "../include/averager.h"
 
 #define START_IDX_TEST20 0
 #define END_IDX_TEST20 160
