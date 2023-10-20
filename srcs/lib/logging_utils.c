@@ -96,10 +96,12 @@ void log_error(bool empty_expected, char *out_str, char *cmd) {
         printf(HRED "\n	KO " DEF_COLOR);
         printf(YELLOW"-> Expected nothing either on stderr nor on stdout (fd 1 or fd 2)");
         printf(" But found this:"DEF_COLOR"\n\"%s\""YELLOW" instead\n\n" DEF_COLOR, out_str);
+        break;
     case FALSE:
         printf(HRED "\n	KO " DEF_COLOR);
         printf(YELLOW"-> Expected the string \"Error\\n\" on the stderr (fd 2)");
         printf(" But found this:\n"DEF_COLOR"\"%s\""YELLOW" instead\n\n" DEF_COLOR, out_str);
+        break;
     }
 }
 
