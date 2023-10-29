@@ -19,11 +19,11 @@ list_size=0
 
 dir="log_files/"
 
-if [[ $log_file == "test5.log" || $log_file == $dir"test5.log" ]]; then
+if [[ "$log_file" == "test5.log" || "$log_file" == $dir"test5.log" ]]; then
     list_size=5
-elif [[ $log_file == "test100.log" || $log_file == $dir"test100.log" ]]; then
+elif [[ "$log_file" == "test100.log" || "$log_file" == $dir"test100.log" ]]; then
     list_size=100
-elif [[ $log_file == "test500.log" || $log_file == $dir"test500.log" ]]; then
+elif [[ "$log_file" == "test500.log" || "$log_file" == $dir"test500.log" ]]; then
     list_size=500
 fi
 
@@ -46,20 +46,20 @@ sorted=($(echo "${arr[@]}" | tr ' ' '\n' | sort -n))
 lowest=${sorted[0]}
 highest=${sorted[-1]}
 
-COLOR=""
-if [ "$list_size" -eq 5 -a "$highest" -ge "$LIMIT_5" ] || [ "$list_size" -eq 100 -a "$highest" -ge "$LIMIT_100" ] || [ "$list_size" -eq 500 -a "$highest" -ge "$LIMIT_500" ]; then
+COLOR=$CYAN
+if [ "$list_size" -eq 5 -a "$highest" -ge "$LIMIT_5" ] || [ "$list_size" -eq 100 -a "$highest" -ge "$LIMIT_100" ] || \
+	[ "$list_size" -eq 500 -a "$highest" -ge "$LIMIT_500" ]; then
     COLOR=$HRED
 	printf "\n$COLOR ERROR: YOU ARE DOING TOO MANY MOVEMENTS SOMEWHERE, CHECK YOUR WORST CASE AND LOG FILES\n"
 fi
 
 # print the lines with the lowest, highest, and average number of operations
 printf "$GREEN< best case arrays >\n$DEF_COLOR"
-cat $log_file | grep "number of operations: $lowest$" | head -n 2
+cat $log_file | grep "number of operations: $lowest" | head -n 2
 
 printf "$COLOR< worst case arrays >\n$DEF_COLOR"
-string=$(cat $log_file | grep "number of operations: $highest$" | head -n 2 | tr "$CYAN" "$COLOR")
-
-printf $DEF_COLOR"$string\n"
+string=$(cat $log_file | grep "number of operations: $highest" | head -n 2 | tr "$CYAN" "$COLOR")
+printf "$string\n"$DEF_COLOR
 
 # print the lowest, highest, and average number of operations
 if [[ "$list_size" -ge 100 ]];
