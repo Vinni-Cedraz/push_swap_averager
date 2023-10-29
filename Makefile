@@ -1,3 +1,4 @@
+SHELL=/bin/bash
 #Colors
 RED = \033[0;31m
 HRED = \033[1;31m
