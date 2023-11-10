@@ -64,7 +64,7 @@ printf "$GREEN< best case arrays >\n$DEF_COLOR"
 cat $log_file | grep "number of operations: $lowest" | head -n 2
 
 printf "$COLOR< worst case arrays >\n$DEF_COLOR"
-string=$(cat $log_file | grep "number of operations: $highest" | head -n 2 | tr "$CYAN" "$COLOR")
+string=$(cat $log_file | grep "number of operations: $highest" | head -n 2 | awk '{gsub(ENVIRON["CYAN"], ENVIRON["COLOR"]); print}')
 printf "$string\n"$DEF_COLOR
 
 # print the lowest, highest, and average number of operations
