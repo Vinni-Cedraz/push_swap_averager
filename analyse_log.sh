@@ -34,8 +34,14 @@ arr=($(grep -v 'number of operations: 0' $log_file | grep -o 'number of operatio
 total_ops=0
 total_lines=0
 for ops in "${arr[@]}"; do
-  ((total_ops += ops))
-  ((total_lines++))
+  # Check if ops is a number
+  if [[ $ops =~ ^[0-9]+$ ]]; then
+    ((total_ops += ops))
+    ((total_lines++))
+  else
+	  cat $log_file | grep "Error"
+	  exit 1
+  fi
 done
 
 # calculate the average number of operations
