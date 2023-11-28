@@ -53,8 +53,8 @@ lowest=${sorted[0]}
 highest=${sorted[-1]}
 
 COLOR=$CYAN
-if [ "$list_size" -eq 5 -a "$highest" -ge "$LIMIT_5" ] || [ "$list_size" -eq 100 -a "$highest" -ge "$LIMIT_100" ] || \
-	[ "$list_size" -eq 500 -a "$highest" -ge "$LIMIT_500" ]; then
+if [ "$list_size" -eq 5 -a "$highest" -gt "$LIMIT_5" ] || [ "$list_size" -eq 100 -a "$highest" -gt "$LIMIT_100" ] || \
+	[ "$list_size" -eq 500 -a "$highest" -gt "$LIMIT_500" ]; then
     COLOR=$HRED
 	printf "\n$COLOR ERROR: YOU ARE DOING TOO MANY MOVEMENTS SOMEWHERE, CHECK YOUR WORST CASE AND LOG FILES\n"
 fi
